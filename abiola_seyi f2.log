@@ -1,0 +1,4107 @@
+---------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\user\Desktop\Contract Project\ABIOLA EHINFUN\abiola_seyi f2.log
+  log type:  text
+ opened on:  28 Mar 2023, 18:29:17
+
+. browse
+
+. tab number_of_children_lost
+
+number_of_c |
+hildren_los |
+          t |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      4,383       65.10       65.10
+          1 |      1,295       19.23       84.33
+          2 |        619        9.19       93.52
+          3 |        261        3.88       97.40
+          4 |        108        1.60       99.00
+          5 |         39        0.58       99.58
+          6 |         18        0.27       99.85
+          7 |          7        0.10       99.96
+          8 |          1        0.01       99.97
+          9 |          1        0.01       99.99
+         10 |          1        0.01      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. recode number_of_children_lost (0=0 "none") (1=1 "one") (2=2 "two") (3/max=3 "three and above"), gen (number_children_lost)
+(175 differences between number_of_children_lost and number_children_lost)
+
+. tab number_children_lost
+
+      RECODE of |
+number_of_child |
+       ren_lost |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+           none |      4,383       65.10       65.10
+            one |      1,295       19.23       84.33
+            two |        619        9.19       93.52
+three and above |        436        6.48      100.00
+----------------+-----------------------------------
+          Total |      6,733      100.00
+
+. tab v024
+
+          region |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+1. north central |        970       14.41       14.41
+   2. north east |      2,137       31.74       46.15
+   3. north west |      2,209       32.81       78.95
+   4. south east |        545        8.09       87.05
+  5. south south |        520        7.72       94.77
+   6. south west |        352        5.23      100.00
+-----------------+-----------------------------------
+           Total |      6,733      100.00
+
+. rename v024 region
+
+. tab v157
+
+    frequency of reading |
+   newspaper or magazine |      Freq.     Percent        Cum.
+-------------------------+-----------------------------------
+           0. not at all |      6,158       91.46       91.46
+1. less than once a week |        426        6.33       97.79
+ 2. at least once a week |        149        2.21      100.00
+-------------------------+-----------------------------------
+                   Total |      6,733      100.00
+
+. do "C:\Users\user\AppData\Local\Temp\STD3600_000000.tmp"
+
+. ta v158
+
+  frequency of listening |
+                to radio |      Freq.     Percent        Cum.
+-------------------------+-----------------------------------
+           0. not at all |      3,552       52.76       52.76
+1. less than once a week |      1,398       20.76       73.52
+ 2. at least once a week |      1,783       26.48      100.00
+-------------------------+-----------------------------------
+                   Total |      6,733      100.00
+
+. tab v159
+
+   frequency of watching |
+              television |      Freq.     Percent        Cum.
+-------------------------+-----------------------------------
+           0. not at all |      4,377       65.01       65.01
+1. less than once a week |        989       14.69       79.70
+ 2. at least once a week |      1,367       20.30      100.00
+-------------------------+-----------------------------------
+                   Total |      6,733      100.00
+
+. recode v157 (0=0 "no") (1/99=1 "yes"), gen (media_exp1)
+(149 differences between v157 and media_exp1)
+
+. recode v158 (0=0 "no") (1/99=1 "yes"), gen (media_exp2)
+(1783 differences between v158 and media_exp2)
+
+. recode v159 (0=0 "no") (1/99=1 "yes"), gen (media_exp3)
+(1367 differences between v159 and media_exp3)
+
+.  gen media_exp=media_exp1+media_exp2+media_exp3
+
+. replace media_exp=0 if media_exp1+media_exp2+media_exp3==0
+(0 real changes made)
+
+. replace media_exp=1 if media_exp1+media_exp2+media_exp3>=1
+(1,960 real changes made)
+
+. label define media_exposure 0 "not exposed" 1 "exposed"
+
+. label value media_exposure media_exposure
+variable media_exposure not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. label value media_exp media_exp
+
+. tab media_exp
+
+  media_exp |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      3,026       44.94       44.94
+          1 |      3,707       55.06      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. label define media_exp 0 "not exposed" 1 "exposed"
+
+. tab media_exp
+
+  media_exp |      Freq.     Percent        Cum.
+------------+-----------------------------------
+not exposed |      3,026       44.94       44.94
+    exposed |      3,707       55.06      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. numlabel, a
+
+. numlabel, a
+(no value label to be modified)
+
+. tab media_exp
+
+     media_exp |      Freq.     Percent        Cum.
+---------------+-----------------------------------
+0. not exposed |      3,026       44.94       44.94
+    1. exposed |      3,707       55.06      100.00
+---------------+-----------------------------------
+         Total |      6,733      100.00
+
+. tab v743a
+
+    person who usually decides on |
+         respondent's health care |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+              1. respondent alone |        493        7.32        7.32
+2. respondent and husband/partner |      1,892       28.10       35.42
+         4. husband/partner alone |      4,329       64.30       99.72
+                  5. someone else |         17        0.25       99.97
+                         6. other |          2        0.03      100.00
+----------------------------------+-----------------------------------
+                            Total |      6,733      100.00
+
+. ta v467a
+variable v467a not found
+r(111);
+
+. tab v743d
+
+    person who usually decides on |
+    visits to family or relatives |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+              1. respondent alone |        782       11.61       11.61
+2. respondent and husband/partner |      2,866       42.57       54.18
+         4. husband/partner alone |      3,066       45.54       99.72
+                  5. someone else |         16        0.24       99.96
+                         6. other |          3        0.04      100.00
+----------------------------------+-----------------------------------
+                            Total |      6,733      100.00
+
+. tab v743b
+
+    person who usually decides on |
+        large household purchases |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+              1. respondent alone |        256        3.80        3.80
+2. respondent and husband/partner |      1,974       29.32       33.12
+         4. husband/partner alone |      4,458       66.21       99.33
+                  5. someone else |         40        0.59       99.93
+                         6. other |          5        0.07      100.00
+----------------------------------+-----------------------------------
+                            Total |      6,733      100.00
+
+. tab v850a
+
+     respondent can refuse sex |      Freq.     Percent        Cum.
+-------------------------------+-----------------------------------
+                         0. no |      3,231       47.99       47.99
+                        1. yes |      3,380       50.20       98.19
+8. don't know/not sure/depends |        122        1.81      100.00
+-------------------------------+-----------------------------------
+                         Total |      6,733      100.00
+
+. save "C:\Users\user\Desktop\Contract Project\ABIOLA EHINFUN\Abiola_seyi's friend_data 2.dta", replace
+file C:\Users\user\Desktop\Contract Project\ABIOLA EHINFUN\Abiola_seyi's friend_data 2.dta saved
+
+. recode v743a (1/2=0 "no") (4/99=1 "yes"), gen (no_autonomy1)
+(6733 differences between v743a and no_autonomy1)
+
+. recode v743b (1/2=0 "no") (4/99=1 "yes"), gen (no_autonomy2)
+(6733 differences between v743b and no_autonomy2)
+
+. recode v743d (1/2=0 "no") (4/99=1 "yes"), gen (no_autonomy3)
+(6733 differences between v743d and no_autonomy3)
+
+. recode v850a (1=0 "no") (0=1 "yes") (8=1 "yes"), gen (no_autonomy4)
+(6733 differences between v850a and no_autonomy4)
+
+. tab no_autonomy1
+
+  RECODE of |
+      v743a |
+(person who |
+    usually |
+ decides on |
+respondent' |
+   s health |
+      care) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      2,385       35.42       35.42
+        yes |      4,348       64.58      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab no_autonomy2
+
+  RECODE of |
+      v743b |
+(person who |
+    usually |
+ decides on |
+      large |
+  household |
+ purchases) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      2,230       33.12       33.12
+        yes |      4,503       66.88      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab no_autonomy3
+
+  RECODE of |
+      v743d |
+(person who |
+    usually |
+ decides on |
+  visits to |
+  family or |
+ relatives) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      3,648       54.18       54.18
+        yes |      3,085       45.82      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab no_autonomy4
+
+  RECODE of |
+      v850a |
+(respondent |
+ can refuse |
+       sex) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      3,380       50.20       50.20
+        yes |      3,353       49.80      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. gen no_autonomy = no_autonomy1 + no_autonomy2 + no_autonomy3 + no_autonomy4
+
+. replace no_autonomy = 0 if no_autonomy1 + no_autonomy2 + no_autonomy3 + no_autonomy4 ==0
+(0 real changes made)
+
+. replace no_autonomy = 1 if no_autonomy1 + no_autonomy2 + no_autonomy3 + no_autonomy4 ==2
+(978 real changes made)
+
+. replace no_autonomy = 1 if no_autonomy1 + no_autonomy2 + no_autonomy3 + no_autonomy4 >=3
+(3,518 real changes made)
+
+. replace no_autonomy = 1 if no_autonomy1 + no_autonomy2 + no_autonomy3 + no_autonomy4 ==1
+(0 real changes made)
+
+. label define no_autonomy 0 "no" 1 "yes"
+
+. label value no_autonomy no_autonomy
+
+. numlabel, a
+
+. tab no_autonomy
+
+no_autonomy |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      1,198       17.79       17.79
+     1. yes |      5,535       82.21      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. gen women_autonomy = no_autonomy1 + no_autonomy2 + no_autonomy3 + no_autonomy4
+
+. replace women_autonomy = 2 if no_autonomy1 + no_autonomy2 + no_autonomy3 + no_autonomy4 ==0
+(1,198 real changes made)
+
+. replace women_autonomy = 1 if no_autonomy1 + no_autonomy2 + no_autonomy3 + no_autonomy4 ==2
+(978 real changes made)
+
+. replace women_autonomy = 0 if no_autonomy1 + no_autonomy2 + no_autonomy3 + no_autonomy4 >=3
+(3,518 real changes made)
+
+. label define women_autonomy 0 "none" 1 "partial" 2 "full"
+
+. label value women_autonomy women_autonomy
+
+. numlabel, a
+
+. tab women_autonomy
+
+women_auton |
+        omy |      Freq.     Percent        Cum.
+------------+-----------------------------------
+    0. none |      3,518       52.25       52.25
+ 1. partial |      2,017       29.96       82.21
+    2. full |      1,198       17.79      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. save "C:\Users\user\Desktop\Contract Project\ABIOLA EHINFUN\Abiola_seyi's friend_data 3.dta"
+file C:\Users\user\Desktop\Contract Project\ABIOLA EHINFUN\Abiola_seyi's friend_data 3.dta saved
+
+. order age maternal_education partner_education marital_status occupation_status religion wealth_index ethnicity number_children
+> _lost number_of_living_children number_of_under_5_children media_exp place_residence region no_autonomy women_autonomy no_treat
+> ment
+
+. misstable, sum
+misstable , unrecognized
+    valid misstable subcommands are summarize, patterns, tree, and nested
+r(198);
+
+. misstable, summarize
+misstable , unrecognized
+    valid misstable subcommands are summarize, patterns, tree, and nested
+r(198);
+
+. sum, misstable
+option misstable not allowed
+r(198);
+
+. summarize, misstable
+option misstable not allowed
+r(198);
+
+. summarize misstable
+variable misstable not found
+r(111);
+
+. misstable, d
+misstable , unrecognized
+    valid misstable subcommands are summarize, patterns, tree, and nested
+r(198);
+
+. sum misstable, a
+variable misstable not found
+r(111);
+
+. misstable summarize
+                                                               Obs<.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs>.     Obs<.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+         h21_1 |     3,827               2,906  |      2          0           1
+        h32z_1 |     1,209               5,524  |      2          0           1
+  -----------------------------------------------------------------------------
+
+. misstable summarize, all
+                                                               Obs<.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs>.     Obs<.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+           age |                         6,733  |      3          1           3
+  maternal_e~n |                         6,733  |      4          0           3
+  partner_ed~n |                         6,733  |      4          0           3
+  marital_st~s |                         6,733  |      2          1           2
+  occupation~s |                         6,733  |      2          0           1
+      religion |                         6,733  |      3          1           3
+  wealth_index |                         6,733  |      3          1           3
+     ethnicity |                         6,733  |      4          1           4
+  number_chi~t |                         6,733  |      4          0           3
+  n~g_children |                         6,733  |      5          1           5
+  n~5_children |                         6,733  |      4          1           4
+     media_exp |                         6,733  |      2          0           1
+  place_resi~e |                         6,733  |      2          1           2
+        region |                         6,733  |      6          1           6
+   no_autonomy |                         6,733  |      2          0           1
+  women_auto~y |                         6,733  |      3          0           2
+  no_treatment |                         6,733  |      2          0           1
+          v013 |                         6,733  |      7          1           7
+          v130 |                         6,733  |      5          1          96
+          v131 |                         6,733  |     12          1          98
+          v157 |                         6,733  |      3          0           2
+          v158 |                         6,733  |      3          0           2
+          v159 |                         6,733  |      3          0           2
+          v190 |                         6,733  |      5          1           5
+          v202 |                         6,733  |     10          0           9
+          v203 |                         6,733  |      8          0           7
+          v204 |                         6,733  |      7          0           6
+          v205 |                         6,733  |      7          0           7
+          v206 |                         6,733  |      7          0           6
+          v207 |                         6,733  |      7          0           6
+          v218 |                         6,733  |     12          1          12
+         v467b |                         6,733  |      2          1           2
+         h21_1 |     3,827               2,906  |      2          0           1
+        h32z_1 |     1,209               5,524  |      2          0           1
+          v701 |                         6,733  |      5          0           8
+         v743a |                         6,733  |      5          1           6
+         v743b |                         6,733  |      5          1           6
+         v743d |                         6,733  |      5          1           6
+         v850a |                         6,733  |      3          0           8
+          v137 |                         6,733  |      9          1           9
+  number_of_~t |                         6,733  |     11          0          10
+    media_exp1 |                         6,733  |      2          0           1
+    media_exp2 |                         6,733  |      2          0           1
+    media_exp3 |                         6,733  |      2          0           1
+  no_autonomy1 |                         6,733  |      2          0           1
+  no_autonomy2 |                         6,733  |      2          0           1
+  no_autonomy3 |                         6,733  |      2          0           1
+  no_autonomy4 |                         6,733  |      2          0           1
+  -----------------------------------------------------------------------------
+
+. tab1 age maternal_education partner_education marital_status occupation_status religion wealth_index ethnicity number_children_
+> lost number_of_living_children number_of_under_5_children media_exp place_residence region women_autonomy
+
+-> tabulation of age  
+
+  RECODE of |
+  v013 (age |
+  in 5-year |
+    groups) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+   1. 15-24 |      1,784       26.50       26.50
+   2. 25-34 |      3,167       47.04       73.53
+   3. 35-49 |      1,782       26.47      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+-> tabulation of maternal_education  
+
+        highest |
+    educational |
+          level |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+0. no education |      3,538       52.55       52.55
+     1. primary |      1,070       15.89       68.44
+   2. secondary |      1,770       26.29       94.73
+      3. higher |        355        5.27      100.00
+----------------+-----------------------------------
+          Total |      6,733      100.00
+
+-> tabulation of partner_education  
+
+ RECODE of v701 |
+(husband/partne |
+  r's education |
+         level) |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+0. no education |      2,810       41.73       41.73
+     1. primary |        941       13.98       55.71
+   2. secondary |      2,099       31.17       86.89
+      3. higher |        883       13.11      100.00
+----------------+-----------------------------------
+          Total |      6,733      100.00
+
+-> tabulation of marital_status  
+
+                current marital status |      Freq.     Percent        Cum.
+---------------------------------------+-----------------------------------
+                            1. married |      6,545       97.21       97.21
+                2. living with partner |        188        2.79      100.00
+---------------------------------------+-----------------------------------
+                                 Total |      6,733      100.00
+
+-> tabulation of occupation_status  
+
+ respondent |
+  currently |
+    working |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      2,175       32.30       32.30
+     1. yes |      4,558       67.70      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+-> tabulation of religion  
+
+   RECODE of |
+        v130 |
+  (religion) |      Freq.     Percent        Cum.
+-------------+-----------------------------------
+1. christian |      2,042       30.33       30.33
+    2. islam |      4,665       69.29       99.61
+   3. others |         26        0.39      100.00
+-------------+-----------------------------------
+       Total |      6,733      100.00
+
+-> tabulation of wealth_index  
+
+  RECODE of |
+       v190 |
+    (wealth |
+      index |
+  combined) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+    1. poor |      3,653       54.26       54.26
+  2. middle |      1,378       20.47       74.72
+    3. rich |      1,702       25.28      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+-> tabulation of ethnicity  
+
+  RECODE of |
+       v131 |
+(ethnicity) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+  1. yoruba |        333        4.95        4.95
+    2. igbo |        652        9.68       14.63
+   3. hausa |      3,528       52.40       67.03
+  4. others |      2,220       32.97      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+-> tabulation of number_children_lost  
+
+         RECODE of |
+number_of_children |
+             _lost |      Freq.     Percent        Cum.
+-------------------+-----------------------------------
+           0. none |      4,383       65.10       65.10
+            1. one |      1,295       19.23       84.33
+            2. two |        619        9.19       93.52
+3. three and above |        436        6.48      100.00
+-------------------+-----------------------------------
+             Total |      6,733      100.00
+
+-> tabulation of number_of_living_children  
+
+   RECODE of v218 |
+(number of living |
+        children) |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+           1. one |      1,173       17.42       17.42
+           2. two |      1,266       18.80       36.22
+         3. three |      1,124       16.69       52.92
+          4. four |        975       14.48       67.40
+5. five and above |      2,195       32.60      100.00
+------------------+-----------------------------------
+            Total |      6,733      100.00
+
+-> tabulation of number_of_under_5_children  
+
+   RECODE of v137 |
+       (number of |
+   children 5 and |
+         under in |
+    household (de |
+           jure)) |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+           1. one |      2,187       32.48       32.48
+           2. two |      2,526       37.52       70.00
+         3. three |      1,127       16.74       86.74
+4. four and above |        893       13.26      100.00
+------------------+-----------------------------------
+            Total |      6,733      100.00
+
+-> tabulation of media_exp  
+
+     media_exp |      Freq.     Percent        Cum.
+---------------+-----------------------------------
+0. not exposed |      3,026       44.94       44.94
+    1. exposed |      3,707       55.06      100.00
+---------------+-----------------------------------
+         Total |      6,733      100.00
+
+-> tabulation of place_residence  
+
+    type of |
+   place of |
+  residence |      Freq.     Percent        Cum.
+------------+-----------------------------------
+   1. urban |      1,940       28.81       28.81
+   2. rural |      4,793       71.19      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+-> tabulation of region  
+
+          region |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+1. north central |        970       14.41       14.41
+   2. north east |      2,137       31.74       46.15
+   3. north west |      2,209       32.81       78.95
+   4. south east |        545        8.09       87.05
+  5. south south |        520        7.72       94.77
+   6. south west |        352        5.23      100.00
+-----------------+-----------------------------------
+           Total |      6,733      100.00
+
+-> tabulation of women_autonomy  
+
+women_auton |
+        omy |      Freq.     Percent        Cum.
+------------+-----------------------------------
+    0. none |      3,518       52.25       52.25
+ 1. partial |      2,017       29.96       82.21
+    2. full |      1,198       17.79      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab no_treatment women_autonomy
+
+no_treatme |          women_autonomy
+        nt |   0. none  1. partia    2. full |     Total
+-----------+---------------------------------+----------
+     0. no |     2,280      1,462        833 |     4,575 
+    1. yes |     1,238        555        365 |     2,158 
+-----------+---------------------------------+----------
+     Total |     3,518      2,017      1,198 |     6,733 
+
+. tab women_autonomy no_treatment, chi2 row
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+women_auto |     no_treatment
+      nomy |     0. no     1. yes |     Total
+-----------+----------------------+----------
+   0. none |     2,280      1,238 |     3,518 
+           |     64.81      35.19 |    100.00 
+-----------+----------------------+----------
+1. partial |     1,462        555 |     2,017 
+           |     72.48      27.52 |    100.00 
+-----------+----------------------+----------
+   2. full |       833        365 |     1,198 
+           |     69.53      30.47 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(2) =  36.3471   Pr = 0.000
+
+. tab no_autonomy no_treatment, chi2 row
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+no_autonom |     no_treatment
+         y |     0. no     1. yes |     Total
+-----------+----------------------+----------
+     0. no |       833        365 |     1,198 
+           |     69.53      30.47 |    100.00 
+-----------+----------------------+----------
+    1. yes |     3,742      1,793 |     5,535 
+           |     67.61      32.39 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(1) =   1.6782   Pr = 0.195
+
+. tab no_treatment
+
+no_treatmen |
+          t |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      4,575       67.95       67.95
+     1. yes |      2,158       32.05      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. pwcorr
+
+             |      age matern~n partne~n marita~s occupa~s religion wealth~x
+-------------+---------------------------------------------------------------
+         age |   1.0000 
+maternal_e~n |   0.0008   1.0000 
+partner_ed~n |   0.0071   0.6542   1.0000 
+marital_st~s |  -0.0470   0.1430   0.1070   1.0000 
+occupation~s |   0.2018   0.1613   0.1452   0.0573   1.0000 
+    religion |  -0.0908  -0.5532  -0.3953  -0.2179  -0.2072   1.0000 
+wealth_index |   0.0780   0.6017   0.5614   0.0775   0.1042  -0.3301   1.0000 
+   ethnicity |  -0.0235  -0.1560  -0.0596  -0.0430  -0.0202   0.0532  -0.2098 
+number_chi~t |   0.3393  -0.2597  -0.2082  -0.0581   0.0375   0.1899  -0.2076 
+n~g_children |   0.6693  -0.2037  -0.1429  -0.0790   0.1526   0.1043  -0.0741 
+n~5_children |   0.0697  -0.2027  -0.1296  -0.0809  -0.0128   0.2158  -0.1173 
+   media_exp |   0.0558   0.4466   0.4054   0.0770   0.1497  -0.2683   0.4617 
+place_resi~e |  -0.0764  -0.3939  -0.3428  -0.0554  -0.0938   0.1864  -0.5456 
+      region |   0.0760   0.3313   0.2216   0.2132   0.0911  -0.3811   0.2877 
+ no_autonomy |  -0.0877  -0.3537  -0.2558  -0.1215  -0.1802   0.4133  -0.2303 
+women_auto~y |   0.0951   0.4126   0.3164   0.1404   0.2430  -0.4692   0.2904 
+no_treatment |   0.0029  -0.1244  -0.1470   0.0188  -0.0625   0.0260  -0.1399 
+        v013 |   0.9286  -0.0166  -0.0003  -0.0453   0.2138  -0.0823   0.0643 
+        v130 |  -0.0173  -0.0908  -0.0598   0.0149  -0.0447   0.2780  -0.0381 
+        v131 |   0.0571   0.1222   0.1243   0.0590   0.1378  -0.2287  -0.0060 
+        v157 |   0.0421   0.4029   0.2807   0.0115   0.0533  -0.2051   0.3187 
+        v158 |   0.0779   0.3428   0.3168   0.0184   0.1335  -0.1826   0.3562 
+        v159 |   0.0341   0.5566   0.4919   0.0625   0.1201  -0.3283   0.6213 
+        v190 |   0.0729   0.6197   0.5884   0.0713   0.1104  -0.3379   0.9418 
+        v202 |   0.4440  -0.1561  -0.0864  -0.0599   0.0888   0.1025  -0.0495 
+        v203 |   0.4083  -0.1375  -0.0859  -0.0642   0.0973   0.1102  -0.0317 
+        v204 |   0.2874  -0.0909  -0.0777  -0.0106   0.0496   0.0245  -0.0813 
+        v205 |   0.3662  -0.1213  -0.0929  -0.0166   0.0789   0.0227  -0.0762 
+        v206 |   0.2614  -0.1939  -0.1560  -0.0447   0.0391   0.1417  -0.1538 
+        v207 |   0.2719  -0.2035  -0.1644  -0.0456   0.0221   0.1542  -0.1617 
+        v218 |   0.6789  -0.2304  -0.1477  -0.0798   0.1442   0.1369  -0.0911 
+       v467b |   0.0147   0.1495   0.1811  -0.0070   0.0894  -0.0841   0.1247 
+       h21_1 |   0.0107   0.0720   0.1183  -0.0235   0.0641  -0.0428   0.1020 
+      h32z_1 |  -0.0060   0.1295   0.1469  -0.0186   0.0690  -0.0178   0.1377 
+        v701 |  -0.0085   0.5013   0.7119   0.0763   0.1055  -0.2871   0.4364 
+       v743a |  -0.0903  -0.3349  -0.2515  -0.1324  -0.2176   0.3949  -0.2424 
+       v743b |  -0.0828  -0.3463  -0.2594  -0.1365  -0.2292   0.3918  -0.2443 
+       v743d |  -0.0482  -0.2291  -0.1840  -0.0722  -0.1737   0.2497  -0.1666 
+       v850a |   0.0050   0.1695   0.1495   0.0569   0.0579  -0.1913   0.1332 
+        v137 |   0.0728  -0.1956  -0.1236  -0.0787  -0.0065   0.2115  -0.1121 
+number_of_~t |   0.3333  -0.2483  -0.2002  -0.0565   0.0385   0.1848  -0.1972 
+  media_exp1 |   0.0359   0.4163   0.2885   0.0160   0.0554  -0.2175   0.3293 
+  media_exp2 |   0.0662   0.3486   0.3141   0.0310   0.1391  -0.2007   0.3558 
+  media_exp3 |   0.0315   0.5366   0.4805   0.0760   0.1319  -0.3316   0.5976 
+no_autonomy1 |  -0.0916  -0.3529  -0.2681  -0.1346  -0.2287   0.4101  -0.2552 
+no_autonomy2 |  -0.0835  -0.3476  -0.2615  -0.1336  -0.2391   0.3940  -0.2421 
+no_autonomy3 |  -0.0508  -0.2501  -0.2066  -0.0762  -0.1819   0.2734  -0.1750 
+no_autonomy4 |  -0.0371  -0.3560  -0.2822  -0.0895  -0.1117   0.3630  -0.2622 
+
+             | ethnic~y number.. n~livi~n n~unde~n media_~p place_~e   region
+-------------+---------------------------------------------------------------
+   ethnicity |   1.0000 
+number_chi~t |   0.0326   1.0000 
+n~g_children |   0.0302   0.2794   1.0000 
+n~5_children |   0.0495   0.0792   0.3133   1.0000 
+   media_exp |  -0.1885  -0.1373  -0.0383  -0.1220   1.0000 
+place_resi~e |   0.3044   0.1370   0.0166   0.0946  -0.3460   1.0000 
+      region |  -0.4302  -0.0599  -0.0393  -0.1188   0.2832  -0.2443   1.0000 
+ no_autonomy |   0.0865   0.1063   0.0358   0.1298  -0.1783   0.1756  -0.2108 
+women_auto~y |  -0.0803  -0.1324  -0.0340  -0.1444   0.2213  -0.2130   0.2265 
+no_treatment |   0.0069   0.0229   0.0136   0.0219  -0.1274   0.1025  -0.0771 
+        v013 |  -0.0230   0.3716   0.6958   0.0722   0.0538  -0.0687   0.0719 
+        v130 |   0.0358   0.0249   0.0244   0.0520  -0.0466   0.0570  -0.0392 
+        v131 |   0.6771  -0.0600  -0.0073  -0.0511  -0.0668   0.1207  -0.2157 
+        v157 |  -0.1451  -0.1145  -0.0813  -0.0919   0.2594  -0.2140   0.2025 
+        v158 |  -0.2314  -0.0861   0.0011  -0.0817   0.7832  -0.2883   0.2513 
+        v159 |  -0.1599  -0.1874  -0.1126  -0.1547   0.6181  -0.4290   0.2948 
+        v190 |  -0.1994  -0.2112  -0.0974  -0.1177   0.4717  -0.5449   0.3008 
+        v202 |   0.0251   0.1648   0.6320   0.2220  -0.0179  -0.0074  -0.0551 
+        v203 |   0.0392   0.1425   0.6058   0.2282  -0.0236  -0.0039  -0.0352 
+        v204 |  -0.0031   0.1687   0.3102   0.0276  -0.0306   0.0491  -0.0002 
+        v205 |   0.0129   0.1762   0.3750   0.0434  -0.0501   0.0747  -0.0098 
+        v206 |   0.0212   0.7866   0.2124   0.0698  -0.1060   0.1063  -0.0370 
+        v207 |   0.0241   0.7528   0.2070   0.0470  -0.1072   0.1101  -0.0523 
+        v218 |   0.0402   0.2749   0.9121   0.2822  -0.0466   0.0278  -0.0558 
+       v467b |  -0.0512  -0.0295   0.0004  -0.0208   0.1428  -0.1100   0.0705 
+       h21_1 |   0.0193  -0.0232  -0.0021  -0.0179   0.0836  -0.0580   0.0151 
+      h32z_1 |  -0.0000  -0.0245  -0.0145  -0.0167   0.1290  -0.0994   0.0915 
+        v701 |  -0.0586  -0.1446  -0.1146  -0.0990   0.3272  -0.2671   0.1706 
+       v743a |   0.0746   0.1116   0.0244   0.1187  -0.2025   0.1813  -0.2463 
+       v743b |   0.0583   0.1100   0.0211   0.1368  -0.1763   0.1931  -0.1921 
+       v743d |   0.0531   0.0563   0.0189   0.0775  -0.1114   0.1141  -0.1455 
+       v850a |   0.0006  -0.0787  -0.0312  -0.0499   0.1360  -0.0950   0.1182 
+        v137 |   0.0482   0.0882   0.2974   0.9570  -0.1271   0.0930  -0.1175 
+number_of_~t |   0.0283   0.9629   0.2623   0.0733  -0.1333   0.1352  -0.0556 
+  media_exp1 |  -0.1577  -0.1205  -0.0860  -0.0951   0.2761  -0.2210   0.2170 
+  media_exp2 |  -0.2148  -0.0947  -0.0099  -0.0938   0.8550  -0.2867   0.2566 
+  media_exp3 |  -0.1498  -0.1826  -0.1058  -0.1499   0.6629  -0.4161   0.2793 
+no_autonomy1 |   0.0740   0.1159   0.0303   0.1199  -0.2084   0.1843  -0.2365 
+no_autonomy2 |   0.0566   0.1114   0.0182   0.1351  -0.1746   0.1878  -0.1822 
+no_autonomy3 |   0.0416   0.0653   0.0219   0.0787  -0.1184   0.1164  -0.1289 
+no_autonomy4 |   0.0953   0.1266   0.0369   0.1086  -0.2084   0.1916  -0.1745 
+
+             | no_aut~y women_~y no_tre~t     v013     v130     v131     v157
+-------------+---------------------------------------------------------------
+ no_autonomy |   1.0000 
+women_auto~y |  -0.8202   1.0000 
+no_treatment |   0.0158  -0.0540   1.0000 
+        v013 |  -0.0772   0.0894  -0.0062   1.0000 
+        v130 |   0.0965  -0.1185   0.0171  -0.0134   1.0000 
+        v131 |  -0.1082   0.1331   0.0181   0.0529  -0.0444   1.0000 
+        v157 |  -0.1340   0.1479  -0.0816   0.0364  -0.0264  -0.0162   1.0000 
+        v158 |  -0.1455   0.1705  -0.1100   0.0755  -0.0304  -0.1394   0.2599 
+        v159 |  -0.2256   0.2607  -0.1360   0.0272  -0.0351   0.0187   0.3448 
+        v190 |  -0.2396   0.3084  -0.1603   0.0595  -0.0376   0.0066   0.3267 
+        v202 |   0.0397  -0.0407   0.0036   0.4678   0.0224  -0.0141  -0.0541 
+        v203 |   0.0378  -0.0382  -0.0120   0.4258   0.0331  -0.0187  -0.0454 
+        v204 |   0.0307  -0.0173   0.0388   0.3306   0.0023  -0.0014  -0.0565 
+        v205 |   0.0128  -0.0082   0.0293   0.4247  -0.0085   0.0011  -0.0625 
+        v206 |   0.0858  -0.0989   0.0030   0.2963   0.0140  -0.0468  -0.0857 
+        v207 |   0.0846  -0.1113   0.0417   0.2962   0.0257  -0.0533  -0.0839 
+        v218 |   0.0570  -0.0530   0.0141   0.7313   0.0303  -0.0191  -0.0911 
+       v467b |  -0.0838   0.1267  -0.1032   0.0134  -0.0215   0.0025   0.0603 
+       h21_1 |  -0.0102   0.0334  -0.6721   0.0157   0.0029   0.0274   0.0532 
+      h32z_1 |  -0.0139   0.0547  -0.9568   0.0012  -0.0156  -0.0203   0.0813 
+        v701 |  -0.1917   0.2386  -0.1213  -0.0177  -0.0442   0.0765   0.2095 
+       v743a |   0.5784  -0.7623   0.0504  -0.0905   0.0984  -0.1061  -0.1268 
+       v743b |   0.6386  -0.7819   0.0098  -0.0746   0.0980  -0.1198  -0.1208 
+       v743d |   0.3753  -0.6583   0.0759  -0.0461   0.0802  -0.0544  -0.0714 
+       v850a |  -0.1473   0.1540  -0.0283   0.0068   0.0284   0.0317   0.0521 
+        v137 |   0.1273  -0.1410   0.0215   0.0784   0.0473  -0.0482  -0.0901 
+number_of_~t |   0.1066  -0.1313   0.0275   0.3704   0.0247  -0.0625  -0.1061 
+  media_exp1 |  -0.1441   0.1590  -0.0778   0.0303  -0.0368  -0.0167   0.9397 
+  media_exp2 |  -0.1618   0.1888  -0.1068   0.0665  -0.0407  -0.1217   0.2343 
+  media_exp3 |  -0.2278   0.2633  -0.1295   0.0235  -0.0443   0.0258   0.3099 
+no_autonomy1 |   0.6282  -0.8000   0.0475  -0.0927   0.1019  -0.1168  -0.1348 
+no_autonomy2 |   0.6611  -0.8037   0.0100  -0.0784   0.0990  -0.1269  -0.1198 
+no_autonomy3 |   0.4278  -0.7117   0.0768  -0.0507   0.0856  -0.0754  -0.0714 
+no_autonomy4 |   0.4634  -0.5054   0.0626  -0.0305   0.0738  -0.0810  -0.1361 
+
+             |     v158     v159     v190     v202     v203     v204     v205
+-------------+---------------------------------------------------------------
+        v158 |   1.0000 
+        v159 |   0.4618   1.0000 
+        v190 |   0.3637   0.6251   1.0000 
+        v202 |   0.0015  -0.0725  -0.0668   1.0000 
+        v203 |   0.0086  -0.0616  -0.0446   0.0534   1.0000 
+        v204 |  -0.0140  -0.0805  -0.0848   0.0100   0.0207   1.0000 
+        v205 |  -0.0172  -0.0967  -0.0853   0.1168   0.1021   0.3132   1.0000 
+        v206 |  -0.0659  -0.1367  -0.1507   0.1264   0.0909   0.1518   0.1353 
+        v207 |  -0.0690  -0.1524  -0.1718   0.1245   0.1083   0.1118   0.1318 
+        v218 |  -0.0029  -0.1275  -0.1123   0.6656   0.6340   0.3724   0.4982 
+       v467b |   0.1219   0.1129   0.1364   0.0019   0.0005  -0.0090  -0.0161 
+       h21_1 |   0.0618   0.0863   0.1220   0.0005  -0.0018  -0.0162   0.0202 
+      h32z_1 |   0.1187   0.1406   0.1546  -0.0012   0.0136  -0.0376  -0.0405 
+        v701 |   0.2493   0.3788   0.4665  -0.0689  -0.0743  -0.0531  -0.0787 
+       v743a |  -0.1516  -0.2154  -0.2600   0.0323   0.0325   0.0094  -0.0119 
+       v743b |  -0.1314  -0.2076  -0.2589   0.0251   0.0369   0.0128  -0.0012 
+       v743d |  -0.0688  -0.1224  -0.1947   0.0314   0.0198  -0.0015   0.0045 
+       v850a |   0.1249   0.1575   0.1484  -0.0099  -0.0278  -0.0252  -0.0160 
+        v137 |  -0.0839  -0.1579  -0.1118   0.2149   0.2153   0.0327   0.0521 
+number_of_~t |  -0.0843  -0.1806  -0.2013   0.1569   0.1244   0.1653   0.1670 
+  media_exp1 |   0.2569   0.3452   0.3355  -0.0570  -0.0503  -0.0534  -0.0675 
+  media_exp2 |   0.9160   0.4373   0.3678  -0.0021  -0.0032  -0.0135  -0.0246 
+  media_exp3 |   0.4485   0.9325   0.6006  -0.0657  -0.0635  -0.0748  -0.0934 
+no_autonomy1 |  -0.1587  -0.2279  -0.2724   0.0323   0.0360   0.0166  -0.0028 
+no_autonomy2 |  -0.1302  -0.2077  -0.2571   0.0215   0.0350   0.0164   0.0036 
+no_autonomy3 |  -0.0815  -0.1316  -0.2053   0.0291   0.0248   0.0045   0.0128 
+no_autonomy4 |  -0.1610  -0.2496  -0.2674   0.0368   0.0187   0.0363   0.0235 
+
+             |     v206     v207     v218    v467b    h21_1   h32z_1     v701
+-------------+---------------------------------------------------------------
+        v206 |   1.0000 
+        v207 |   0.2787   1.0000 
+        v218 |   0.2063   0.2035   1.0000 
+       v467b |  -0.0216  -0.0370  -0.0056   1.0000 
+       h21_1 |  -0.0119  -0.0397   0.0009   0.0651   1.0000 
+      h32z_1 |  -0.0039  -0.0405  -0.0150   0.1126   0.2567   1.0000 
+        v701 |  -0.1174  -0.1092  -0.1201   0.1552   0.1052   0.1195   1.0000 
+       v743a |   0.0800   0.0950   0.0368  -0.0887  -0.0303  -0.0495  -0.1914 
+       v743b |   0.0836   0.0846   0.0390  -0.0838  -0.0084  -0.0097  -0.2045 
+       v743d |   0.0374   0.0514   0.0309  -0.1424  -0.0272  -0.0839  -0.1546 
+       v850a |  -0.0599  -0.0672  -0.0330   0.0386   0.0214   0.0329   0.1070 
+        v137 |   0.0745   0.0574   0.2745  -0.0244  -0.0129  -0.0169  -0.0991 
+number_of_~t |   0.8084   0.7906   0.2563  -0.0365  -0.0327  -0.0273  -0.1418 
+  media_exp1 |  -0.0881  -0.0924  -0.0962   0.0718   0.0518   0.0768   0.2173 
+  media_exp2 |  -0.0734  -0.0723  -0.0137   0.1319   0.0662   0.1108   0.2590 
+  media_exp3 |  -0.1336  -0.1489  -0.1220   0.1156   0.0963   0.1337   0.3759 
+no_autonomy1 |   0.0804   0.0998   0.0434  -0.0970  -0.0326  -0.0464  -0.2080 
+no_autonomy2 |   0.0846   0.0863   0.0381  -0.0830  -0.0094  -0.0088  -0.2050 
+no_autonomy3 |   0.0422   0.0610   0.0363  -0.1458  -0.0336  -0.0832  -0.1759 
+no_autonomy4 |   0.0975   0.1111   0.0491  -0.1135  -0.0547  -0.0649  -0.2092 
+
+             |    v743a    v743b    v743d    v850a     v137 number.. media_~1
+-------------+---------------------------------------------------------------
+       v743a |   1.0000 
+       v743b |   0.6142   1.0000 
+       v743d |   0.5235   0.4765   1.0000 
+       v850a |  -0.0785  -0.0745  -0.0100   1.0000 
+        v137 |   0.1116   0.1364   0.0773  -0.0502   1.0000 
+number_of_~t |   0.1092   0.1052   0.0554  -0.0794   0.0827   1.0000 
+  media_exp1 |  -0.1356  -0.1314  -0.0777   0.0486  -0.0929  -0.1128   1.0000 
+  media_exp2 |  -0.1723  -0.1501  -0.0916   0.1235  -0.0962  -0.0911   0.2452 
+  media_exp3 |  -0.2203  -0.2135  -0.1260   0.1563  -0.1538  -0.1764   0.3196 
+no_autonomy1 |   0.9735   0.6472   0.5168  -0.0827   0.1141   0.1124  -0.1448 
+no_autonomy2 |   0.6107   0.9794   0.4739  -0.0759   0.1356   0.1068  -0.1316 
+no_autonomy3 |   0.5371   0.5264   0.9632  -0.0165   0.0791   0.0643  -0.0773 
+no_autonomy4 |   0.2320   0.2348   0.1690  -0.3179   0.1069   0.1303  -0.1375 
+
+             | media_~2 media_~3 no_aut~1 no_aut~2 no_aut~3 no_aut~4
+-------------+------------------------------------------------------
+  media_exp2 |   1.0000 
+  media_exp3 |   0.4659   1.0000 
+no_autonomy1 |  -0.1768  -0.2314   1.0000 
+no_autonomy2 |  -0.1482  -0.2135   0.6645   1.0000 
+no_autonomy3 |  -0.1000  -0.1334   0.5589   0.5445   1.0000 
+no_autonomy4 |  -0.1643  -0.2474   0.2451   0.2370   0.1852   1.0000 
+
+. sig
+command sig is unrecognized
+r(199);
+
+. vif
+not appropriate after regress, nocons;
+use option uncentered to get uncentered VIFs
+r(301);
+
+. pwcorr, sig
+
+             |      age matern~n partne~n marita~s occupa~s religion wealth~x
+-------------+---------------------------------------------------------------
+         age |   1.0000 
+             |
+             |
+maternal_e~n |   0.0008   1.0000 
+             |   0.9502
+             |
+partner_ed~n |   0.0071   0.6542   1.0000 
+             |   0.5629   0.0000
+             |
+marital_st~s |  -0.0470   0.1430   0.1070   1.0000 
+             |   0.0001   0.0000   0.0000
+             |
+occupation~s |   0.2018   0.1613   0.1452   0.0573   1.0000 
+             |   0.0000   0.0000   0.0000   0.0000
+             |
+    religion |  -0.0908  -0.5532  -0.3953  -0.2179  -0.2072   1.0000 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+wealth_index |   0.0780   0.6017   0.5614   0.0775   0.1042  -0.3301   1.0000 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+   ethnicity |  -0.0235  -0.1560  -0.0596  -0.0430  -0.0202   0.0532  -0.2098 
+             |   0.0537   0.0000   0.0000   0.0004   0.0968   0.0000   0.0000
+             |
+number_chi~t |   0.3393  -0.2597  -0.2082  -0.0581   0.0375   0.1899  -0.2076 
+             |   0.0000   0.0000   0.0000   0.0000   0.0021   0.0000   0.0000
+             |
+n~g_children |   0.6693  -0.2037  -0.1429  -0.0790   0.1526   0.1043  -0.0741 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+n~5_children |   0.0697  -0.2027  -0.1296  -0.0809  -0.0128   0.2158  -0.1173 
+             |   0.0000   0.0000   0.0000   0.0000   0.2942   0.0000   0.0000
+             |
+   media_exp |   0.0558   0.4466   0.4054   0.0770   0.1497  -0.2683   0.4617 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+place_resi~e |  -0.0764  -0.3939  -0.3428  -0.0554  -0.0938   0.1864  -0.5456 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+      region |   0.0760   0.3313   0.2216   0.2132   0.0911  -0.3811   0.2877 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+ no_autonomy |  -0.0877  -0.3537  -0.2558  -0.1215  -0.1802   0.4133  -0.2303 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+women_auto~y |   0.0951   0.4126   0.3164   0.1404   0.2430  -0.4692   0.2904 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+no_treatment |   0.0029  -0.1244  -0.1470   0.0188  -0.0625   0.0260  -0.1399 
+             |   0.8117   0.0000   0.0000   0.1225   0.0000   0.0327   0.0000
+             |
+        v013 |   0.9286  -0.0166  -0.0003  -0.0453   0.2138  -0.0823   0.0643 
+             |   0.0000   0.1723   0.9813   0.0002   0.0000   0.0000   0.0000
+             |
+        v130 |  -0.0173  -0.0908  -0.0598   0.0149  -0.0447   0.2780  -0.0381 
+             |   0.1560   0.0000   0.0000   0.2217   0.0002   0.0000   0.0018
+             |
+        v131 |   0.0571   0.1222   0.1243   0.0590   0.1378  -0.2287  -0.0060 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.6217
+             |
+        v157 |   0.0421   0.4029   0.2807   0.0115   0.0533  -0.2051   0.3187 
+             |   0.0006   0.0000   0.0000   0.3447   0.0000   0.0000   0.0000
+             |
+        v158 |   0.0779   0.3428   0.3168   0.0184   0.1335  -0.1826   0.3562 
+             |   0.0000   0.0000   0.0000   0.1303   0.0000   0.0000   0.0000
+             |
+        v159 |   0.0341   0.5566   0.4919   0.0625   0.1201  -0.3283   0.6213 
+             |   0.0051   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+        v190 |   0.0729   0.6197   0.5884   0.0713   0.1104  -0.3379   0.9418 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+        v202 |   0.4440  -0.1561  -0.0864  -0.0599   0.0888   0.1025  -0.0495 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+        v203 |   0.4083  -0.1375  -0.0859  -0.0642   0.0973   0.1102  -0.0317 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0093
+             |
+        v204 |   0.2874  -0.0909  -0.0777  -0.0106   0.0496   0.0245  -0.0813 
+             |   0.0000   0.0000   0.0000   0.3837   0.0000   0.0448   0.0000
+             |
+        v205 |   0.3662  -0.1213  -0.0929  -0.0166   0.0789   0.0227  -0.0762 
+             |   0.0000   0.0000   0.0000   0.1735   0.0000   0.0624   0.0000
+             |
+        v206 |   0.2614  -0.1939  -0.1560  -0.0447   0.0391   0.1417  -0.1538 
+             |   0.0000   0.0000   0.0000   0.0002   0.0013   0.0000   0.0000
+             |
+        v207 |   0.2719  -0.2035  -0.1644  -0.0456   0.0221   0.1542  -0.1617 
+             |   0.0000   0.0000   0.0000   0.0002   0.0697   0.0000   0.0000
+             |
+        v218 |   0.6789  -0.2304  -0.1477  -0.0798   0.1442   0.1369  -0.0911 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+       v467b |   0.0147   0.1495   0.1811  -0.0070   0.0894  -0.0841   0.1247 
+             |   0.2286   0.0000   0.0000   0.5644   0.0000   0.0000   0.0000
+             |
+       h21_1 |   0.0107   0.0720   0.1183  -0.0235   0.0641  -0.0428   0.1020 
+             |   0.5656   0.0001   0.0000   0.2056   0.0005   0.0209   0.0000
+             |
+      h32z_1 |  -0.0060   0.1295   0.1469  -0.0186   0.0690  -0.0178   0.1377 
+             |   0.6576   0.0000   0.0000   0.1667   0.0000   0.1861   0.0000
+             |
+        v701 |  -0.0085   0.5013   0.7119   0.0763   0.1055  -0.2871   0.4364 
+             |   0.4857   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+       v743a |  -0.0903  -0.3349  -0.2515  -0.1324  -0.2176   0.3949  -0.2424 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+       v743b |  -0.0828  -0.3463  -0.2594  -0.1365  -0.2292   0.3918  -0.2443 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+       v743d |  -0.0482  -0.2291  -0.1840  -0.0722  -0.1737   0.2497  -0.1666 
+             |   0.0001   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+       v850a |   0.0050   0.1695   0.1495   0.0569   0.0579  -0.1913   0.1332 
+             |   0.6819   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+        v137 |   0.0728  -0.1956  -0.1236  -0.0787  -0.0065   0.2115  -0.1121 
+             |   0.0000   0.0000   0.0000   0.0000   0.5921   0.0000   0.0000
+             |
+number_of_~t |   0.3333  -0.2483  -0.2002  -0.0565   0.0385   0.1848  -0.1972 
+             |   0.0000   0.0000   0.0000   0.0000   0.0016   0.0000   0.0000
+             |
+  media_exp1 |   0.0359   0.4163   0.2885   0.0160   0.0554  -0.2175   0.3293 
+             |   0.0032   0.0000   0.0000   0.1907   0.0000   0.0000   0.0000
+             |
+  media_exp2 |   0.0662   0.3486   0.3141   0.0310   0.1391  -0.2007   0.3558 
+             |   0.0000   0.0000   0.0000   0.0109   0.0000   0.0000   0.0000
+             |
+  media_exp3 |   0.0315   0.5366   0.4805   0.0760   0.1319  -0.3316   0.5976 
+             |   0.0097   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy1 |  -0.0916  -0.3529  -0.2681  -0.1346  -0.2287   0.4101  -0.2552 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy2 |  -0.0835  -0.3476  -0.2615  -0.1336  -0.2391   0.3940  -0.2421 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy3 |  -0.0508  -0.2501  -0.2066  -0.0762  -0.1819   0.2734  -0.1750 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy4 |  -0.0371  -0.3560  -0.2822  -0.0895  -0.1117   0.3630  -0.2622 
+             |   0.0023   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+
+             | ethnic~y number.. n~livi~n n~unde~n media_~p place_~e   region
+-------------+---------------------------------------------------------------
+   ethnicity |   1.0000 
+             |
+             |
+number_chi~t |   0.0326   1.0000 
+             |   0.0075
+             |
+n~g_children |   0.0302   0.2794   1.0000 
+             |   0.0133   0.0000
+             |
+n~5_children |   0.0495   0.0792   0.3133   1.0000 
+             |   0.0000   0.0000   0.0000
+             |
+   media_exp |  -0.1885  -0.1373  -0.0383  -0.1220   1.0000 
+             |   0.0000   0.0000   0.0017   0.0000
+             |
+place_resi~e |   0.3044   0.1370   0.0166   0.0946  -0.3460   1.0000 
+             |   0.0000   0.0000   0.1738   0.0000   0.0000
+             |
+      region |  -0.4302  -0.0599  -0.0393  -0.1188   0.2832  -0.2443   1.0000 
+             |   0.0000   0.0000   0.0012   0.0000   0.0000   0.0000
+             |
+ no_autonomy |   0.0865   0.1063   0.0358   0.1298  -0.1783   0.1756  -0.2108 
+             |   0.0000   0.0000   0.0033   0.0000   0.0000   0.0000   0.0000
+             |
+women_auto~y |  -0.0803  -0.1324  -0.0340  -0.1444   0.2213  -0.2130   0.2265 
+             |   0.0000   0.0000   0.0052   0.0000   0.0000   0.0000   0.0000
+             |
+no_treatment |   0.0069   0.0229   0.0136   0.0219  -0.1274   0.1025  -0.0771 
+             |   0.5710   0.0608   0.2659   0.0719   0.0000   0.0000   0.0000
+             |
+        v013 |  -0.0230   0.3716   0.6958   0.0722   0.0538  -0.0687   0.0719 
+             |   0.0591   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+        v130 |   0.0358   0.0249   0.0244   0.0520  -0.0466   0.0570  -0.0392 
+             |   0.0033   0.0411   0.0455   0.0000   0.0001   0.0000   0.0013
+             |
+        v131 |   0.6771  -0.0600  -0.0073  -0.0511  -0.0668   0.1207  -0.2157 
+             |   0.0000   0.0000   0.5486   0.0000   0.0000   0.0000   0.0000
+             |
+        v157 |  -0.1451  -0.1145  -0.0813  -0.0919   0.2594  -0.2140   0.2025 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+        v158 |  -0.2314  -0.0861   0.0011  -0.0817   0.7832  -0.2883   0.2513 
+             |   0.0000   0.0000   0.9274   0.0000   0.0000   0.0000   0.0000
+             |
+        v159 |  -0.1599  -0.1874  -0.1126  -0.1547   0.6181  -0.4290   0.2948 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+        v190 |  -0.1994  -0.2112  -0.0974  -0.1177   0.4717  -0.5449   0.3008 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+        v202 |   0.0251   0.1648   0.6320   0.2220  -0.0179  -0.0074  -0.0551 
+             |   0.0391   0.0000   0.0000   0.0000   0.1421   0.5450   0.0000
+             |
+        v203 |   0.0392   0.1425   0.6058   0.2282  -0.0236  -0.0039  -0.0352 
+             |   0.0013   0.0000   0.0000   0.0000   0.0526   0.7501   0.0038
+             |
+        v204 |  -0.0031   0.1687   0.3102   0.0276  -0.0306   0.0491  -0.0002 
+             |   0.7990   0.0000   0.0000   0.0237   0.0120   0.0001   0.9872
+             |
+        v205 |   0.0129   0.1762   0.3750   0.0434  -0.0501   0.0747  -0.0098 
+             |   0.2893   0.0000   0.0000   0.0004   0.0000   0.0000   0.4228
+             |
+        v206 |   0.0212   0.7866   0.2124   0.0698  -0.1060   0.1063  -0.0370 
+             |   0.0813   0.0000   0.0000   0.0000   0.0000   0.0000   0.0024
+             |
+        v207 |   0.0241   0.7528   0.2070   0.0470  -0.1072   0.1101  -0.0523 
+             |   0.0477   0.0000   0.0000   0.0001   0.0000   0.0000   0.0000
+             |
+        v218 |   0.0402   0.2749   0.9121   0.2822  -0.0466   0.0278  -0.0558 
+             |   0.0010   0.0000   0.0000   0.0000   0.0001   0.0224   0.0000
+             |
+       v467b |  -0.0512  -0.0295   0.0004  -0.0208   0.1428  -0.1100   0.0705 
+             |   0.0000   0.0154   0.9718   0.0877   0.0000   0.0000   0.0000
+             |
+       h21_1 |   0.0193  -0.0232  -0.0021  -0.0179   0.0836  -0.0580   0.0151 
+             |   0.2972   0.2106   0.9088   0.3345   0.0000   0.0018   0.4170
+             |
+      h32z_1 |  -0.0000  -0.0245  -0.0145  -0.0167   0.1290  -0.0994   0.0915 
+             |   0.9973   0.0688   0.2816   0.2150   0.0000   0.0000   0.0000
+             |
+        v701 |  -0.0586  -0.1446  -0.1146  -0.0990   0.3272  -0.2671   0.1706 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+       v743a |   0.0746   0.1116   0.0244   0.1187  -0.2025   0.1813  -0.2463 
+             |   0.0000   0.0000   0.0452   0.0000   0.0000   0.0000   0.0000
+             |
+       v743b |   0.0583   0.1100   0.0211   0.1368  -0.1763   0.1931  -0.1921 
+             |   0.0000   0.0000   0.0829   0.0000   0.0000   0.0000   0.0000
+             |
+       v743d |   0.0531   0.0563   0.0189   0.0775  -0.1114   0.1141  -0.1455 
+             |   0.0000   0.0000   0.1204   0.0000   0.0000   0.0000   0.0000
+             |
+       v850a |   0.0006  -0.0787  -0.0312  -0.0499   0.1360  -0.0950   0.1182 
+             |   0.9615   0.0000   0.0103   0.0000   0.0000   0.0000   0.0000
+             |
+        v137 |   0.0482   0.0882   0.2974   0.9570  -0.1271   0.0930  -0.1175 
+             |   0.0001   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+number_of_~t |   0.0283   0.9629   0.2623   0.0733  -0.1333   0.1352  -0.0556 
+             |   0.0201   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+  media_exp1 |  -0.1577  -0.1205  -0.0860  -0.0951   0.2761  -0.2210   0.2170 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+  media_exp2 |  -0.2148  -0.0947  -0.0099  -0.0938   0.8550  -0.2867   0.2566 
+             |   0.0000   0.0000   0.4156   0.0000   0.0000   0.0000   0.0000
+             |
+  media_exp3 |  -0.1498  -0.1826  -0.1058  -0.1499   0.6629  -0.4161   0.2793 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy1 |   0.0740   0.1159   0.0303   0.1199  -0.2084   0.1843  -0.2365 
+             |   0.0000   0.0000   0.0129   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy2 |   0.0566   0.1114   0.0182   0.1351  -0.1746   0.1878  -0.1822 
+             |   0.0000   0.0000   0.1363   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy3 |   0.0416   0.0653   0.0219   0.0787  -0.1184   0.1164  -0.1289 
+             |   0.0006   0.0000   0.0718   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy4 |   0.0953   0.1266   0.0369   0.1086  -0.2084   0.1916  -0.1745 
+             |   0.0000   0.0000   0.0025   0.0000   0.0000   0.0000   0.0000
+             |
+
+             | no_aut~y women_~y no_tre~t     v013     v130     v131     v157
+-------------+---------------------------------------------------------------
+ no_autonomy |   1.0000 
+             |
+             |
+women_auto~y |  -0.8202   1.0000 
+             |   0.0000
+             |
+no_treatment |   0.0158  -0.0540   1.0000 
+             |   0.1952   0.0000
+             |
+        v013 |  -0.0772   0.0894  -0.0062   1.0000 
+             |   0.0000   0.0000   0.6117
+             |
+        v130 |   0.0965  -0.1185   0.0171  -0.0134   1.0000 
+             |   0.0000   0.0000   0.1595   0.2705
+             |
+        v131 |  -0.1082   0.1331   0.0181   0.0529  -0.0444   1.0000 
+             |   0.0000   0.0000   0.1377   0.0000   0.0003
+             |
+        v157 |  -0.1340   0.1479  -0.0816   0.0364  -0.0264  -0.0162   1.0000 
+             |   0.0000   0.0000   0.0000   0.0028   0.0306   0.1837
+             |
+        v158 |  -0.1455   0.1705  -0.1100   0.0755  -0.0304  -0.1394   0.2599 
+             |   0.0000   0.0000   0.0000   0.0000   0.0125   0.0000   0.0000
+             |
+        v159 |  -0.2256   0.2607  -0.1360   0.0272  -0.0351   0.0187   0.3448 
+             |   0.0000   0.0000   0.0000   0.0255   0.0040   0.1255   0.0000
+             |
+        v190 |  -0.2396   0.3084  -0.1603   0.0595  -0.0376   0.0066   0.3267 
+             |   0.0000   0.0000   0.0000   0.0000   0.0020   0.5889   0.0000
+             |
+        v202 |   0.0397  -0.0407   0.0036   0.4678   0.0224  -0.0141  -0.0541 
+             |   0.0011   0.0008   0.7659   0.0000   0.0662   0.2465   0.0000
+             |
+        v203 |   0.0378  -0.0382  -0.0120   0.4258   0.0331  -0.0187  -0.0454 
+             |   0.0019   0.0017   0.3246   0.0000   0.0067   0.1244   0.0002
+             |
+        v204 |   0.0307  -0.0173   0.0388   0.3306   0.0023  -0.0014  -0.0565 
+             |   0.0119   0.1558   0.0015   0.0000   0.8504   0.9076   0.0000
+             |
+        v205 |   0.0128  -0.0082   0.0293   0.4247  -0.0085   0.0011  -0.0625 
+             |   0.2934   0.5000   0.0162   0.0000   0.4841   0.9252   0.0000
+             |
+        v206 |   0.0858  -0.0989   0.0030   0.2963   0.0140  -0.0468  -0.0857 
+             |   0.0000   0.0000   0.8038   0.0000   0.2504   0.0001   0.0000
+             |
+        v207 |   0.0846  -0.1113   0.0417   0.2962   0.0257  -0.0533  -0.0839 
+             |   0.0000   0.0000   0.0006   0.0000   0.0351   0.0000   0.0000
+             |
+        v218 |   0.0570  -0.0530   0.0141   0.7313   0.0303  -0.0191  -0.0911 
+             |   0.0000   0.0000   0.2490   0.0000   0.0129   0.1165   0.0000
+             |
+       v467b |  -0.0838   0.1267  -0.1032   0.0134  -0.0215   0.0025   0.0603 
+             |   0.0000   0.0000   0.0000   0.2703   0.0784   0.8367   0.0000
+             |
+       h21_1 |  -0.0102   0.0334  -0.6721   0.0157   0.0029   0.0274   0.0532 
+             |   0.5827   0.0717   0.0000   0.3983   0.8742   0.1397   0.0041
+             |
+      h32z_1 |  -0.0139   0.0547  -0.9568   0.0012  -0.0156  -0.0203   0.0813 
+             |   0.3003   0.0000   0.0000   0.9281   0.2474   0.1311   0.0000
+             |
+        v701 |  -0.1917   0.2386  -0.1213  -0.0177  -0.0442   0.0765   0.2095 
+             |   0.0000   0.0000   0.0000   0.1475   0.0003   0.0000   0.0000
+             |
+       v743a |   0.5784  -0.7623   0.0504  -0.0905   0.0984  -0.1061  -0.1268 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+       v743b |   0.6386  -0.7819   0.0098  -0.0746   0.0980  -0.1198  -0.1208 
+             |   0.0000   0.0000   0.4207   0.0000   0.0000   0.0000   0.0000
+             |
+       v743d |   0.3753  -0.6583   0.0759  -0.0461   0.0802  -0.0544  -0.0714 
+             |   0.0000   0.0000   0.0000   0.0002   0.0000   0.0000   0.0000
+             |
+       v850a |  -0.1473   0.1540  -0.0283   0.0068   0.0284   0.0317   0.0521 
+             |   0.0000   0.0000   0.0202   0.5765   0.0199   0.0092   0.0000
+             |
+        v137 |   0.1273  -0.1410   0.0215   0.0784   0.0473  -0.0482  -0.0901 
+             |   0.0000   0.0000   0.0776   0.0000   0.0001   0.0001   0.0000
+             |
+number_of_~t |   0.1066  -0.1313   0.0275   0.3704   0.0247  -0.0625  -0.1061 
+             |   0.0000   0.0000   0.0242   0.0000   0.0429   0.0000   0.0000
+             |
+  media_exp1 |  -0.1441   0.1590  -0.0778   0.0303  -0.0368  -0.0167   0.9397 
+             |   0.0000   0.0000   0.0000   0.0130   0.0025   0.1714   0.0000
+             |
+  media_exp2 |  -0.1618   0.1888  -0.1068   0.0665  -0.0407  -0.1217   0.2343 
+             |   0.0000   0.0000   0.0000   0.0000   0.0008   0.0000   0.0000
+             |
+  media_exp3 |  -0.2278   0.2633  -0.1295   0.0235  -0.0443   0.0258   0.3099 
+             |   0.0000   0.0000   0.0000   0.0542   0.0003   0.0341   0.0000
+             |
+no_autonomy1 |   0.6282  -0.8000   0.0475  -0.0927   0.1019  -0.1168  -0.1348 
+             |   0.0000   0.0000   0.0001   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy2 |   0.6611  -0.8037   0.0100  -0.0784   0.0990  -0.1269  -0.1198 
+             |   0.0000   0.0000   0.4135   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy3 |   0.4278  -0.7117   0.0768  -0.0507   0.0856  -0.0754  -0.0714 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy4 |   0.4634  -0.5054   0.0626  -0.0305   0.0738  -0.0810  -0.1361 
+             |   0.0000   0.0000   0.0000   0.0124   0.0000   0.0000   0.0000
+             |
+
+             |     v158     v159     v190     v202     v203     v204     v205
+-------------+---------------------------------------------------------------
+        v158 |   1.0000 
+             |
+             |
+        v159 |   0.4618   1.0000 
+             |   0.0000
+             |
+        v190 |   0.3637   0.6251   1.0000 
+             |   0.0000   0.0000
+             |
+        v202 |   0.0015  -0.0725  -0.0668   1.0000 
+             |   0.9047   0.0000   0.0000
+             |
+        v203 |   0.0086  -0.0616  -0.0446   0.0534   1.0000 
+             |   0.4826   0.0000   0.0003   0.0000
+             |
+        v204 |  -0.0140  -0.0805  -0.0848   0.0100   0.0207   1.0000 
+             |   0.2495   0.0000   0.0000   0.4127   0.0902
+             |
+        v205 |  -0.0172  -0.0967  -0.0853   0.1168   0.1021   0.3132   1.0000 
+             |   0.1590   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+        v206 |  -0.0659  -0.1367  -0.1507   0.1264   0.0909   0.1518   0.1353 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+        v207 |  -0.0690  -0.1524  -0.1718   0.1245   0.1083   0.1118   0.1318 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+        v218 |  -0.0029  -0.1275  -0.1123   0.6656   0.6340   0.3724   0.4982 
+             |   0.8106   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+       v467b |   0.1219   0.1129   0.1364   0.0019   0.0005  -0.0090  -0.0161 
+             |   0.0000   0.0000   0.0000   0.8741   0.9641   0.4590   0.1852
+             |
+       h21_1 |   0.0618   0.0863   0.1220   0.0005  -0.0018  -0.0162   0.0202 
+             |   0.0009   0.0000   0.0000   0.9784   0.9223   0.3821   0.2766
+             |
+      h32z_1 |   0.1187   0.1406   0.1546  -0.0012   0.0136  -0.0376  -0.0405 
+             |   0.0000   0.0000   0.0000   0.9289   0.3110   0.0052   0.0026
+             |
+        v701 |   0.2493   0.3788   0.4665  -0.0689  -0.0743  -0.0531  -0.0787 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+       v743a |  -0.1516  -0.2154  -0.2600   0.0323   0.0325   0.0094  -0.0119 
+             |   0.0000   0.0000   0.0000   0.0081   0.0076   0.4420   0.3289
+             |
+       v743b |  -0.1314  -0.2076  -0.2589   0.0251   0.0369   0.0128  -0.0012 
+             |   0.0000   0.0000   0.0000   0.0395   0.0024   0.2918   0.9247
+             |
+       v743d |  -0.0688  -0.1224  -0.1947   0.0314   0.0198  -0.0015   0.0045 
+             |   0.0000   0.0000   0.0000   0.0099   0.1041   0.8994   0.7131
+             |
+       v850a |   0.1249   0.1575   0.1484  -0.0099  -0.0278  -0.0252  -0.0160 
+             |   0.0000   0.0000   0.0000   0.4178   0.0224   0.0389   0.1884
+             |
+        v137 |  -0.0839  -0.1579  -0.1118   0.2149   0.2153   0.0327   0.0521 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0073   0.0000
+             |
+number_of_~t |  -0.0843  -0.1806  -0.2013   0.1569   0.1244   0.1653   0.1670 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+  media_exp1 |   0.2569   0.3452   0.3355  -0.0570  -0.0503  -0.0534  -0.0675 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+  media_exp2 |   0.9160   0.4373   0.3678  -0.0021  -0.0032  -0.0135  -0.0246 
+             |   0.0000   0.0000   0.0000   0.8653   0.7919   0.2697   0.0432
+             |
+  media_exp3 |   0.4485   0.9325   0.6006  -0.0657  -0.0635  -0.0748  -0.0934 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy1 |  -0.1587  -0.2279  -0.2724   0.0323   0.0360   0.0166  -0.0028 
+             |   0.0000   0.0000   0.0000   0.0080   0.0032   0.1719   0.8180
+             |
+no_autonomy2 |  -0.1302  -0.2077  -0.2571   0.0215   0.0350   0.0164   0.0036 
+             |   0.0000   0.0000   0.0000   0.0781   0.0041   0.1778   0.7703
+             |
+no_autonomy3 |  -0.0815  -0.1316  -0.2053   0.0291   0.0248   0.0045   0.0128 
+             |   0.0000   0.0000   0.0000   0.0171   0.0419   0.7149   0.2924
+             |
+no_autonomy4 |  -0.1610  -0.2496  -0.2674   0.0368   0.0187   0.0363   0.0235 
+             |   0.0000   0.0000   0.0000   0.0025   0.1242   0.0029   0.0537
+             |
+
+             |     v206     v207     v218    v467b    h21_1   h32z_1     v701
+-------------+---------------------------------------------------------------
+        v206 |   1.0000 
+             |
+             |
+        v207 |   0.2787   1.0000 
+             |   0.0000
+             |
+        v218 |   0.2063   0.2035   1.0000 
+             |   0.0000   0.0000
+             |
+       v467b |  -0.0216  -0.0370  -0.0056   1.0000 
+             |   0.0767   0.0024   0.6482
+             |
+       h21_1 |  -0.0119  -0.0397   0.0009   0.0651   1.0000 
+             |   0.5224   0.0323   0.9598   0.0004
+             |
+      h32z_1 |  -0.0039  -0.0405  -0.0150   0.1126   0.2567   1.0000 
+             |   0.7722   0.0026   0.2664   0.0000   0.0000
+             |
+        v701 |  -0.1174  -0.1092  -0.1201   0.1552   0.1052   0.1195   1.0000 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+       v743a |   0.0800   0.0950   0.0368  -0.0887  -0.0303  -0.0495  -0.1914 
+             |   0.0000   0.0000   0.0025   0.0000   0.1022   0.0002   0.0000
+             |
+       v743b |   0.0836   0.0846   0.0390  -0.0838  -0.0084  -0.0097  -0.2045 
+             |   0.0000   0.0000   0.0014   0.0000   0.6490   0.4729   0.0000
+             |
+       v743d |   0.0374   0.0514   0.0309  -0.1424  -0.0272  -0.0839  -0.1546 
+             |   0.0021   0.0000   0.0111   0.0000   0.1422   0.0000   0.0000
+             |
+       v850a |  -0.0599  -0.0672  -0.0330   0.0386   0.0214   0.0329   0.1070 
+             |   0.0000   0.0000   0.0068   0.0015   0.2481   0.0144   0.0000
+             |
+        v137 |   0.0745   0.0574   0.2745  -0.0244  -0.0129  -0.0169  -0.0991 
+             |   0.0000   0.0000   0.0000   0.0456   0.4885   0.2100   0.0000
+             |
+number_of_~t |   0.8084   0.7906   0.2563  -0.0365  -0.0327  -0.0273  -0.1418 
+             |   0.0000   0.0000   0.0000   0.0028   0.0782   0.0425   0.0000
+             |
+  media_exp1 |  -0.0881  -0.0924  -0.0962   0.0718   0.0518   0.0768   0.2173 
+             |   0.0000   0.0000   0.0000   0.0000   0.0052   0.0000   0.0000
+             |
+  media_exp2 |  -0.0734  -0.0723  -0.0137   0.1319   0.0662   0.1108   0.2590 
+             |   0.0000   0.0000   0.2609   0.0000   0.0004   0.0000   0.0000
+             |
+  media_exp3 |  -0.1336  -0.1489  -0.1220   0.1156   0.0963   0.1337   0.3759 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy1 |   0.0804   0.0998   0.0434  -0.0970  -0.0326  -0.0464  -0.2080 
+             |   0.0000   0.0000   0.0004   0.0000   0.0785   0.0006   0.0000
+             |
+no_autonomy2 |   0.0846   0.0863   0.0381  -0.0830  -0.0094  -0.0088  -0.2050 
+             |   0.0000   0.0000   0.0018   0.0000   0.6112   0.5109   0.0000
+             |
+no_autonomy3 |   0.0422   0.0610   0.0363  -0.1458  -0.0336  -0.0832  -0.1759 
+             |   0.0005   0.0000   0.0029   0.0000   0.0700   0.0000   0.0000
+             |
+no_autonomy4 |   0.0975   0.1111   0.0491  -0.1135  -0.0547  -0.0649  -0.2092 
+             |   0.0000   0.0000   0.0001   0.0000   0.0032   0.0000   0.0000
+             |
+
+             |    v743a    v743b    v743d    v850a     v137 number.. media_~1
+-------------+---------------------------------------------------------------
+       v743a |   1.0000 
+             |
+             |
+       v743b |   0.6142   1.0000 
+             |   0.0000
+             |
+       v743d |   0.5235   0.4765   1.0000 
+             |   0.0000   0.0000
+             |
+       v850a |  -0.0785  -0.0745  -0.0100   1.0000 
+             |   0.0000   0.0000   0.4130
+             |
+        v137 |   0.1116   0.1364   0.0773  -0.0502   1.0000 
+             |   0.0000   0.0000   0.0000   0.0000
+             |
+number_of_~t |   0.1092   0.1052   0.0554  -0.0794   0.0827   1.0000 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+  media_exp1 |  -0.1356  -0.1314  -0.0777   0.0486  -0.0929  -0.1128   1.0000 
+             |   0.0000   0.0000   0.0000   0.0001   0.0000   0.0000
+             |
+  media_exp2 |  -0.1723  -0.1501  -0.0916   0.1235  -0.0962  -0.0911   0.2452 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+  media_exp3 |  -0.2203  -0.2135  -0.1260   0.1563  -0.1538  -0.1764   0.3196 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy1 |   0.9735   0.6472   0.5168  -0.0827   0.1141   0.1124  -0.1448 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy2 |   0.6107   0.9794   0.4739  -0.0759   0.1356   0.1068  -0.1316 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy3 |   0.5371   0.5264   0.9632  -0.0165   0.0791   0.0643  -0.0773 
+             |   0.0000   0.0000   0.0000   0.1747   0.0000   0.0000   0.0000
+             |
+no_autonomy4 |   0.2320   0.2348   0.1690  -0.3179   0.1069   0.1303  -0.1375 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+
+             | media_~2 media_~3 no_aut~1 no_aut~2 no_aut~3 no_aut~4
+-------------+------------------------------------------------------
+  media_exp2 |   1.0000 
+             |
+             |
+  media_exp3 |   0.4659   1.0000 
+             |   0.0000
+             |
+no_autonomy1 |  -0.1768  -0.2314   1.0000 
+             |   0.0000   0.0000
+             |
+no_autonomy2 |  -0.1482  -0.2135   0.6645   1.0000 
+             |   0.0000   0.0000   0.0000
+             |
+no_autonomy3 |  -0.1000  -0.1334   0.5589   0.5445   1.0000 
+             |   0.0000   0.0000   0.0000   0.0000
+             |
+no_autonomy4 |  -0.1643  -0.2474   0.2451   0.2370   0.1852   1.0000 
+             |   0.0000   0.0000   0.0000   0.0000   0.0000
+             |
+
+. tab no_autonomy1
+
+  RECODE of |
+      v743a |
+(person who |
+    usually |
+ decides on |
+respondent' |
+   s health |
+      care) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      2,385       35.42       35.42
+     1. yes |      4,348       64.58      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab no_autonomy2
+
+  RECODE of |
+      v743b |
+(person who |
+    usually |
+ decides on |
+      large |
+  household |
+ purchases) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      2,230       33.12       33.12
+     1. yes |      4,503       66.88      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab women_autonomy
+
+women_auton |
+        omy |      Freq.     Percent        Cum.
+------------+-----------------------------------
+    0. none |      3,518       52.25       52.25
+ 1. partial |      2,017       29.96       82.21
+    2. full |      1,198       17.79      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab no_autonomy
+
+no_autonomy |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      1,198       17.79       17.79
+     1. yes |      5,535       82.21      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab no_autonomy1
+
+  RECODE of |
+      v743a |
+(person who |
+    usually |
+ decides on |
+respondent' |
+   s health |
+      care) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      2,385       35.42       35.42
+     1. yes |      4,348       64.58      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab no_autonomy2
+
+  RECODE of |
+      v743b |
+(person who |
+    usually |
+ decides on |
+      large |
+  household |
+ purchases) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      2,230       33.12       33.12
+     1. yes |      4,503       66.88      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab no_autonomy3
+
+  RECODE of |
+      v743d |
+(person who |
+    usually |
+ decides on |
+  visits to |
+  family or |
+ relatives) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      3,648       54.18       54.18
+     1. yes |      3,085       45.82      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab no_autonomy4
+
+  RECODE of |
+      v850a |
+(respondent |
+ can refuse |
+       sex) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      3,380       50.20       50.20
+     1. yes |      3,353       49.80      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab v743d
+
+    person who usually decides on |
+    visits to family or relatives |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+              1. respondent alone |        782       11.61       11.61
+2. respondent and husband/partner |      2,866       42.57       54.18
+         4. husband/partner alone |      3,066       45.54       99.72
+                  5. someone else |         16        0.24       99.96
+                         6. other |          3        0.04      100.00
+----------------------------------+-----------------------------------
+                            Total |      6,733      100.00
+
+. asdoc tab1 age maternal_education partner_education marital_status occupation_status religion wealth_index ethnicity number_chi
+> ldren_lost number_of_living_children number_of_under_5_children media_exp place_residence region women_autonomy
+(File Myfile.doc already exists, option append was assumed)
+
+  RECODE of |
+  v013 (age |
+  in 5-year |
+    groups) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+   1. 15-24 |      1,784       26.50       26.50
+   2. 25-34 |      3,167       47.04       73.53
+   3. 35-49 |      1,782       26.47      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+        highest |
+    educational |
+          level |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+0. no education |      3,538       52.55       52.55
+     1. primary |      1,070       15.89       68.44
+   2. secondary |      1,770       26.29       94.73
+      3. higher |        355        5.27      100.00
+----------------+-----------------------------------
+          Total |      6,733      100.00
+
+ RECODE of v701 |
+(husband/partne |
+  r's education |
+         level) |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+0. no education |      2,810       41.73       41.73
+     1. primary |        941       13.98       55.71
+   2. secondary |      2,099       31.17       86.89
+      3. higher |        883       13.11      100.00
+----------------+-----------------------------------
+          Total |      6,733      100.00
+
+                current marital status |      Freq.     Percent        Cum.
+---------------------------------------+-----------------------------------
+                            1. married |      6,545       97.21       97.21
+                2. living with partner |        188        2.79      100.00
+---------------------------------------+-----------------------------------
+                                 Total |      6,733      100.00
+
+ respondent |
+  currently |
+    working |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      2,175       32.30       32.30
+     1. yes |      4,558       67.70      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+   RECODE of |
+        v130 |
+  (religion) |      Freq.     Percent        Cum.
+-------------+-----------------------------------
+1. christian |      2,042       30.33       30.33
+    2. islam |      4,665       69.29       99.61
+   3. others |         26        0.39      100.00
+-------------+-----------------------------------
+       Total |      6,733      100.00
+
+  RECODE of |
+       v190 |
+    (wealth |
+      index |
+  combined) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+    1. poor |      3,653       54.26       54.26
+  2. middle |      1,378       20.47       74.72
+    3. rich |      1,702       25.28      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+  RECODE of |
+       v131 |
+(ethnicity) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+  1. yoruba |        333        4.95        4.95
+    2. igbo |        652        9.68       14.63
+   3. hausa |      3,528       52.40       67.03
+  4. others |      2,220       32.97      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+         RECODE of |
+number_of_children |
+             _lost |      Freq.     Percent        Cum.
+-------------------+-----------------------------------
+           0. none |      4,383       65.10       65.10
+            1. one |      1,295       19.23       84.33
+            2. two |        619        9.19       93.52
+3. three and above |        436        6.48      100.00
+-------------------+-----------------------------------
+             Total |      6,733      100.00
+
+   RECODE of v218 |
+(number of living |
+        children) |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+           1. one |      1,173       17.42       17.42
+           2. two |      1,266       18.80       36.22
+         3. three |      1,124       16.69       52.92
+          4. four |        975       14.48       67.40
+5. five and above |      2,195       32.60      100.00
+------------------+-----------------------------------
+            Total |      6,733      100.00
+
+   RECODE of v137 |
+       (number of |
+   children 5 and |
+         under in |
+    household (de |
+           jure)) |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+           1. one |      2,187       32.48       32.48
+           2. two |      2,526       37.52       70.00
+         3. three |      1,127       16.74       86.74
+4. four and above |        893       13.26      100.00
+------------------+-----------------------------------
+            Total |      6,733      100.00
+
+     media_exp |      Freq.     Percent        Cum.
+---------------+-----------------------------------
+0. not exposed |      3,026       44.94       44.94
+    1. exposed |      3,707       55.06      100.00
+---------------+-----------------------------------
+         Total |      6,733      100.00
+
+    type of |
+   place of |
+  residence |      Freq.     Percent        Cum.
+------------+-----------------------------------
+   1. urban |      1,940       28.81       28.81
+   2. rural |      4,793       71.19      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+          region |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+1. north central |        970       14.41       14.41
+   2. north east |      2,137       31.74       46.15
+   3. north west |      2,209       32.81       78.95
+   4. south east |        545        8.09       87.05
+  5. south south |        520        7.72       94.77
+   6. south west |        352        5.23      100.00
+-----------------+-----------------------------------
+           Total |      6,733      100.00
+
+women_auton |
+        omy |      Freq.     Percent        Cum.
+------------+-----------------------------------
+    0. none |      3,518       52.25       52.25
+ 1. partial |      2,017       29.96       82.21
+    2. full |      1,198       17.79      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+Click to Open File:  Myfile.doc
+
+. tab no_autonomy1
+
+  RECODE of |
+      v743a |
+(person who |
+    usually |
+ decides on |
+respondent' |
+   s health |
+      care) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      2,385       35.42       35.42
+     1. yes |      4,348       64.58      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab no_autonomy1
+
+  RECODE of |
+      v743a |
+(person who |
+    usually |
+ decides on |
+respondent' |
+   s health |
+      care) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      2,385       35.42       35.42
+     1. yes |      4,348       64.58      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab v743d
+
+    person who usually decides on |
+    visits to family or relatives |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+              1. respondent alone |        782       11.61       11.61
+2. respondent and husband/partner |      2,866       42.57       54.18
+         4. husband/partner alone |      3,066       45.54       99.72
+                  5. someone else |         16        0.24       99.96
+                         6. other |          3        0.04      100.00
+----------------------------------+-----------------------------------
+                            Total |      6,733      100.00
+
+. tab v743b
+
+    person who usually decides on |
+        large household purchases |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+              1. respondent alone |        256        3.80        3.80
+2. respondent and husband/partner |      1,974       29.32       33.12
+         4. husband/partner alone |      4,458       66.21       99.33
+                  5. someone else |         40        0.59       99.93
+                         6. other |          5        0.07      100.00
+----------------------------------+-----------------------------------
+                            Total |      6,733      100.00
+
+. tab v850a
+
+     respondent can refuse sex |      Freq.     Percent        Cum.
+-------------------------------+-----------------------------------
+                         0. no |      3,231       47.99       47.99
+                        1. yes |      3,380       50.20       98.19
+8. don't know/not sure/depends |        122        1.81      100.00
+-------------------------------+-----------------------------------
+                         Total |      6,733      100.00
+
+. tab no_treatment
+
+no_treatmen |
+          t |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      4,575       67.95       67.95
+     1. yes |      2,158       32.05      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab h21_1
+
+   received |
+        any |
+  treatment |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |        493       16.96       16.96
+     1. yes |      2,413       83.04      100.00
+------------+-----------------------------------
+      Total |      2,906      100.00
+
+. tab h32z_1
+
+fever/cough |
+  : medical |
+  treatment |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      1,843       33.36       33.36
+     1. yes |      3,681       66.64      100.00
+------------+-----------------------------------
+      Total |      5,524      100.00
+
+. tab h21_1, m
+
+   received |
+        any |
+  treatment |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |        493        7.32        7.32
+     1. yes |      2,413       35.84       43.16
+          . |      3,827       56.84      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab h32z_1, m
+
+fever/cough |
+  : medical |
+  treatment |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      1,843       27.37       27.37
+     1. yes |      3,681       54.67       82.04
+          . |      1,209       17.96      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. tab no_treatment, m
+
+no_treatmen |
+          t |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      4,575       67.95       67.95
+     1. yes |      2,158       32.05      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. asdoc tab no_treatment
+(File Myfile.doc already exists, option append was assumed)
+
+no_treatmen |
+          t |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      4,575       67.95       67.95
+     1. yes |      2,158       32.05      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+Click to Open File:  Myfile.doc
+
+. global Demo " age maternal_education partner_education marital_status occupation_status religion wealth_index ethnicity number_
+> children_lost number_of_living_children number_of_under_5_children media_exp women_autonomy place_residence region"
+
+. foreach demo of global Demo {
+  2. 
+. tab `demo' h21_1, row
+  3. 
+. }
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+ v013 (age |     received any
+ in 5-year |       treatment
+   groups) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+  1. 15-24 |       149        716 |       865 
+           |     17.23      82.77 |    100.00 
+-----------+----------------------+----------
+  2. 25-34 |       233      1,117 |     1,350 
+           |     17.26      82.74 |    100.00 
+-----------+----------------------+----------
+  3. 35-49 |       111        580 |       691 
+           |     16.06      83.94 |    100.00 
+-----------+----------------------+----------
+     Total |       493      2,413 |     2,906 
+           |     16.96      83.04 |    100.00 
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+        highest |     received any
+    educational |       treatment
+          level |     0. no     1. yes |     Total
+----------------+----------------------+----------
+0. no education |       316      1,331 |     1,647 
+                |     19.19      80.81 |    100.00 
+----------------+----------------------+----------
+     1. primary |        75        378 |       453 
+                |     16.56      83.44 |    100.00 
+----------------+----------------------+----------
+   2. secondary |        85        600 |       685 
+                |     12.41      87.59 |    100.00 
+----------------+----------------------+----------
+      3. higher |        17        104 |       121 
+                |     14.05      85.95 |    100.00 
+----------------+----------------------+----------
+          Total |       493      2,413 |     2,906 
+                |     16.96      83.04 |    100.00 
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of v701 |
+(husband/partne |     received any
+  r's education |       treatment
+         level) |     0. no     1. yes |     Total
+----------------+----------------------+----------
+0. no education |       273      1,027 |     1,300 
+                |     21.00      79.00 |    100.00 
+----------------+----------------------+----------
+     1. primary |        73        302 |       375 
+                |     19.47      80.53 |    100.00 
+----------------+----------------------+----------
+   2. secondary |       113        741 |       854 
+                |     13.23      86.77 |    100.00 
+----------------+----------------------+----------
+      3. higher |        34        343 |       377 
+                |      9.02      90.98 |    100.00 
+----------------+----------------------+----------
+          Total |       493      2,413 |     2,906 
+                |     16.96      83.04 |    100.00 
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+                      |     received any
+      current marital |       treatment
+               status |     0. no     1. yes |     Total
+----------------------+----------------------+----------
+           1. married |       477      2,358 |     2,835 
+                      |     16.83      83.17 |    100.00 
+----------------------+----------------------+----------
+2. living with partne |        16         55 |        71 
+                      |     22.54      77.46 |    100.00 
+----------------------+----------------------+----------
+                Total |       493      2,413 |     2,906 
+                      |     16.96      83.04 |    100.00 
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+respondent |     received any
+ currently |       treatment
+   working |     0. no     1. yes |     Total
+-----------+----------------------+----------
+     0. no |       200        784 |       984 
+           |     20.33      79.67 |    100.00 
+-----------+----------------------+----------
+    1. yes |       293      1,629 |     1,922 
+           |     15.24      84.76 |    100.00 
+-----------+----------------------+----------
+     Total |       493      2,413 |     2,906 
+           |     16.96      83.04 |    100.00 
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of |     received any
+        v130 |       treatment
+  (religion) |     0. no     1. yes |     Total
+-------------+----------------------+----------
+1. christian |        96        589 |       685 
+             |     14.01      85.99 |    100.00 
+-------------+----------------------+----------
+    2. islam |       396      1,818 |     2,214 
+             |     17.89      82.11 |    100.00 
+-------------+----------------------+----------
+   3. others |         1          6 |         7 
+             |     14.29      85.71 |    100.00 
+-------------+----------------------+----------
+       Total |       493      2,413 |     2,906 
+             |     16.96      83.04 |    100.00 
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+      v190 |
+   (wealth |     received any
+     index |       treatment
+ combined) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+   1. poor |       342      1,338 |     1,680 
+           |     20.36      79.64 |    100.00 
+-----------+----------------------+----------
+ 2. middle |        76        506 |       582 
+           |     13.06      86.94 |    100.00 
+-----------+----------------------+----------
+   3. rich |        75        569 |       644 
+           |     11.65      88.35 |    100.00 
+-----------+----------------------+----------
+     Total |       493      2,413 |     2,906 
+           |     16.96      83.04 |    100.00 
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+      v131 |     received any
+(ethnicity |       treatment
+         ) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+ 1. yoruba |        29        119 |       148 
+           |     19.59      80.41 |    100.00 
+-----------+----------------------+----------
+   2. igbo |        21        166 |       187 
+           |     11.23      88.77 |    100.00 
+-----------+----------------------+----------
+  3. hausa |       311      1,372 |     1,683 
+           |     18.48      81.52 |    100.00 
+-----------+----------------------+----------
+ 4. others |       132        756 |       888 
+           |     14.86      85.14 |    100.00 
+-----------+----------------------+----------
+     Total |       493      2,413 |     2,906 
+           |     16.96      83.04 |    100.00 
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+         RECODE of |     received any
+number_of_children |       treatment
+             _lost |     0. no     1. yes |     Total
+-------------------+----------------------+----------
+           0. none |       303      1,518 |     1,821 
+                   |     16.64      83.36 |    100.00 
+-------------------+----------------------+----------
+            1. one |        95        488 |       583 
+                   |     16.30      83.70 |    100.00 
+-------------------+----------------------+----------
+            2. two |        53        247 |       300 
+                   |     17.67      82.33 |    100.00 
+-------------------+----------------------+----------
+3. three and above |        42        160 |       202 
+                   |     20.79      79.21 |    100.00 
+-------------------+----------------------+----------
+             Total |       493      2,413 |     2,906 
+                   |     16.96      83.04 |    100.00 
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of v218 |     received any
+(number of living |       treatment
+        children) |     0. no     1. yes |     Total
+------------------+----------------------+----------
+           1. one |        86        441 |       527 
+                  |     16.32      83.68 |    100.00 
+------------------+----------------------+----------
+           2. two |        98        446 |       544 
+                  |     18.01      81.99 |    100.00 
+------------------+----------------------+----------
+         3. three |        82        425 |       507 
+                  |     16.17      83.83 |    100.00 
+------------------+----------------------+----------
+          4. four |        67        322 |       389 
+                  |     17.22      82.78 |    100.00 
+------------------+----------------------+----------
+5. five and above |       160        779 |       939 
+                  |     17.04      82.96 |    100.00 
+------------------+----------------------+----------
+            Total |       493      2,413 |     2,906 
+                  |     16.96      83.04 |    100.00 
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of v137 |
+       (number of |
+   children 5 and |
+         under in |     received any
+    household (de |       treatment
+           jure)) |     0. no     1. yes |     Total
+------------------+----------------------+----------
+           1. one |       138        719 |       857 
+                  |     16.10      83.90 |    100.00 
+------------------+----------------------+----------
+           2. two |       190        923 |     1,113 
+                  |     17.07      82.93 |    100.00 
+------------------+----------------------+----------
+         3. three |        91        444 |       535 
+                  |     17.01      82.99 |    100.00 
+------------------+----------------------+----------
+4. four and above |        74        327 |       401 
+                  |     18.45      81.55 |    100.00 
+------------------+----------------------+----------
+            Total |       493      2,413 |     2,906 
+                  |     16.96      83.04 |    100.00 
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+               |     received any
+               |       treatment
+     media_exp |     0. no     1. yes |     Total
+---------------+----------------------+----------
+0. not exposed |       270      1,054 |     1,324 
+               |     20.39      79.61 |    100.00 
+---------------+----------------------+----------
+    1. exposed |       223      1,359 |     1,582 
+               |     14.10      85.90 |    100.00 
+---------------+----------------------+----------
+         Total |       493      2,413 |     2,906 
+               |     16.96      83.04 |    100.00 
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+           |     received any
+women_auto |       treatment
+      nomy |     0. no     1. yes |     Total
+-----------+----------------------+----------
+   0. none |       300      1,334 |     1,634 
+           |     18.36      81.64 |    100.00 
+-----------+----------------------+----------
+1. partial |       124        718 |       842 
+           |     14.73      85.27 |    100.00 
+-----------+----------------------+----------
+   2. full |        69        361 |       430 
+           |     16.05      83.95 |    100.00 
+-----------+----------------------+----------
+     Total |       493      2,413 |     2,906 
+           |     16.96      83.04 |    100.00 
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   type of |     received any
+  place of |       treatment
+ residence |     0. no     1. yes |     Total
+-----------+----------------------+----------
+  1. urban |       107        690 |       797 
+           |     13.43      86.57 |    100.00 
+-----------+----------------------+----------
+  2. rural |       386      1,723 |     2,109 
+           |     18.30      81.70 |    100.00 
+-----------+----------------------+----------
+     Total |       493      2,413 |     2,906 
+           |     16.96      83.04 |    100.00 
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+                 |     received any
+                 |       treatment
+          region |     0. no     1. yes |     Total
+-----------------+----------------------+----------
+1. north central |        68        363 |       431 
+                 |     15.78      84.22 |    100.00 
+-----------------+----------------------+----------
+   2. north east |       217        911 |     1,128 
+                 |     19.24      80.76 |    100.00 
+-----------------+----------------------+----------
+   3. north west |       143        778 |       921 
+                 |     15.53      84.47 |    100.00 
+-----------------+----------------------+----------
+   4. south east |        20        133 |       153 
+                 |     13.07      86.93 |    100.00 
+-----------------+----------------------+----------
+  5. south south |        15        103 |       118 
+                 |     12.71      87.29 |    100.00 
+-----------------+----------------------+----------
+   6. south west |        30        125 |       155 
+                 |     19.35      80.65 |    100.00 
+-----------------+----------------------+----------
+           Total |       493      2,413 |     2,906 
+                 |     16.96      83.04 |    100.00 
+
+. tab no_autonomy h21_1, row chi2
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+           |     received any
+no_autonom |       treatment
+         y |     0. no     1. yes |     Total
+-----------+----------------------+----------
+     0. no |        69        361 |       430 
+           |     16.05      83.95 |    100.00 
+-----------+----------------------+----------
+    1. yes |       424      2,052 |     2,476 
+           |     17.12      82.88 |    100.00 
+-----------+----------------------+----------
+     Total |       493      2,413 |     2,906 
+           |     16.96      83.04 |    100.00 
+
+          Pearson chi2(1) =   0.3022   Pr = 0.583
+
+. tab no_autonomy h32z_1 , row chi2
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+           | fever/cough: medical
+no_autonom |       treatment
+         y |     0. no     1. yes |     Total
+-----------+----------------------+----------
+     0. no |       319        679 |       998 
+           |     31.96      68.04 |    100.00 
+-----------+----------------------+----------
+    1. yes |     1,524      3,002 |     4,526 
+           |     33.67      66.33 |    100.00 
+-----------+----------------------+----------
+     Total |     1,843      3,681 |     5,524 
+           |     33.36      66.64 |    100.00 
+
+          Pearson chi2(1) =   1.0732   Pr = 0.300
+
+. tab women_autonomy h32z_1 , row chi2
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+           | fever/cough: medical
+women_auto |       treatment
+      nomy |     0. no     1. yes |     Total
+-----------+----------------------+----------
+   0. none |     1,055      1,822 |     2,877 
+           |     36.67      63.33 |    100.00 
+-----------+----------------------+----------
+1. partial |       469      1,180 |     1,649 
+           |     28.44      71.56 |    100.00 
+-----------+----------------------+----------
+   2. full |       319        679 |       998 
+           |     31.96      68.04 |    100.00 
+-----------+----------------------+----------
+     Total |     1,843      3,681 |     5,524 
+           |     33.36      66.64 |    100.00 
+
+          Pearson chi2(2) =  32.9974   Pr = 0.000
+
+. tab women_autonomy h21_1 , row chi2
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+           |     received any
+women_auto |       treatment
+      nomy |     0. no     1. yes |     Total
+-----------+----------------------+----------
+   0. none |       300      1,334 |     1,634 
+           |     18.36      81.64 |    100.00 
+-----------+----------------------+----------
+1. partial |       124        718 |       842 
+           |     14.73      85.27 |    100.00 
+-----------+----------------------+----------
+   2. full |        69        361 |       430 
+           |     16.05      83.95 |    100.00 
+-----------+----------------------+----------
+     Total |       493      2,413 |     2,906 
+           |     16.96      83.04 |    100.00 
+
+          Pearson chi2(2) =   5.5085   Pr = 0.064
+
+. tab women_autonomy no_treatment , row chi2
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+women_auto |     no_treatment
+      nomy |     0. no     1. yes |     Total
+-----------+----------------------+----------
+   0. none |     2,280      1,238 |     3,518 
+           |     64.81      35.19 |    100.00 
+-----------+----------------------+----------
+1. partial |     1,462        555 |     2,017 
+           |     72.48      27.52 |    100.00 
+-----------+----------------------+----------
+   2. full |       833        365 |     1,198 
+           |     69.53      30.47 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(2) =  36.3471   Pr = 0.000
+
+. foreach demo of global Demo {
+  2. 
+. asdoc tab `demo' h21_1, row
+  3. 
+. }
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+ v013 (age |     received any
+ in 5-year |       treatment
+   groups) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+  1. 15-24 |       149        716 |       865 
+           |     17.23      82.77 |    100.00 
+-----------+----------------------+----------
+  2. 25-34 |       233      1,117 |     1,350 
+           |     17.26      82.74 |    100.00 
+-----------+----------------------+----------
+  3. 35-49 |       111        580 |       691 
+           |     16.06      83.94 |    100.00 
+-----------+----------------------+----------
+     Total |       493      2,413 |     2,906 
+           |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+        highest |     received any
+    educational |       treatment
+          level |     0. no     1. yes |     Total
+----------------+----------------------+----------
+0. no education |       316      1,331 |     1,647 
+                |     19.19      80.81 |    100.00 
+----------------+----------------------+----------
+     1. primary |        75        378 |       453 
+                |     16.56      83.44 |    100.00 
+----------------+----------------------+----------
+   2. secondary |        85        600 |       685 
+                |     12.41      87.59 |    100.00 
+----------------+----------------------+----------
+      3. higher |        17        104 |       121 
+                |     14.05      85.95 |    100.00 
+----------------+----------------------+----------
+          Total |       493      2,413 |     2,906 
+                |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of v701 |
+(husband/partne |     received any
+  r's education |       treatment
+         level) |     0. no     1. yes |     Total
+----------------+----------------------+----------
+0. no education |       273      1,027 |     1,300 
+                |     21.00      79.00 |    100.00 
+----------------+----------------------+----------
+     1. primary |        73        302 |       375 
+                |     19.47      80.53 |    100.00 
+----------------+----------------------+----------
+   2. secondary |       113        741 |       854 
+                |     13.23      86.77 |    100.00 
+----------------+----------------------+----------
+      3. higher |        34        343 |       377 
+                |      9.02      90.98 |    100.00 
+----------------+----------------------+----------
+          Total |       493      2,413 |     2,906 
+                |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+                      |     received any
+      current marital |       treatment
+               status |     0. no     1. yes |     Total
+----------------------+----------------------+----------
+           1. married |       477      2,358 |     2,835 
+                      |     16.83      83.17 |    100.00 
+----------------------+----------------------+----------
+2. living with partne |        16         55 |        71 
+                      |     22.54      77.46 |    100.00 
+----------------------+----------------------+----------
+                Total |       493      2,413 |     2,906 
+                      |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+respondent |     received any
+ currently |       treatment
+   working |     0. no     1. yes |     Total
+-----------+----------------------+----------
+     0. no |       200        784 |       984 
+           |     20.33      79.67 |    100.00 
+-----------+----------------------+----------
+    1. yes |       293      1,629 |     1,922 
+           |     15.24      84.76 |    100.00 
+-----------+----------------------+----------
+     Total |       493      2,413 |     2,906 
+           |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of |     received any
+        v130 |       treatment
+  (religion) |     0. no     1. yes |     Total
+-------------+----------------------+----------
+1. christian |        96        589 |       685 
+             |     14.01      85.99 |    100.00 
+-------------+----------------------+----------
+    2. islam |       396      1,818 |     2,214 
+             |     17.89      82.11 |    100.00 
+-------------+----------------------+----------
+   3. others |         1          6 |         7 
+             |     14.29      85.71 |    100.00 
+-------------+----------------------+----------
+       Total |       493      2,413 |     2,906 
+             |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+      v190 |
+   (wealth |     received any
+     index |       treatment
+ combined) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+   1. poor |       342      1,338 |     1,680 
+           |     20.36      79.64 |    100.00 
+-----------+----------------------+----------
+ 2. middle |        76        506 |       582 
+           |     13.06      86.94 |    100.00 
+-----------+----------------------+----------
+   3. rich |        75        569 |       644 
+           |     11.65      88.35 |    100.00 
+-----------+----------------------+----------
+     Total |       493      2,413 |     2,906 
+           |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+      v131 |     received any
+(ethnicity |       treatment
+         ) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+ 1. yoruba |        29        119 |       148 
+           |     19.59      80.41 |    100.00 
+-----------+----------------------+----------
+   2. igbo |        21        166 |       187 
+           |     11.23      88.77 |    100.00 
+-----------+----------------------+----------
+  3. hausa |       311      1,372 |     1,683 
+           |     18.48      81.52 |    100.00 
+-----------+----------------------+----------
+ 4. others |       132        756 |       888 
+           |     14.86      85.14 |    100.00 
+-----------+----------------------+----------
+     Total |       493      2,413 |     2,906 
+           |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+         RECODE of |     received any
+number_of_children |       treatment
+             _lost |     0. no     1. yes |     Total
+-------------------+----------------------+----------
+           0. none |       303      1,518 |     1,821 
+                   |     16.64      83.36 |    100.00 
+-------------------+----------------------+----------
+            1. one |        95        488 |       583 
+                   |     16.30      83.70 |    100.00 
+-------------------+----------------------+----------
+            2. two |        53        247 |       300 
+                   |     17.67      82.33 |    100.00 
+-------------------+----------------------+----------
+3. three and above |        42        160 |       202 
+                   |     20.79      79.21 |    100.00 
+-------------------+----------------------+----------
+             Total |       493      2,413 |     2,906 
+                   |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of v218 |     received any
+(number of living |       treatment
+        children) |     0. no     1. yes |     Total
+------------------+----------------------+----------
+           1. one |        86        441 |       527 
+                  |     16.32      83.68 |    100.00 
+------------------+----------------------+----------
+           2. two |        98        446 |       544 
+                  |     18.01      81.99 |    100.00 
+------------------+----------------------+----------
+         3. three |        82        425 |       507 
+                  |     16.17      83.83 |    100.00 
+------------------+----------------------+----------
+          4. four |        67        322 |       389 
+                  |     17.22      82.78 |    100.00 
+------------------+----------------------+----------
+5. five and above |       160        779 |       939 
+                  |     17.04      82.96 |    100.00 
+------------------+----------------------+----------
+            Total |       493      2,413 |     2,906 
+                  |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of v137 |
+       (number of |
+   children 5 and |
+         under in |     received any
+    household (de |       treatment
+           jure)) |     0. no     1. yes |     Total
+------------------+----------------------+----------
+           1. one |       138        719 |       857 
+                  |     16.10      83.90 |    100.00 
+------------------+----------------------+----------
+           2. two |       190        923 |     1,113 
+                  |     17.07      82.93 |    100.00 
+------------------+----------------------+----------
+         3. three |        91        444 |       535 
+                  |     17.01      82.99 |    100.00 
+------------------+----------------------+----------
+4. four and above |        74        327 |       401 
+                  |     18.45      81.55 |    100.00 
+------------------+----------------------+----------
+            Total |       493      2,413 |     2,906 
+                  |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+               |     received any
+               |       treatment
+     media_exp |     0. no     1. yes |     Total
+---------------+----------------------+----------
+0. not exposed |       270      1,054 |     1,324 
+               |     20.39      79.61 |    100.00 
+---------------+----------------------+----------
+    1. exposed |       223      1,359 |     1,582 
+               |     14.10      85.90 |    100.00 
+---------------+----------------------+----------
+         Total |       493      2,413 |     2,906 
+               |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+           |     received any
+women_auto |       treatment
+      nomy |     0. no     1. yes |     Total
+-----------+----------------------+----------
+   0. none |       300      1,334 |     1,634 
+           |     18.36      81.64 |    100.00 
+-----------+----------------------+----------
+1. partial |       124        718 |       842 
+           |     14.73      85.27 |    100.00 
+-----------+----------------------+----------
+   2. full |        69        361 |       430 
+           |     16.05      83.95 |    100.00 
+-----------+----------------------+----------
+     Total |       493      2,413 |     2,906 
+           |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   type of |     received any
+  place of |       treatment
+ residence |     0. no     1. yes |     Total
+-----------+----------------------+----------
+  1. urban |       107        690 |       797 
+           |     13.43      86.57 |    100.00 
+-----------+----------------------+----------
+  2. rural |       386      1,723 |     2,109 
+           |     18.30      81.70 |    100.00 
+-----------+----------------------+----------
+     Total |       493      2,413 |     2,906 
+           |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+                 |     received any
+                 |       treatment
+          region |     0. no     1. yes |     Total
+-----------------+----------------------+----------
+1. north central |        68        363 |       431 
+                 |     15.78      84.22 |    100.00 
+-----------------+----------------------+----------
+   2. north east |       217        911 |     1,128 
+                 |     19.24      80.76 |    100.00 
+-----------------+----------------------+----------
+   3. north west |       143        778 |       921 
+                 |     15.53      84.47 |    100.00 
+-----------------+----------------------+----------
+   4. south east |        20        133 |       153 
+                 |     13.07      86.93 |    100.00 
+-----------------+----------------------+----------
+  5. south south |        15        103 |       118 
+                 |     12.71      87.29 |    100.00 
+-----------------+----------------------+----------
+   6. south west |        30        125 |       155 
+                 |     19.35      80.65 |    100.00 
+-----------------+----------------------+----------
+           Total |       493      2,413 |     2,906 
+                 |     16.96      83.04 |    100.00 
+Click to Open File:  Myfile.doc
+
+. foreach demo of global Demo {
+  2. 
+. asdoc tab `demo' h32z_1, row
+  3. 
+. }
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+ v013 (age | fever/cough: medical
+ in 5-year |       treatment
+   groups) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+  1. 15-24 |       481        962 |     1,443 
+           |     33.33      66.67 |    100.00 
+-----------+----------------------+----------
+  2. 25-34 |       854      1,737 |     2,591 
+           |     32.96      67.04 |    100.00 
+-----------+----------------------+----------
+  3. 35-49 |       508        982 |     1,490 
+           |     34.09      65.91 |    100.00 
+-----------+----------------------+----------
+     Total |     1,843      3,681 |     5,524 
+           |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+        highest | fever/cough: medical
+    educational |       treatment
+          level |     0. no     1. yes |     Total
+----------------+----------------------+----------
+0. no education |     1,127      1,772 |     2,899 
+                |     38.88      61.12 |    100.00 
+----------------+----------------------+----------
+     1. primary |       261        620 |       881 
+                |     29.63      70.37 |    100.00 
+----------------+----------------------+----------
+   2. secondary |       403      1,045 |     1,448 
+                |     27.83      72.17 |    100.00 
+----------------+----------------------+----------
+      3. higher |        52        244 |       296 
+                |     17.57      82.43 |    100.00 
+----------------+----------------------+----------
+          Total |     1,843      3,681 |     5,524 
+                |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of v701 |
+(husband/partne | fever/cough: medical
+  r's education |       treatment
+         level) |     0. no     1. yes |     Total
+----------------+----------------------+----------
+0. no education |       937      1,364 |     2,301 
+                |     40.72      59.28 |    100.00 
+----------------+----------------------+----------
+     1. primary |       254        531 |       785 
+                |     32.36      67.64 |    100.00 
+----------------+----------------------+----------
+   2. secondary |       508      1,224 |     1,732 
+                |     29.33      70.67 |    100.00 
+----------------+----------------------+----------
+      3. higher |       144        562 |       706 
+                |     20.40      79.60 |    100.00 
+----------------+----------------------+----------
+          Total |     1,843      3,681 |     5,524 
+                |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+                      | fever/cough: medical
+      current marital |       treatment
+               status |     0. no     1. yes |     Total
+----------------------+----------------------+----------
+           1. married |     1,784      3,587 |     5,371 
+                      |     33.22      66.78 |    100.00 
+----------------------+----------------------+----------
+2. living with partne |        59         94 |       153 
+                      |     38.56      61.44 |    100.00 
+----------------------+----------------------+----------
+                Total |     1,843      3,681 |     5,524 
+                      |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+respondent | fever/cough: medical
+ currently |       treatment
+   working |     0. no     1. yes |     Total
+-----------+----------------------+----------
+     0. no |       665      1,078 |     1,743 
+           |     38.15      61.85 |    100.00 
+-----------+----------------------+----------
+    1. yes |     1,178      2,603 |     3,781 
+           |     31.16      68.84 |    100.00 
+-----------+----------------------+----------
+     Total |     1,843      3,681 |     5,524 
+           |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of | fever/cough: medical
+        v130 |       treatment
+  (religion) |     0. no     1. yes |     Total
+-------------+----------------------+----------
+1. christian |       553      1,174 |     1,727 
+             |     32.02      67.98 |    100.00 
+-------------+----------------------+----------
+    2. islam |     1,283      2,489 |     3,772 
+             |     34.01      65.99 |    100.00 
+-------------+----------------------+----------
+   3. others |         7         18 |        25 
+             |     28.00      72.00 |    100.00 
+-------------+----------------------+----------
+       Total |     1,843      3,681 |     5,524 
+             |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+      v190 |
+   (wealth | fever/cough: medical
+     index |       treatment
+ combined) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+   1. poor |     1,160      1,850 |     3,010 
+           |     38.54      61.46 |    100.00 
+-----------+----------------------+----------
+ 2. middle |       364        753 |     1,117 
+           |     32.59      67.41 |    100.00 
+-----------+----------------------+----------
+   3. rich |       319      1,078 |     1,397 
+           |     22.83      77.17 |    100.00 
+-----------+----------------------+----------
+     Total |     1,843      3,681 |     5,524 
+           |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+      v131 | fever/cough: medical
+(ethnicity |       treatment
+         ) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+ 1. yoruba |        90        152 |       242 
+           |     37.19      62.81 |    100.00 
+-----------+----------------------+----------
+   2. igbo |       179        395 |       574 
+           |     31.18      68.82 |    100.00 
+-----------+----------------------+----------
+  3. hausa |       948      1,902 |     2,850 
+           |     33.26      66.74 |    100.00 
+-----------+----------------------+----------
+ 4. others |       626      1,232 |     1,858 
+           |     33.69      66.31 |    100.00 
+-----------+----------------------+----------
+     Total |     1,843      3,681 |     5,524 
+           |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+         RECODE of | fever/cough: medical
+number_of_children |       treatment
+             _lost |     0. no     1. yes |     Total
+-------------------+----------------------+----------
+           0. none |     1,169      2,428 |     3,597 
+                   |     32.50      67.50 |    100.00 
+-------------------+----------------------+----------
+            1. one |       371        700 |     1,071 
+                   |     34.64      65.36 |    100.00 
+-------------------+----------------------+----------
+            2. two |       177        328 |       505 
+                   |     35.05      64.95 |    100.00 
+-------------------+----------------------+----------
+3. three and above |       126        225 |       351 
+                   |     35.90      64.10 |    100.00 
+-------------------+----------------------+----------
+             Total |     1,843      3,681 |     5,524 
+                   |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of v218 | fever/cough: medical
+(number of living |       treatment
+        children) |     0. no     1. yes |     Total
+------------------+----------------------+----------
+           1. one |       308        641 |       949 
+                  |     32.46      67.54 |    100.00 
+------------------+----------------------+----------
+           2. two |       332        713 |     1,045 
+                  |     31.77      68.23 |    100.00 
+------------------+----------------------+----------
+         3. three |       312        586 |       898 
+                  |     34.74      65.26 |    100.00 
+------------------+----------------------+----------
+          4. four |       270        531 |       801 
+                  |     33.71      66.29 |    100.00 
+------------------+----------------------+----------
+5. five and above |       621      1,210 |     1,831 
+                  |     33.92      66.08 |    100.00 
+------------------+----------------------+----------
+            Total |     1,843      3,681 |     5,524 
+                  |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of v137 |
+       (number of |
+   children 5 and |
+         under in | fever/cough: medical
+    household (de |       treatment
+           jure)) |     0. no     1. yes |     Total
+------------------+----------------------+----------
+           1. one |       600      1,222 |     1,822 
+                  |     32.93      67.07 |    100.00 
+------------------+----------------------+----------
+           2. two |       665      1,381 |     2,046 
+                  |     32.50      67.50 |    100.00 
+------------------+----------------------+----------
+         3. three |       323        600 |       923 
+                  |     34.99      65.01 |    100.00 
+------------------+----------------------+----------
+4. four and above |       255        478 |       733 
+                  |     34.79      65.21 |    100.00 
+------------------+----------------------+----------
+            Total |     1,843      3,681 |     5,524 
+                  |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+               | fever/cough: medical
+               |       treatment
+     media_exp |     0. no     1. yes |     Total
+---------------+----------------------+----------
+0. not exposed |     1,002      1,500 |     2,502 
+               |     40.05      59.95 |    100.00 
+---------------+----------------------+----------
+    1. exposed |       841      2,181 |     3,022 
+               |     27.83      72.17 |    100.00 
+---------------+----------------------+----------
+         Total |     1,843      3,681 |     5,524 
+               |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+           | fever/cough: medical
+women_auto |       treatment
+      nomy |     0. no     1. yes |     Total
+-----------+----------------------+----------
+   0. none |     1,055      1,822 |     2,877 
+           |     36.67      63.33 |    100.00 
+-----------+----------------------+----------
+1. partial |       469      1,180 |     1,649 
+           |     28.44      71.56 |    100.00 
+-----------+----------------------+----------
+   2. full |       319        679 |       998 
+           |     31.96      68.04 |    100.00 
+-----------+----------------------+----------
+     Total |     1,843      3,681 |     5,524 
+           |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   type of | fever/cough: medical
+  place of |       treatment
+ residence |     0. no     1. yes |     Total
+-----------+----------------------+----------
+  1. urban |       402      1,152 |     1,554 
+           |     25.87      74.13 |    100.00 
+-----------+----------------------+----------
+  2. rural |     1,441      2,529 |     3,970 
+           |     36.30      63.70 |    100.00 
+-----------+----------------------+----------
+     Total |     1,843      3,681 |     5,524 
+           |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+                 | fever/cough: medical
+                 |       treatment
+          region |     0. no     1. yes |     Total
+-----------------+----------------------+----------
+1. north central |       305        448 |       753 
+                 |     40.50      59.50 |    100.00 
+-----------------+----------------------+----------
+   2. north east |       673      1,070 |     1,743 
+                 |     38.61      61.39 |    100.00 
+-----------------+----------------------+----------
+   3. north west |       522      1,287 |     1,809 
+                 |     28.86      71.14 |    100.00 
+-----------------+----------------------+----------
+   4. south east |       151        332 |       483 
+                 |     31.26      68.74 |    100.00 
+-----------------+----------------------+----------
+  5. south south |        99        381 |       480 
+                 |     20.63      79.38 |    100.00 
+-----------------+----------------------+----------
+   6. south west |        93        163 |       256 
+                 |     36.33      63.67 |    100.00 
+-----------------+----------------------+----------
+           Total |     1,843      3,681 |     5,524 
+                 |     33.36      66.64 |    100.00 
+Click to Open File:  Myfile.doc
+
+. foreach demo of global Demo {
+  2. 
+. tab `demo' no_treatment, row chi2
+  3. 
+. }
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+ v013 (age |
+ in 5-year |     no_treatment
+   groups) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+  1. 15-24 |     1,211        573 |     1,784 
+           |     67.88      32.12 |    100.00 
+-----------+----------------------+----------
+  2. 25-34 |     2,161      1,006 |     3,167 
+           |     68.23      31.77 |    100.00 
+-----------+----------------------+----------
+  3. 35-49 |     1,203        579 |     1,782 
+           |     67.51      32.49 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(2) =   0.2815   Pr = 0.869
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+        highest |
+    educational |     no_treatment
+          level |     0. no     1. yes |     Total
+----------------+----------------------+----------
+0. no education |     2,217      1,321 |     3,538 
+                |     62.66      37.34 |    100.00 
+----------------+----------------------+----------
+     1. primary |       762        308 |     1,070 
+                |     71.21      28.79 |    100.00 
+----------------+----------------------+----------
+   2. secondary |     1,308        462 |     1,770 
+                |     73.90      26.10 |    100.00 
+----------------+----------------------+----------
+      3. higher |       288         67 |       355 
+                |     81.13      18.87 |    100.00 
+----------------+----------------------+----------
+          Total |     4,575      2,158 |     6,733 
+                |     67.95      32.05 |    100.00 
+
+          Pearson chi2(3) = 107.7141   Pr = 0.000
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of v701 |
+(husband/partne |
+  r's education |     no_treatment
+         level) |     0. no     1. yes |     Total
+----------------+----------------------+----------
+0. no education |     1,705      1,105 |     2,810 
+                |     60.68      39.32 |    100.00 
+----------------+----------------------+----------
+     1. primary |       645        296 |       941 
+                |     68.54      31.46 |    100.00 
+----------------+----------------------+----------
+   2. secondary |     1,516        583 |     2,099 
+                |     72.22      27.78 |    100.00 
+----------------+----------------------+----------
+      3. higher |       709        174 |       883 
+                |     80.29      19.71 |    100.00 
+----------------+----------------------+----------
+          Total |     4,575      2,158 |     6,733 
+                |     67.95      32.05 |    100.00 
+
+          Pearson chi2(3) = 147.8166   Pr = 0.000
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+      current marital |     no_treatment
+               status |     0. no     1. yes |     Total
+----------------------+----------------------+----------
+           1. married |     4,457      2,088 |     6,545 
+                      |     68.10      31.90 |    100.00 
+----------------------+----------------------+----------
+2. living with partne |       118         70 |       188 
+                      |     62.77      37.23 |    100.00 
+----------------------+----------------------+----------
+                Total |     4,575      2,158 |     6,733 
+                      |     67.95      32.05 |    100.00 
+
+          Pearson chi2(1) =   2.3855   Pr = 0.122
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+respondent |
+ currently |     no_treatment
+   working |     0. no     1. yes |     Total
+-----------+----------------------+----------
+     0. no |     1,386        789 |     2,175 
+           |     63.72      36.28 |    100.00 
+-----------+----------------------+----------
+    1. yes |     3,189      1,369 |     4,558 
+           |     69.96      30.04 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(1) =  26.3314   Pr = 0.000
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of |
+        v130 |     no_treatment
+  (religion) |     0. no     1. yes |     Total
+-------------+----------------------+----------
+1. christian |     1,426        616 |     2,042 
+             |     69.83      30.17 |    100.00 
+-------------+----------------------+----------
+    2. islam |     3,131      1,534 |     4,665 
+             |     67.12      32.88 |    100.00 
+-------------+----------------------+----------
+   3. others |        18          8 |        26 
+             |     69.23      30.77 |    100.00 
+-------------+----------------------+----------
+       Total |     4,575      2,158 |     6,733 
+             |     67.95      32.05 |    100.00 
+
+          Pearson chi2(2) =   4.8328   Pr = 0.089
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+      v190 |
+   (wealth |
+     index |     no_treatment
+ combined) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+   1. poor |     2,281      1,372 |     3,653 
+           |     62.44      37.56 |    100.00 
+-----------+----------------------+----------
+ 2. middle |       968        410 |     1,378 
+           |     70.25      29.75 |    100.00 
+-----------+----------------------+----------
+   3. rich |     1,326        376 |     1,702 
+           |     77.91      22.09 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(2) = 131.7297   Pr = 0.000
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+      v131 |
+(ethnicity |     no_treatment
+         ) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+ 1. yoruba |       222        111 |       333 
+           |     66.67      33.33 |    100.00 
+-----------+----------------------+----------
+   2. igbo |       464        188 |       652 
+           |     71.17      28.83 |    100.00 
+-----------+----------------------+----------
+  3. hausa |     2,385      1,143 |     3,528 
+           |     67.60      32.40 |    100.00 
+-----------+----------------------+----------
+ 4. others |     1,504        716 |     2,220 
+           |     67.75      32.25 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(3) =   3.5854   Pr = 0.310
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+         RECODE of |
+number_of_children |     no_treatment
+             _lost |     0. no     1. yes |     Total
+-------------------+----------------------+----------
+           0. none |     3,011      1,372 |     4,383 
+                   |     68.70      31.30 |    100.00 
+-------------------+----------------------+----------
+            1. one |       866        429 |     1,295 
+                   |     66.87      33.13 |    100.00 
+-------------------+----------------------+----------
+            2. two |       415        204 |       619 
+                   |     67.04      32.96 |    100.00 
+-------------------+----------------------+----------
+3. three and above |       283        153 |       436 
+                   |     64.91      35.09 |    100.00 
+-------------------+----------------------+----------
+             Total |     4,575      2,158 |     6,733 
+                   |     67.95      32.05 |    100.00 
+
+          Pearson chi2(3) =   3.8998   Pr = 0.272
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of v218 |
+(number of living |     no_treatment
+        children) |     0. no     1. yes |     Total
+------------------+----------------------+----------
+           1. one |       810        363 |     1,173 
+                  |     69.05      30.95 |    100.00 
+------------------+----------------------+----------
+           2. two |       868        398 |     1,266 
+                  |     68.56      31.44 |    100.00 
+------------------+----------------------+----------
+         3. three |       760        364 |     1,124 
+                  |     67.62      32.38 |    100.00 
+------------------+----------------------+----------
+          4. four |       659        316 |       975 
+                  |     67.59      32.41 |    100.00 
+------------------+----------------------+----------
+5. five and above |     1,478        717 |     2,195 
+                  |     67.33      32.67 |    100.00 
+------------------+----------------------+----------
+            Total |     4,575      2,158 |     6,733 
+                  |     67.95      32.05 |    100.00 
+
+          Pearson chi2(4) =   1.3713   Pr = 0.849
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of v137 |
+       (number of |
+   children 5 and |
+         under in |
+    household (de |     no_treatment
+           jure)) |     0. no     1. yes |     Total
+------------------+----------------------+----------
+           1. one |     1,498        689 |     2,187 
+                  |     68.50      31.50 |    100.00 
+------------------+----------------------+----------
+           2. two |     1,741        785 |     2,526 
+                  |     68.92      31.08 |    100.00 
+------------------+----------------------+----------
+         3. three |       750        377 |     1,127 
+                  |     66.55      33.45 |    100.00 
+------------------+----------------------+----------
+4. four and above |       586        307 |       893 
+                  |     65.62      34.38 |    100.00 
+------------------+----------------------+----------
+            Total |     4,575      2,158 |     6,733 
+                  |     67.95      32.05 |    100.00 
+
+          Pearson chi2(3) =   4.6374   Pr = 0.200
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+               |     no_treatment
+     media_exp |     0. no     1. yes |     Total
+---------------+----------------------+----------
+0. not exposed |     1,857      1,169 |     3,026 
+               |     61.37      38.63 |    100.00 
+---------------+----------------------+----------
+    1. exposed |     2,718        989 |     3,707 
+               |     73.32      26.68 |    100.00 
+---------------+----------------------+----------
+         Total |     4,575      2,158 |     6,733 
+               |     67.95      32.05 |    100.00 
+
+          Pearson chi2(1) = 109.2905   Pr = 0.000
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+women_auto |     no_treatment
+      nomy |     0. no     1. yes |     Total
+-----------+----------------------+----------
+   0. none |     2,280      1,238 |     3,518 
+           |     64.81      35.19 |    100.00 
+-----------+----------------------+----------
+1. partial |     1,462        555 |     2,017 
+           |     72.48      27.52 |    100.00 
+-----------+----------------------+----------
+   2. full |       833        365 |     1,198 
+           |     69.53      30.47 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(2) =  36.3471   Pr = 0.000
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   type of |
+  place of |     no_treatment
+ residence |     0. no     1. yes |     Total
+-----------+----------------------+----------
+  1. urban |     1,464        476 |     1,940 
+           |     75.46      24.54 |    100.00 
+-----------+----------------------+----------
+  2. rural |     3,111      1,682 |     4,793 
+           |     64.91      35.09 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(1) =  70.6703   Pr = 0.000
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+                 |     no_treatment
+          region |     0. no     1. yes |     Total
+-----------------+----------------------+----------
+1. north central |       622        348 |       970 
+                 |     64.12      35.88 |    100.00 
+-----------------+----------------------+----------
+   2. north east |     1,326        811 |     2,137 
+                 |     62.05      37.95 |    100.00 
+-----------------+----------------------+----------
+   3. north west |     1,597        612 |     2,209 
+                 |     72.30      27.70 |    100.00 
+-----------------+----------------------+----------
+   4. south east |       385        160 |       545 
+                 |     70.64      29.36 |    100.00 
+-----------------+----------------------+----------
+  5. south south |       409        111 |       520 
+                 |     78.65      21.35 |    100.00 
+-----------------+----------------------+----------
+   6. south west |       236        116 |       352 
+                 |     67.05      32.95 |    100.00 
+-----------------+----------------------+----------
+           Total |     4,575      2,158 |     6,733 
+                 |     67.95      32.05 |    100.00 
+
+          Pearson chi2(5) =  89.1356   Pr = 0.000
+
+. foreach demo of global Demo {
+  2. 
+. asdoc tab `demo' no_treatment, row chi2
+  3. 
+. }
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+ v013 (age |
+ in 5-year |     no_treatment
+   groups) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+  1. 15-24 |     1,211        573 |     1,784 
+           |     67.88      32.12 |    100.00 
+-----------+----------------------+----------
+  2. 25-34 |     2,161      1,006 |     3,167 
+           |     68.23      31.77 |    100.00 
+-----------+----------------------+----------
+  3. 35-49 |     1,203        579 |     1,782 
+           |     67.51      32.49 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(2) =   0.2815   Pr = 0.869
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+        highest |
+    educational |     no_treatment
+          level |     0. no     1. yes |     Total
+----------------+----------------------+----------
+0. no education |     2,217      1,321 |     3,538 
+                |     62.66      37.34 |    100.00 
+----------------+----------------------+----------
+     1. primary |       762        308 |     1,070 
+                |     71.21      28.79 |    100.00 
+----------------+----------------------+----------
+   2. secondary |     1,308        462 |     1,770 
+                |     73.90      26.10 |    100.00 
+----------------+----------------------+----------
+      3. higher |       288         67 |       355 
+                |     81.13      18.87 |    100.00 
+----------------+----------------------+----------
+          Total |     4,575      2,158 |     6,733 
+                |     67.95      32.05 |    100.00 
+
+          Pearson chi2(3) = 107.7141   Pr = 0.000
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of v701 |
+(husband/partne |
+  r's education |     no_treatment
+         level) |     0. no     1. yes |     Total
+----------------+----------------------+----------
+0. no education |     1,705      1,105 |     2,810 
+                |     60.68      39.32 |    100.00 
+----------------+----------------------+----------
+     1. primary |       645        296 |       941 
+                |     68.54      31.46 |    100.00 
+----------------+----------------------+----------
+   2. secondary |     1,516        583 |     2,099 
+                |     72.22      27.78 |    100.00 
+----------------+----------------------+----------
+      3. higher |       709        174 |       883 
+                |     80.29      19.71 |    100.00 
+----------------+----------------------+----------
+          Total |     4,575      2,158 |     6,733 
+                |     67.95      32.05 |    100.00 
+
+          Pearson chi2(3) = 147.8166   Pr = 0.000
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+      current marital |     no_treatment
+               status |     0. no     1. yes |     Total
+----------------------+----------------------+----------
+           1. married |     4,457      2,088 |     6,545 
+                      |     68.10      31.90 |    100.00 
+----------------------+----------------------+----------
+2. living with partne |       118         70 |       188 
+                      |     62.77      37.23 |    100.00 
+----------------------+----------------------+----------
+                Total |     4,575      2,158 |     6,733 
+                      |     67.95      32.05 |    100.00 
+
+          Pearson chi2(1) =   2.3855   Pr = 0.122
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+respondent |
+ currently |     no_treatment
+   working |     0. no     1. yes |     Total
+-----------+----------------------+----------
+     0. no |     1,386        789 |     2,175 
+           |     63.72      36.28 |    100.00 
+-----------+----------------------+----------
+    1. yes |     3,189      1,369 |     4,558 
+           |     69.96      30.04 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(1) =  26.3314   Pr = 0.000
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of |
+        v130 |     no_treatment
+  (religion) |     0. no     1. yes |     Total
+-------------+----------------------+----------
+1. christian |     1,426        616 |     2,042 
+             |     69.83      30.17 |    100.00 
+-------------+----------------------+----------
+    2. islam |     3,131      1,534 |     4,665 
+             |     67.12      32.88 |    100.00 
+-------------+----------------------+----------
+   3. others |        18          8 |        26 
+             |     69.23      30.77 |    100.00 
+-------------+----------------------+----------
+       Total |     4,575      2,158 |     6,733 
+             |     67.95      32.05 |    100.00 
+
+          Pearson chi2(2) =   4.8328   Pr = 0.089
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+      v190 |
+   (wealth |
+     index |     no_treatment
+ combined) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+   1. poor |     2,281      1,372 |     3,653 
+           |     62.44      37.56 |    100.00 
+-----------+----------------------+----------
+ 2. middle |       968        410 |     1,378 
+           |     70.25      29.75 |    100.00 
+-----------+----------------------+----------
+   3. rich |     1,326        376 |     1,702 
+           |     77.91      22.09 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(2) = 131.7297   Pr = 0.000
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+ RECODE of |
+      v131 |
+(ethnicity |     no_treatment
+         ) |     0. no     1. yes |     Total
+-----------+----------------------+----------
+ 1. yoruba |       222        111 |       333 
+           |     66.67      33.33 |    100.00 
+-----------+----------------------+----------
+   2. igbo |       464        188 |       652 
+           |     71.17      28.83 |    100.00 
+-----------+----------------------+----------
+  3. hausa |     2,385      1,143 |     3,528 
+           |     67.60      32.40 |    100.00 
+-----------+----------------------+----------
+ 4. others |     1,504        716 |     2,220 
+           |     67.75      32.25 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(3) =   3.5854   Pr = 0.310
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+         RECODE of |
+number_of_children |     no_treatment
+             _lost |     0. no     1. yes |     Total
+-------------------+----------------------+----------
+           0. none |     3,011      1,372 |     4,383 
+                   |     68.70      31.30 |    100.00 
+-------------------+----------------------+----------
+            1. one |       866        429 |     1,295 
+                   |     66.87      33.13 |    100.00 
+-------------------+----------------------+----------
+            2. two |       415        204 |       619 
+                   |     67.04      32.96 |    100.00 
+-------------------+----------------------+----------
+3. three and above |       283        153 |       436 
+                   |     64.91      35.09 |    100.00 
+-------------------+----------------------+----------
+             Total |     4,575      2,158 |     6,733 
+                   |     67.95      32.05 |    100.00 
+
+          Pearson chi2(3) =   3.8998   Pr = 0.272
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of v218 |
+(number of living |     no_treatment
+        children) |     0. no     1. yes |     Total
+------------------+----------------------+----------
+           1. one |       810        363 |     1,173 
+                  |     69.05      30.95 |    100.00 
+------------------+----------------------+----------
+           2. two |       868        398 |     1,266 
+                  |     68.56      31.44 |    100.00 
+------------------+----------------------+----------
+         3. three |       760        364 |     1,124 
+                  |     67.62      32.38 |    100.00 
+------------------+----------------------+----------
+          4. four |       659        316 |       975 
+                  |     67.59      32.41 |    100.00 
+------------------+----------------------+----------
+5. five and above |     1,478        717 |     2,195 
+                  |     67.33      32.67 |    100.00 
+------------------+----------------------+----------
+            Total |     4,575      2,158 |     6,733 
+                  |     67.95      32.05 |    100.00 
+
+          Pearson chi2(4) =   1.3713   Pr = 0.849
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   RECODE of v137 |
+       (number of |
+   children 5 and |
+         under in |
+    household (de |     no_treatment
+           jure)) |     0. no     1. yes |     Total
+------------------+----------------------+----------
+           1. one |     1,498        689 |     2,187 
+                  |     68.50      31.50 |    100.00 
+------------------+----------------------+----------
+           2. two |     1,741        785 |     2,526 
+                  |     68.92      31.08 |    100.00 
+------------------+----------------------+----------
+         3. three |       750        377 |     1,127 
+                  |     66.55      33.45 |    100.00 
+------------------+----------------------+----------
+4. four and above |       586        307 |       893 
+                  |     65.62      34.38 |    100.00 
+------------------+----------------------+----------
+            Total |     4,575      2,158 |     6,733 
+                  |     67.95      32.05 |    100.00 
+
+          Pearson chi2(3) =   4.6374   Pr = 0.200
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+               |     no_treatment
+     media_exp |     0. no     1. yes |     Total
+---------------+----------------------+----------
+0. not exposed |     1,857      1,169 |     3,026 
+               |     61.37      38.63 |    100.00 
+---------------+----------------------+----------
+    1. exposed |     2,718        989 |     3,707 
+               |     73.32      26.68 |    100.00 
+---------------+----------------------+----------
+         Total |     4,575      2,158 |     6,733 
+               |     67.95      32.05 |    100.00 
+
+          Pearson chi2(1) = 109.2905   Pr = 0.000
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+women_auto |     no_treatment
+      nomy |     0. no     1. yes |     Total
+-----------+----------------------+----------
+   0. none |     2,280      1,238 |     3,518 
+           |     64.81      35.19 |    100.00 
+-----------+----------------------+----------
+1. partial |     1,462        555 |     2,017 
+           |     72.48      27.52 |    100.00 
+-----------+----------------------+----------
+   2. full |       833        365 |     1,198 
+           |     69.53      30.47 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(2) =  36.3471   Pr = 0.000
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+   type of |
+  place of |     no_treatment
+ residence |     0. no     1. yes |     Total
+-----------+----------------------+----------
+  1. urban |     1,464        476 |     1,940 
+           |     75.46      24.54 |    100.00 
+-----------+----------------------+----------
+  2. rural |     3,111      1,682 |     4,793 
+           |     64.91      35.09 |    100.00 
+-----------+----------------------+----------
+     Total |     4,575      2,158 |     6,733 
+           |     67.95      32.05 |    100.00 
+
+          Pearson chi2(1) =  70.6703   Pr = 0.000
+Click to Open File:  Myfile.doc
+(File Myfile.doc already exists, option append was assumed)
+
++----------------+
+| Key            |
+|----------------|
+|   frequency    |
+| row percentage |
++----------------+
+
+                 |     no_treatment
+          region |     0. no     1. yes |     Total
+-----------------+----------------------+----------
+1. north central |       622        348 |       970 
+                 |     64.12      35.88 |    100.00 
+-----------------+----------------------+----------
+   2. north east |     1,326        811 |     2,137 
+                 |     62.05      37.95 |    100.00 
+-----------------+----------------------+----------
+   3. north west |     1,597        612 |     2,209 
+                 |     72.30      27.70 |    100.00 
+-----------------+----------------------+----------
+   4. south east |       385        160 |       545 
+                 |     70.64      29.36 |    100.00 
+-----------------+----------------------+----------
+  5. south south |       409        111 |       520 
+                 |     78.65      21.35 |    100.00 
+-----------------+----------------------+----------
+   6. south west |       236        116 |       352 
+                 |     67.05      32.95 |    100.00 
+-----------------+----------------------+----------
+           Total |     4,575      2,158 |     6,733 
+                 |     67.95      32.05 |    100.00 
+
+          Pearson chi2(5) =  89.1356   Pr = 0.000
+Click to Open File:  Myfile.doc
+

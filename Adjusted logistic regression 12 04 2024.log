@@ -1,0 +1,687 @@
+-----------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Adjusted logistic r
+> egression 12 04 2024.log
+  log type:  text
+ opened on:  12 Apr 2024, 13:16:53
+
+. tab empowerment_status
+
+          RECODE of |
+     no_empowerment |      Freq.     Percent        Cum.
+--------------------+-----------------------------------
+1. highly empowered |        207        3.08        3.08
+2. fairly empowered |      1,652       24.61       27.69
+3. poorly empowered |      2,345       34.93       62.62
+   4. not empowered |      2,509       37.38      100.00
+--------------------+-----------------------------------
+              Total |      6,713      100.00
+
+. tab no_empowerment_for_woman
+
+  RECODE of |
+no_empowerm |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      1,859       27.69       27.69
+        yes |      4,854       72.31      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. numlabel no_empowerment_for_woman, a
+there are value labels that are only partially numlabel-ed
+specify option detail for a list of these value labels
+specify option force to modify value labels anyway
+r(180);
+
+. codebook no_empowerment_for_woman
+
+-----------------------------------------------------------------------------------------
+no_empowerment_for_woman                                         RECODE of no_empowerment
+-----------------------------------------------------------------------------------------
+
+                  type:  numeric (float)
+                 label:  no_empowerment_for_woman
+
+                 range:  [0,1]                        units:  1
+         unique values:  2                        missing .:  0/6,713
+
+            tabulation:  Freq.   Numeric  Label
+                         1,859         0  no
+                         4,854         1  yes
+
+. numlabel no_empowerment_for_woman, modify
+option modify not allowed
+r(198);
+
+. ta region
+
+          region |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+1. north central |        965       14.38       14.38
+   2. north east |      2,133       31.77       46.15
+   3. north west |      2,207       32.88       79.03
+   4. south east |        541        8.06       87.08
+  5. south south |        516        7.69       94.77
+   6. south west |        351        5.23      100.00
+-----------------+-----------------------------------
+           Total |      6,713      100.00
+
+. logit no_treatment i.age i.maternal_education i.partner_education i.occupation_status i
+> .religion i.wealth_index i.number_of_under_5_children i.number_of_living_children i.med
+> ia_exposure i.place_residence i.empowerment_status i.no_empowerment_for_woman, or allba
+> se if region==1
+option if not allowed
+r(198);
+
+. logit no_treatment i.age i.maternal_education i.partner_education i.occupation_status i
+> .religion i.wealth_index i.number_of_under_5_children i.number_of_living_children i.med
+> ia_exposure i.place_residence i.empowerment_status i.no_empowerment_for_woman if region
+> ==1, or allbase
+
+note: 1.no_empowerment_for_woman omitted because of collinearity
+Iteration 0:   log likelihood = -629.73864  
+Iteration 1:   log likelihood = -593.11042  
+Iteration 2:   log likelihood = -592.78781  
+Iteration 3:   log likelihood = -592.78757  
+Iteration 4:   log likelihood = -592.78757  
+
+Logistic regression                             Number of obs     =        965
+                                                LR chi2(23)       =      73.90
+                                                Prob > chi2       =     0.0000
+Log likelihood = -592.78757                     Pseudo R2         =     0.0587
+
+----------------------------------------------------------------------------------------
+          no_treatment | Odds Ratio   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------+----------------------------------------------------------------
+                   age |
+             1. 15-24  |          1  (base)
+             2. 25-34  |   1.107495   .2205731     0.51   0.608     .7495714    1.636328
+             3. 35-49  |   1.487883    .397114     1.49   0.137     .8818285     2.51046
+                       |
+    maternal_education |
+      0. no education  |          1  (base)
+           1. primary  |   .9143456   .2062195    -0.40   0.691     .5876683    1.422619
+         2. secondary  |   .9703101   .2291054    -0.13   0.898     .6108415    1.541319
+            3. higher  |   .8828394   .3478908    -0.32   0.752     .4078102    1.911196
+                       |
+     partner_education |
+      0. no education  |          1  (base)
+           1. primary  |   .6158327   .1563609    -1.91   0.056     .3744048    1.012941
+         2. secondary  |   .6879364   .1517784    -1.70   0.090     .4464254    1.060102
+            3. higher  |   .4903226     .14431    -2.42   0.015     .2753971    .8729803
+                       |
+     occupation_status |
+                0. no  |          1  (base)
+               1. yes  |   .9796695   .1658994    -0.12   0.903     .7029674    1.365287
+                       |
+              religion |
+         1. christian  |          1  (base)
+             2. islam  |   .9680274   .1705205    -0.18   0.854     .6854034     1.36719
+            3. others  |   1.909241   1.808844     0.68   0.495     .2981396    12.22649
+                       |
+          wealth_index |
+              1. poor  |          1  (base)
+            2. middle  |   .8725708   .1716333    -0.69   0.488     .5934316    1.283012
+              3. rich  |   .9189448   .2145496    -0.36   0.717     .5815085    1.452188
+                       |
+number_of_under_5_ch~n |
+           1. One-Two  |          1  (base)
+        2. Three-Four  |   .9912926   .1825139    -0.05   0.962     .6910049    1.422075
+    3. Five and above  |   1.393797    .479318     0.97   0.334     .7103567    2.734779
+                       |
+number_of_living_chi~n |
+           1. One-Two  |          1  (base)
+        2. Three-Four  |   1.028696   .1969542     0.15   0.883     .7068317    1.497125
+    3. Five and above  |   1.060794   .2550689     0.25   0.806     .6621534    1.699429
+                       |
+        media_exposure |
+       0. no exposure  |          1  (base)
+     1. poor exposure  |   .7714998   .1356655    -1.48   0.140     .5465817    1.088972
+     2. good exposure  |   .9047741     .24401    -0.37   0.711     .5333081    1.534978
+                       |
+       place_residence |
+             1. urban  |          1  (base)
+             2. rural  |   .8873218   .1749583    -0.61   0.544     .6028994    1.305923
+                       |
+    empowerment_status |
+  1. highly empowered  |          1  (base)
+  2. fairly empowered  |   .8942235   .3716838    -0.27   0.788     .3959537    2.019518
+  3. poorly empowered  |   1.383246   .5793002     0.77   0.439     .6087208    3.143262
+     4. not empowered  |   1.963942   .8782395     1.51   0.131      .817498    4.718138
+                       |
+no_empowerment_for_w~n |
+                   no  |          1  (base)
+                  yes  |          1  (omitted)
+                       |
+                 _cons |   .6378317   .3383899    -0.85   0.397     .2254845    1.804245
+----------------------------------------------------------------------------------------
+Note: _cons estimates baseline odds.
+
+. logit no_treatment i.age i.maternal_education i.partner_education i.occupation_status i
+> .religion i.wealth_index i.number_of_under_5_children i.number_of_living_children i.med
+> ia_exposure i.place_residence i.empowerment_status i.no_empowerment_for_woman, or allba
+> se
+
+note: 1.no_empowerment_for_woman omitted because of collinearity
+Iteration 0:   log likelihood = -4209.5605  
+Iteration 1:   log likelihood = -4074.6571  
+Iteration 2:   log likelihood = -4072.7375  
+Iteration 3:   log likelihood = -4072.7349  
+Iteration 4:   log likelihood = -4072.7349  
+
+Logistic regression                             Number of obs     =      6,713
+                                                LR chi2(23)       =     273.65
+                                                Prob > chi2       =     0.0000
+Log likelihood = -4072.7349                     Pseudo R2         =     0.0325
+
+----------------------------------------------------------------------------------------
+          no_treatment | Odds Ratio   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------+----------------------------------------------------------------
+                   age |
+             1. 15-24  |          1  (base)
+             2. 25-34  |   1.103666   .0868787     1.25   0.210     .9458725    1.287783
+             3. 35-49  |     1.1755   .1214483     1.57   0.118     .9600186    1.439348
+                       |
+    maternal_education |
+      0. no education  |          1  (base)
+           1. primary  |   .8805648    .079451    -1.41   0.159     .7378357    1.050904
+         2. secondary  |   .9306485   .0953411    -0.70   0.483     .7613487    1.137595
+            3. higher  |   .8403331   .1539477    -0.95   0.342     .5868304    1.203345
+                       |
+     partner_education |
+      0. no education  |          1  (base)
+           1. primary  |   .7916624    .069754    -2.65   0.008     .6661008    .9408927
+         2. secondary  |   .7438651   .0614832    -3.58   0.000     .6326147    .8746799
+            3. higher  |   .5828696   .0682362    -4.61   0.000     .4633635    .7331977
+                       |
+     occupation_status |
+                0. no  |          1  (base)
+               1. yes  |    .864501   .0543358    -2.32   0.021     .7643031    .9778345
+                       |
+              religion |
+         1. christian  |          1  (base)
+             2. islam  |    .647435    .053938    -5.22   0.000     .5498981    .7622722
+            3. others  |   .6038799   .2657661    -1.15   0.252     .2548818    1.430745
+                       |
+          wealth_index |
+              1. poor  |          1  (base)
+            2. middle  |   .9110626   .0701243    -1.21   0.226     .7834864    1.059412
+              3. rich  |   .7750149   .0758229    -2.61   0.009     .6397843    .9388292
+                       |
+number_of_under_5_ch~n |
+           1. One-Two  |          1  (base)
+        2. Three-Four  |   1.040413   .0678728     0.61   0.544     .9155384     1.18232
+    3. Five and above  |   1.071434   .1242521     0.59   0.552      .853598    1.344862
+                       |
+number_of_living_chi~n |
+           1. One-Two  |          1  (base)
+        2. Three-Four  |   .9902724   .0758739    -0.13   0.898     .8521898    1.150729
+    3. Five and above  |   .9101026   .0847712    -1.01   0.312      .758238    1.092384
+                       |
+        media_exposure |
+       0. no exposure  |          1  (base)
+     1. poor exposure  |   .7938927   .0499276    -3.67   0.000     .7018271    .8980355
+     2. good exposure  |   .6086949   .0667661    -4.53   0.000      .490946    .7546848
+                       |
+       place_residence |
+             1. urban  |          1  (base)
+             2. rural  |    1.09058   .0806814     1.17   0.241     .9433777    1.260753
+                       |
+    empowerment_status |
+  1. highly empowered  |          1  (base)
+  2. fairly empowered  |    .987866   .1699912    -0.07   0.943     .7050565    1.384115
+  3. poorly empowered  |   .9990103   .1770842    -0.01   0.996     .7058076    1.414014
+     4. not empowered  |   1.276254   .2400997     1.30   0.195     .8826768    1.845322
+                       |
+no_empowerment_for_w~n |
+                   no  |          1  (base)
+                  yes  |          1  (omitted)
+                       |
+                 _cons |   .8894153   .1930542    -0.54   0.589      .581226    1.361019
+----------------------------------------------------------------------------------------
+Note: _cons estimates baseline odds.
+
+. asdoc logit no_treatment i.age i.maternal_education i.partner_education i.occupation_st
+> atus i.religion i.wealth_index i.number_of_under_5_children i.number_of_living_children
+>  i.media_exposure i.place_residence i.empowerment_status i.no_empowerment_for_woman if 
+> region==1, or allbase
+(File Myfile.doc already exists, option append was assumed)
+
+note: 1.no_empowerment_for_woman omitted because of collinearity
+Iteration 0:   log likelihood = -629.73864  
+Iteration 1:   log likelihood = -593.11042  
+Iteration 2:   log likelihood = -592.78781  
+Iteration 3:   log likelihood = -592.78757  
+Iteration 4:   log likelihood = -592.78757  
+
+Logistic regression                             Number of obs     =        965
+                                                LR chi2(23)       =      73.90
+                                                Prob > chi2       =     0.0000
+Log likelihood = -592.78757                     Pseudo R2         =     0.0587
+
+----------------------------------------------------------------------------------------
+          no_treatment | Odds Ratio   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------+----------------------------------------------------------------
+                   age |
+             1. 15-24  |          1  (base)
+             2. 25-34  |   1.107495   .2205731     0.51   0.608     .7495714    1.636328
+             3. 35-49  |   1.487883    .397114     1.49   0.137     .8818285     2.51046
+                       |
+    maternal_education |
+      0. no education  |          1  (base)
+           1. primary  |   .9143456   .2062195    -0.40   0.691     .5876683    1.422619
+         2. secondary  |   .9703101   .2291054    -0.13   0.898     .6108415    1.541319
+            3. higher  |   .8828394   .3478908    -0.32   0.752     .4078102    1.911196
+                       |
+     partner_education |
+      0. no education  |          1  (base)
+           1. primary  |   .6158327   .1563609    -1.91   0.056     .3744048    1.012941
+         2. secondary  |   .6879364   .1517784    -1.70   0.090     .4464254    1.060102
+            3. higher  |   .4903226     .14431    -2.42   0.015     .2753971    .8729803
+                       |
+     occupation_status |
+                0. no  |          1  (base)
+               1. yes  |   .9796695   .1658994    -0.12   0.903     .7029674    1.365287
+                       |
+              religion |
+         1. christian  |          1  (base)
+             2. islam  |   .9680274   .1705205    -0.18   0.854     .6854034     1.36719
+            3. others  |   1.909241   1.808844     0.68   0.495     .2981396    12.22649
+                       |
+          wealth_index |
+              1. poor  |          1  (base)
+            2. middle  |   .8725708   .1716333    -0.69   0.488     .5934316    1.283012
+              3. rich  |   .9189448   .2145496    -0.36   0.717     .5815085    1.452188
+                       |
+number_of_under_5_ch~n |
+           1. One-Two  |          1  (base)
+        2. Three-Four  |   .9912926   .1825139    -0.05   0.962     .6910049    1.422075
+    3. Five and above  |   1.393797    .479318     0.97   0.334     .7103567    2.734779
+                       |
+number_of_living_chi~n |
+           1. One-Two  |          1  (base)
+        2. Three-Four  |   1.028696   .1969542     0.15   0.883     .7068317    1.497125
+    3. Five and above  |   1.060794   .2550689     0.25   0.806     .6621534    1.699429
+                       |
+        media_exposure |
+       0. no exposure  |          1  (base)
+     1. poor exposure  |   .7714998   .1356655    -1.48   0.140     .5465817    1.088972
+     2. good exposure  |   .9047741     .24401    -0.37   0.711     .5333081    1.534978
+                       |
+       place_residence |
+             1. urban  |          1  (base)
+             2. rural  |   .8873218   .1749583    -0.61   0.544     .6028994    1.305923
+                       |
+    empowerment_status |
+  1. highly empowered  |          1  (base)
+  2. fairly empowered  |   .8942235   .3716838    -0.27   0.788     .3959537    2.019518
+  3. poorly empowered  |   1.383246   .5793002     0.77   0.439     .6087208    3.143262
+     4. not empowered  |   1.963942   .8782395     1.51   0.131      .817498    4.718138
+                       |
+no_empowerment_for_w~n |
+                   no  |          1  (base)
+                  yes  |          1  (omitted)
+                       |
+                 _cons |   .6378317   .3383899    -0.85   0.397     .2254845    1.804245
+----------------------------------------------------------------------------------------
+Note: _cons estimates baseline odds.
+Click to Open File:  Myfile.doc
+
+. asdoc logit no_treatment i.age i.maternal_education i.partner_education i.occupation_st
+> atus i.religion i.wealth_index i.ethnicity i.number_of_under_5_children i.number_of_liv
+> ing_children i.media_exposure i.place_residence i.empowerment_status i.no_empowerment_f
+> or_woman if region==2, or allbase
+(File Myfile.doc already exists, option append was assumed)
+
+note: 1.ethnicity != 0 predicts failure perfectly
+      1.ethnicity dropped and 2 obs not used
+
+note: 4.ethnicity omitted because of collinearity
+note: 1.no_empowerment_for_woman omitted because of collinearity
+Iteration 0:   log likelihood = -1414.7382  
+Iteration 1:   log likelihood = -1320.2711  
+Iteration 2:   log likelihood = -1318.1577  
+Iteration 3:   log likelihood = -1318.1471  
+Iteration 4:   log likelihood = -1318.1471  
+
+Logistic regression                             Number of obs     =      2,131
+                                                LR chi2(24)       =     193.18
+                                                Prob > chi2       =     0.0000
+Log likelihood = -1318.1471                     Pseudo R2         =     0.0683
+
+----------------------------------------------------------------------------------------
+          no_treatment | Odds Ratio   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------+----------------------------------------------------------------
+                   age |
+             1. 15-24  |          1  (base)
+             2. 25-34  |   .9751301   .1373038    -0.18   0.858     .7399606     1.28504
+             3. 35-49  |    1.00662   .1904331     0.03   0.972     .6947596    1.458467
+                       |
+    maternal_education |
+      0. no education  |          1  (base)
+           1. primary  |   .9836098   .1490493    -0.11   0.913      .730866    1.323756
+         2. secondary  |   .7407189   .1414922    -1.57   0.116     .5093976    1.077085
+            3. higher  |   .6900024   .3353068    -0.76   0.445     .2662006    1.788513
+                       |
+     partner_education |
+      0. no education  |          1  (base)
+           1. primary  |   1.059501   .1607856     0.38   0.703     .7869128    1.426515
+         2. secondary  |   .7838544   .1103755    -1.73   0.084     .5948078    1.032985
+            3. higher  |   .6985298   .1539445    -1.63   0.104     .4535175     1.07591
+                       |
+     occupation_status |
+                0. no  |          1  (base)
+               1. yes  |   .7116372   .0779536    -3.11   0.002      .574139    .8820644
+                       |
+              religion |
+         1. christian  |          1  (base)
+             2. islam  |   .4074183   .0704997    -5.19   0.000     .2902341    .5719165
+                       |
+          wealth_index |
+              1. poor  |          1  (base)
+            2. middle  |   1.096927   .1581541     0.64   0.521     .8268982    1.455135
+              3. rich  |   .8378764   .1939854    -0.76   0.445     .5322424    1.319017
+                       |
+             ethnicity |
+            1. yoruba  |          1  (empty)
+              2. igbo  |   2.401912   3.077596     0.68   0.494     .1949412    29.59449
+      3. hausa/fulani  |    1.54657    .167139     4.03   0.000     1.251352    1.911435
+            4. others  |          1  (omitted)
+                       |
+number_of_under_5_ch~n |
+           1. One-Two  |          1  (base)
+        2. Three-Four  |    1.31801   .1431673     2.54   0.011     1.065266    1.630721
+    3. Five and above  |    1.23625   .2284826     1.15   0.251     .8605739    1.775925
+                       |
+number_of_living_chi~n |
+           1. One-Two  |          1  (base)
+        2. Three-Four  |   1.076126   .1516705     0.52   0.603     .8163826     1.41851
+    3. Five and above  |   .8056952   .1389838    -1.25   0.210     .5745623    1.129808
+                       |
+        media_exposure |
+       0. no exposure  |          1  (base)
+     1. poor exposure  |   .6758946   .0743366    -3.56   0.000     .5448308    .8384869
+     2. good exposure  |   .3667989   .1093661    -3.36   0.001     .2044704    .6579994
+                       |
+       place_residence |
+             1. urban  |          1  (base)
+             2. rural  |   1.961406   .3571885     3.70   0.000      1.37264    2.802712
+                       |
+    empowerment_status |
+  1. highly empowered  |          1  (base)
+  2. fairly empowered  |   .7974583   .4191944    -0.43   0.667     .2846182     2.23436
+  3. poorly empowered  |   .7440669   .3935986    -0.56   0.576     .2638402    2.098374
+     4. not empowered  |   .8233295   .4432556    -0.36   0.718      .286624     2.36502
+                       |
+no_empowerment_for_w~n |
+                   no  |          1  (base)
+                  yes  |          1  (omitted)
+                       |
+                 _cons |   1.200132   .7134149     0.31   0.759     .3743131    3.847895
+----------------------------------------------------------------------------------------
+Note: _cons estimates baseline odds.
+Click to Open File:  Myfile.doc
+
+. asdoc logit no_treatment i.age i.maternal_education i.partner_education i.wealth_index 
+> i.ethnicity i.media_exposure i.place_residence i.empowerment_status if region==3, or al
+> lbase
+(File Myfile.doc already exists, option append was assumed)
+
+note: 1.ethnicity != 0 predicts failure perfectly
+      1.ethnicity dropped and 2 obs not used
+
+note: 4.ethnicity omitted because of collinearity
+Iteration 0:   log likelihood = -1301.3713  
+Iteration 1:   log likelihood =  -1245.206  
+Iteration 2:   log likelihood =  -1243.785  
+Iteration 3:   log likelihood = -1243.7802  
+Iteration 4:   log likelihood = -1243.7802  
+
+Logistic regression                             Number of obs     =      2,205
+                                                LR chi2(18)       =     115.18
+                                                Prob > chi2       =     0.0000
+Log likelihood = -1243.7802                     Pseudo R2         =     0.0443
+
+--------------------------------------------------------------------------------------
+        no_treatment | Odds Ratio   Std. Err.      z    P>|z|     [95% Conf. Interval]
+---------------------+----------------------------------------------------------------
+                 age |
+           1. 15-24  |          1  (base)
+           2. 25-34  |   1.200624   .1417695     1.55   0.122     .9525711    1.513271
+           3. 35-49  |   1.119986   .1525728     0.83   0.406     .8575425    1.462748
+                     |
+  maternal_education |
+    0. no education  |          1  (base)
+         1. primary  |   .7445965   .1267578    -1.73   0.083     .5333534    1.039506
+       2. secondary  |   .6105757   .1376379    -2.19   0.029     .3925174    .9497735
+          3. higher  |   .5284634   .2755629    -1.22   0.221     .1901791    1.468476
+                     |
+   partner_education |
+    0. no education  |          1  (base)
+         1. primary  |   .6499618   .1014657    -2.76   0.006     .4786372    .8826106
+       2. secondary  |   .5768594   .0909899    -3.49   0.000      .423455    .7858375
+          3. higher  |   .6017521   .1346028    -2.27   0.023     .3881653    .9328643
+                     |
+        wealth_index |
+            1. poor  |          1  (base)
+          2. middle  |   .9339756   .1338801    -0.48   0.634     .7052135    1.236945
+            3. rich  |    .776331   .1710062    -1.15   0.250     .5041371    1.195488
+                     |
+           ethnicity |
+          1. yoruba  |          1  (empty)
+            2. igbo  |   2.088946   3.012417     0.51   0.609     .1237174    35.27147
+    3. hausa/fulani  |   .4789734   .0932982    -3.78   0.000     .3269699    .7016412
+          4. others  |          1  (omitted)
+                     |
+      media_exposure |
+     0. no exposure  |          1  (base)
+   1. poor exposure  |    1.07266   .1133399     0.66   0.507     .8720108    1.319478
+   2. good exposure  |   1.041401    .245398     0.17   0.863      .656204    1.652711
+                     |
+     place_residence |
+           1. urban  |          1  (base)
+           2. rural  |   .9375221   .1348459    -0.45   0.654     .7072148     1.24283
+                     |
+  empowerment_status |
+1. highly empowered  |          1  (base)
+2. fairly empowered  |   .5358843   .3835863    -0.87   0.383     .1317591    2.179523
+3. poorly empowered  |   .2594263   .1848761    -1.89   0.058     .0641828    1.048599
+   4. not empowered  |   .4273727   .3057011    -1.19   0.235     .1051816    1.736497
+                     |
+               _cons |   2.617247   1.940797     1.30   0.194     .6118478    11.19556
+--------------------------------------------------------------------------------------
+Note: _cons estimates baseline odds.
+Click to Open File:  Myfile.doc
+
+. asdoc logit no_treatment i.age i.partner_education i.marital_status i.wealth_index i.me
+> dia i.empowerment_status i.no_empowerment_for_woman if region==4, or allbase
+(File Myfile.doc already exists, option append was assumed)
+media ambiguous abbreviation
+r(111);
+
+. asdoc logit no_treatment i.age i.partner_education i.marital_status i.wealth_index i.me
+> dia_exposure i.empowerment_status i.no_empowerment_for_woman if region==4, or allbase
+(File Myfile.doc already exists, option append was assumed)
+
+note: 1.no_empowerment_for_woman omitted because of collinearity
+Iteration 0:   log likelihood = -327.63339  
+Iteration 1:   log likelihood =  -306.9969  
+Iteration 2:   log likelihood = -306.67181  
+Iteration 3:   log likelihood = -306.67139  
+Iteration 4:   log likelihood = -306.67139  
+
+Logistic regression                             Number of obs     =        541
+                                                LR chi2(13)       =      41.92
+                                                Prob > chi2       =     0.0001
+Log likelihood = -306.67139                     Pseudo R2         =     0.0640
+
+----------------------------------------------------------------------------------------
+          no_treatment | Odds Ratio   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------+----------------------------------------------------------------
+                   age |
+             1. 15-24  |          1  (base)
+             2. 25-34  |   .5470145   .1585424    -2.08   0.037     .3099511    .9653937
+             3. 35-49  |   .6379965   .2030602    -1.41   0.158     .3419004    1.190521
+                       |
+     partner_education |
+      0. no education  |          1  (base)
+           1. primary  |   .2328232    .138457    -2.45   0.014     .0725817    .7468358
+         2. secondary  |   .2305111   .1351748    -2.50   0.012     .0730359    .7275246
+            3. higher  |   .2527376    .168637    -2.06   0.039      .068346    .9346021
+                       |
+        marital_status |
+           1. married  |          1  (base)
+2. living with part..  |   1.431913   .5634364     0.91   0.362     .6621886    3.096362
+                       |
+          wealth_index |
+              1. poor  |          1  (base)
+            2. middle  |   .7097157   .2022299    -1.20   0.229      .406012    1.240595
+              3. rich  |   .6489899   .1959645    -1.43   0.152     .3590996      1.1729
+                       |
+        media_exposure |
+       0. no exposure  |          1  (base)
+     1. poor exposure  |   1.027738    .311542     0.09   0.928     .5673548    1.861703
+     2. good exposure  |   .5019178   .1812793    -1.91   0.056      .247287    1.018741
+                       |
+    empowerment_status |
+  1. highly empowered  |          1  (base)
+  2. fairly empowered  |   1.073094   .3676654     0.21   0.837     .5482739    2.100284
+  3. poorly empowered  |   1.796468   .6716682     1.57   0.117     .8633166    3.738255
+     4. not empowered  |   3.637407   3.496473     1.34   0.179     .5528038    23.93387
+                       |
+no_empowerment_for_w~n |
+                   no  |          1  (base)
+                  yes  |          1  (omitted)
+                       |
+                 _cons |   3.593892    2.63231     1.75   0.081     .8552851    15.10146
+----------------------------------------------------------------------------------------
+Note: _cons estimates baseline odds.
+Click to Open File:  Myfile.doc
+
+. asdoc logit no_treatment i.maternal_education i.partner_education i.occupation_status i
+> .religion i.wealth_index i.media_exposure i.place_residence i.empowerment_status i.no_e
+> mpowerment_for_woman if region==5, or allbase
+(File Myfile.doc already exists, option append was assumed)
+
+note: 1.no_empowerment_for_woman omitted because of collinearity
+Iteration 0:   log likelihood = -267.35887  
+Iteration 1:   log likelihood = -251.28546  
+Iteration 2:   log likelihood = -250.55112  
+Iteration 3:   log likelihood = -250.54149  
+Iteration 4:   log likelihood = -250.54148  
+
+Logistic regression                             Number of obs     =        516
+                                                LR chi2(17)       =      33.63
+                                                Prob > chi2       =     0.0094
+Log likelihood = -250.54148                     Pseudo R2         =     0.0629
+
+----------------------------------------------------------------------------------------
+          no_treatment | Odds Ratio   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------+----------------------------------------------------------------
+    maternal_education |
+      0. no education  |          1  (base)
+           1. primary  |    .651418   .4054405    -0.69   0.491     .1923422      2.2062
+         2. secondary  |    .634777   .3895231    -0.74   0.459     .1906741    2.113248
+            3. higher  |   .4285753   .3531433    -1.03   0.304     .0852398    2.154824
+                       |
+     partner_education |
+      0. no education  |          1  (base)
+           1. primary  |   .9263696   .5707577    -0.12   0.901     .2769105    3.099055
+         2. secondary  |   .9441494   .5510841    -0.10   0.922     .3007521    2.963963
+            3. higher  |   .5366943   .3709581    -0.90   0.368     .1384792     2.08003
+                       |
+     occupation_status |
+                0. no  |          1  (base)
+               1. yes  |   .5782613   .1538146    -2.06   0.039     .3433276    .9739564
+                       |
+              religion |
+         1. christian  |          1  (base)
+             2. islam  |   1.986442   1.227852     1.11   0.267      .591472    6.671406
+            3. others  |   12.03449   15.46606     1.94   0.053     .9694154    149.3981
+                       |
+          wealth_index |
+              1. poor  |          1  (base)
+            2. middle  |   1.202134   .3916641     0.57   0.572     .6347829    2.276568
+              3. rich  |   .8569057   .2883621    -0.46   0.646     .4430885    1.657203
+                       |
+        media_exposure |
+       0. no exposure  |          1  (base)
+     1. poor exposure  |   .8266857   .2727636    -0.58   0.564     .4329999    1.578313
+     2. good exposure  |   .7755088   .3023433    -0.65   0.514     .3611882    1.665099
+                       |
+       place_residence |
+             1. urban  |          1  (base)
+             2. rural  |   1.589959   .4336714     1.70   0.089     .9315699    2.713667
+                       |
+    empowerment_status |
+  1. highly empowered  |          1  (base)
+  2. fairly empowered  |   .6075028   .2397173    -1.26   0.207     .2803295    1.316521
+  3. poorly empowered  |    .770651    .329527    -0.61   0.542     .3333403    1.781672
+     4. not empowered  |   .8609845   .6582518    -0.20   0.845     .1924079    3.852723
+                       |
+no_empowerment_for_w~n |
+                   no  |          1  (base)
+                  yes  |          1  (omitted)
+                       |
+                 _cons |   .9102588   .8161168    -0.10   0.916     .1570353    5.276335
+----------------------------------------------------------------------------------------
+Note: _cons estimates baseline odds.
+Click to Open File:  Myfile.doc
+
+. asdoc logit no_treatment i.maternal_education i.partner_education i.wealth_index i.numb
+> er_of_living_children i.media_exposure if region==6, or allbase
+(File Myfile.doc already exists, option append was assumed)
+
+Iteration 0:   log likelihood = -222.00446  
+Iteration 1:   log likelihood =  -212.5814  
+Iteration 2:   log likelihood = -212.48599  
+Iteration 3:   log likelihood = -212.48594  
+Iteration 4:   log likelihood = -212.48594  
+
+Logistic regression                             Number of obs     =        351
+                                                LR chi2(12)       =      19.04
+                                                Prob > chi2       =     0.0876
+Log likelihood = -212.48594                     Pseudo R2         =     0.0429
+
+----------------------------------------------------------------------------------------
+          no_treatment | Odds Ratio   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-----------------------+----------------------------------------------------------------
+    maternal_education |
+      0. no education  |          1  (base)
+           1. primary  |   .6736456   .3513072    -0.76   0.449     .2423978    1.872123
+         2. secondary  |   1.188312   .5871661     0.35   0.727     .4511664    3.129856
+            3. higher  |   1.120406    .687041     0.19   0.853     .3368315    3.726819
+                       |
+     partner_education |
+      0. no education  |          1  (base)
+           1. primary  |   1.100187   .5841735     0.18   0.857     .3885959    3.114832
+         2. secondary  |    1.28167   .5720578     0.56   0.578     .5343829     3.07397
+            3. higher  |    .608891   .3154047    -0.96   0.338     .2206065    1.680586
+                       |
+          wealth_index |
+              1. poor  |          1  (base)
+            2. middle  |   .9054421   .3533392    -0.25   0.799      .421394    1.945508
+              3. rich  |   .6956797   .2467174    -1.02   0.306     .3471661     1.39406
+                       |
+number_of_living_chi~n |
+           1. One-Two  |          1  (base)
+        2. Three-Four  |   1.216959   .3248505     0.74   0.462     .7212064     2.05349
+    3. Five and above  |   1.448005   .4887822     1.10   0.273     .7472095    2.806066
+                       |
+        media_exposure |
+       0. no exposure  |          1  (base)
+     1. poor exposure  |   .6395177   .2604392    -1.10   0.272     .2878767    1.420688
+     2. good exposure  |   .4481536   .1997272    -1.80   0.072     .1871004    1.073443
+                       |
+                 _cons |    .857008   .4768028    -0.28   0.782     .2880133      2.5501
+----------------------------------------------------------------------------------------
+Note: _cons estimates baseline odds.
+Click to Open File:  Myfile.doc
+
+. save "C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Abiola Ehinfun_newdatase
+> t_05-03-2024.dta", replace
+file C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Abiola Ehinfun_newdataset_0
+> 5-03-2024.dta saved
+
+. exit, clear

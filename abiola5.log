@@ -1,0 +1,2256 @@
+-----------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\abiola5.log
+  log type:  text
+ opened on:  27 Feb 2024, 13:25:22
+
+. numlabel, a
+
+. tab v501
+
+                current marital status |      Freq.     Percent        Cum.
+---------------------------------------+-----------------------------------
+                     0. never in union |     10,669       25.51       25.51
+                            1. married |     27,841       66.57       92.08
+                2. living with partner |      1,047        2.50       94.59
+                            3. widowed |      1,117        2.67       97.26
+                           4. divorced |        543        1.30       98.56
+5. no longer living together/separated |        604        1.44      100.00
+---------------------------------------+-----------------------------------
+                                 Total |     41,821      100.00
+
+. drop if v501==0| v501==3 | v501==4 | v501==5
+(12,933 observations deleted)
+
+. tab v218
+
+  number of |
+     living |
+   children |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      2,234        7.73        7.73
+          1 |      4,219       14.60       22.34
+          2 |      4,808       16.64       38.98
+          3 |      4,521       15.65       54.63
+          4 |      4,177       14.46       69.09
+          5 |      3,373       11.68       80.77
+          6 |      2,415        8.36       89.13
+          7 |      1,532        5.30       94.43
+          8 |        893        3.09       97.52
+          9 |        419        1.45       98.97
+         10 |        198        0.69       99.66
+         11 |         59        0.20       99.86
+         12 |         36        0.12       99.99
+         13 |          2        0.01       99.99
+         14 |          1        0.00      100.00
+         15 |          1        0.00      100.00
+------------+-----------------------------------
+      Total |     28,888      100.00
+
+. tab v137
+
+  number of |
+ children 5 |
+  and under |
+         in |
+  household |
+  (de jure) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      6,546       22.66       22.66
+          1 |      8,673       30.02       52.68
+          2 |      7,945       27.50       80.19
+          3 |      3,420       11.84       92.02
+          4 |      1,336        4.62       96.65
+          5 |        605        2.09       98.74
+          6 |        238        0.82       99.57
+          7 |         91        0.32       99.88
+          8 |         25        0.09       99.97
+          9 |          9        0.03      100.00
+------------+-----------------------------------
+      Total |     28,888      100.00
+
+. drop if v137==0
+(6,546 observations deleted)
+
+. drop if v218==0
+(565 observations deleted)
+
+. tab h32z_1
+
+fever/cough |
+  : medical |
+  treatment |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      1,843       33.36       33.36
+     1. yes |      3,681       66.64      100.00
+------------+-----------------------------------
+      Total |      5,524      100.00
+
+. ta v501
+
+                current marital status |      Freq.     Percent        Cum.
+---------------------------------------+-----------------------------------
+                            1. married |     21,061       96.71       96.71
+                2. living with partner |        716        3.29      100.00
+---------------------------------------+-----------------------------------
+                                 Total |     21,777      100.00
+
+. keep v013 v218 v190 v714 v130 v106 v501 v701 v102 v131 v206 v207 v024 v157 v158 v159 v7
+> 43a v467b v743d v743b v850a h21_1 h32z_1 v202 v203 v204 v205 v621 v739 v743f v744d v850
+> b v137
+
+. gen no_treatment = 0 if h21_1 == 1 | h32z_1== 1
+(16,680 missing values generated)
+
+. replace no_treatmen = 1 if h21_1 == 0 | h32z_1 == 0
+(2,158 real changes made)
+
+. label define no_treatment 0 "no" 1 "yes"
+
+. label value no_treatment no_treatment
+
+. numlabel, a
+
+. tab no_treatment
+
+no_treatmen |
+          t |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      4,575       67.95       67.95
+     1. yes |      2,158       32.05      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. misstable summarize, all
+                                                               Obs<.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs>.     Obs<.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+          v013 |                        21,777  |      7          1           7
+          v024 |                        21,777  |      6          1           6
+          v102 |                        21,777  |      2          1           2
+          v106 |                        21,777  |      4          0           3
+          v130 |                        21,777  |      5          1          96
+          v131 |                        21,777  |     12          1          98
+          v137 |                        21,777  |      9          1           9
+          v157 |                        21,777  |      3          0           2
+          v158 |                        21,777  |      3          0           2
+          v159 |                        21,777  |      3          0           2
+          v190 |                        21,777  |      5          1           5
+          v202 |                        21,777  |     11          0          10
+          v203 |                        21,777  |      8          0           7
+          v204 |                        21,777  |      7          0           6
+          v205 |                        21,777  |      8          0           7
+          v206 |                        21,777  |      8          0           7
+          v207 |                        21,777  |      7          0           6
+          v218 |                        21,777  |     13          1          13
+         v467b |                        21,777  |      2          1           2
+         h21_1 |    18,871               2,906  |      2          0           1
+        h32z_1 |    16,253               5,524  |      2          0           1
+          v501 |                        21,777  |      2          1           2
+          v621 |        38              21,739  |      4          1           8
+          v701 |                        21,777  |      5          0           8
+          v714 |                        21,777  |      2          0           1
+          v739 |     8,698              13,079  |      4          1           5
+         v743a |                        21,777  |      5          1           6
+         v743b |                        21,777  |      5          1           6
+         v743d |                        21,777  |      5          1           6
+         v743f |        48              21,729  |      5          1           7
+         v744d |                        21,777  |      3          0           8
+         v850a |                        21,777  |      3          0           8
+         v850b |                        21,777  |      3          0           8
+  no_treatment |    15,044               6,733  |      2          0           1
+  -----------------------------------------------------------------------------
+
+. drop if h21_1==. & h32z_1==.
+(15,044 observations deleted)
+
+. misstable summarize, all
+                                                               Obs<.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs>.     Obs<.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+          v013 |                         6,733  |      7          1           7
+          v024 |                         6,733  |      6          1           6
+          v102 |                         6,733  |      2          1           2
+          v106 |                         6,733  |      4          0           3
+          v130 |                         6,733  |      5          1          96
+          v131 |                         6,733  |     12          1          98
+          v137 |                         6,733  |      9          1           9
+          v157 |                         6,733  |      3          0           2
+          v158 |                         6,733  |      3          0           2
+          v159 |                         6,733  |      3          0           2
+          v190 |                         6,733  |      5          1           5
+          v202 |                         6,733  |     10          0           9
+          v203 |                         6,733  |      8          0           7
+          v204 |                         6,733  |      7          0           6
+          v205 |                         6,733  |      7          0           7
+          v206 |                         6,733  |      7          0           6
+          v207 |                         6,733  |      7          0           6
+          v218 |                         6,733  |     12          1          12
+         v467b |                         6,733  |      2          1           2
+         h21_1 |     3,827               2,906  |      2          0           1
+        h32z_1 |     1,209               5,524  |      2          0           1
+          v501 |                         6,733  |      2          1           2
+          v621 |         7               6,726  |      4          1           8
+          v701 |                         6,733  |      5          0           8
+          v714 |                         6,733  |      2          0           1
+          v739 |     2,748               3,985  |      3          1           4
+         v743a |                         6,733  |      5          1           6
+         v743b |                         6,733  |      5          1           6
+         v743d |                         6,733  |      5          1           6
+         v743f |        13               6,720  |      5          1           7
+         v744d |                         6,733  |      3          0           8
+         v850a |                         6,733  |      3          0           8
+         v850b |                         6,733  |      3          0           8
+  no_treatment |                         6,733  |      2          0           1
+  -----------------------------------------------------------------------------
+
+. drop v739
+
+. misstable summarize, all
+                                                               Obs<.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs>.     Obs<.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+          v013 |                         6,733  |      7          1           7
+          v024 |                         6,733  |      6          1           6
+          v102 |                         6,733  |      2          1           2
+          v106 |                         6,733  |      4          0           3
+          v130 |                         6,733  |      5          1          96
+          v131 |                         6,733  |     12          1          98
+          v137 |                         6,733  |      9          1           9
+          v157 |                         6,733  |      3          0           2
+          v158 |                         6,733  |      3          0           2
+          v159 |                         6,733  |      3          0           2
+          v190 |                         6,733  |      5          1           5
+          v202 |                         6,733  |     10          0           9
+          v203 |                         6,733  |      8          0           7
+          v204 |                         6,733  |      7          0           6
+          v205 |                         6,733  |      7          0           7
+          v206 |                         6,733  |      7          0           6
+          v207 |                         6,733  |      7          0           6
+          v218 |                         6,733  |     12          1          12
+         v467b |                         6,733  |      2          1           2
+         h21_1 |     3,827               2,906  |      2          0           1
+        h32z_1 |     1,209               5,524  |      2          0           1
+          v501 |                         6,733  |      2          1           2
+          v621 |         7               6,726  |      4          1           8
+          v701 |                         6,733  |      5          0           8
+          v714 |                         6,733  |      2          0           1
+         v743a |                         6,733  |      5          1           6
+         v743b |                         6,733  |      5          1           6
+         v743d |                         6,733  |      5          1           6
+         v743f |        13               6,720  |      5          1           7
+         v744d |                         6,733  |      3          0           8
+         v850a |                         6,733  |      3          0           8
+         v850b |                         6,733  |      3          0           8
+  no_treatment |                         6,733  |      2          0           1
+  -----------------------------------------------------------------------------
+
+. drop if v743f==.
+(13 observations deleted)
+
+. misstable summarize, all
+                                                               Obs<.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs>.     Obs<.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+          v013 |                         6,720  |      7          1           7
+          v024 |                         6,720  |      6          1           6
+          v102 |                         6,720  |      2          1           2
+          v106 |                         6,720  |      4          0           3
+          v130 |                         6,720  |      5          1          96
+          v131 |                         6,720  |     12          1          98
+          v137 |                         6,720  |      9          1           9
+          v157 |                         6,720  |      3          0           2
+          v158 |                         6,720  |      3          0           2
+          v159 |                         6,720  |      3          0           2
+          v190 |                         6,720  |      5          1           5
+          v202 |                         6,720  |     10          0           9
+          v203 |                         6,720  |      8          0           7
+          v204 |                         6,720  |      7          0           6
+          v205 |                         6,720  |      7          0           7
+          v206 |                         6,720  |      7          0           6
+          v207 |                         6,720  |      7          0           6
+          v218 |                         6,720  |     12          1          12
+         v467b |                         6,720  |      2          1           2
+         h21_1 |     3,820               2,900  |      2          0           1
+        h32z_1 |     1,207               5,513  |      2          0           1
+          v501 |                         6,720  |      2          1           2
+          v621 |         7               6,713  |      4          1           8
+          v701 |                         6,720  |      5          0           8
+          v714 |                         6,720  |      2          0           1
+         v743a |                         6,720  |      5          1           6
+         v743b |                         6,720  |      5          1           6
+         v743d |                         6,720  |      5          1           6
+         v743f |                         6,720  |      5          1           7
+         v744d |                         6,720  |      3          0           8
+         v850a |                         6,720  |      3          0           8
+         v850b |                         6,720  |      3          0           8
+  no_treatment |                         6,720  |      2          0           1
+  -----------------------------------------------------------------------------
+
+. tab v621
+
+  husband's desire for |
+              children |      Freq.     Percent        Cum.
+-----------------------+-----------------------------------
+     1. both want same |      2,227       33.17       33.17
+ 2. husband wants more |      3,466       51.63       84.81
+3. husband wants fewer |        300        4.47       89.27
+         8. don't know |        720       10.73      100.00
+-----------------------+-----------------------------------
+                 Total |      6,713      100.00
+
+. drop if v621==.
+(7 observations deleted)
+
+. misstable summarize, all
+                                                               Obs<.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs>.     Obs<.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+          v013 |                         6,713  |      7          1           7
+          v024 |                         6,713  |      6          1           6
+          v102 |                         6,713  |      2          1           2
+          v106 |                         6,713  |      4          0           3
+          v130 |                         6,713  |      5          1          96
+          v131 |                         6,713  |     12          1          98
+          v137 |                         6,713  |      9          1           9
+          v157 |                         6,713  |      3          0           2
+          v158 |                         6,713  |      3          0           2
+          v159 |                         6,713  |      3          0           2
+          v190 |                         6,713  |      5          1           5
+          v202 |                         6,713  |     10          0           9
+          v203 |                         6,713  |      8          0           7
+          v204 |                         6,713  |      7          0           6
+          v205 |                         6,713  |      7          0           7
+          v206 |                         6,713  |      7          0           6
+          v207 |                         6,713  |      7          0           6
+          v218 |                         6,713  |     12          1          12
+         v467b |                         6,713  |      2          1           2
+         h21_1 |     3,815               2,898  |      2          0           1
+        h32z_1 |     1,206               5,507  |      2          0           1
+          v501 |                         6,713  |      2          1           2
+          v621 |                         6,713  |      4          1           8
+          v701 |                         6,713  |      5          0           8
+          v714 |                         6,713  |      2          0           1
+         v743a |                         6,713  |      5          1           6
+         v743b |                         6,713  |      5          1           6
+         v743d |                         6,713  |      5          1           6
+         v743f |                         6,713  |      5          1           7
+         v744d |                         6,713  |      3          0           8
+         v850a |                         6,713  |      3          0           8
+         v850b |                         6,713  |      3          0           8
+  no_treatment |                         6,713  |      2          0           1
+  -----------------------------------------------------------------------------
+
+. save "C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Abiola Ehinfun_newdatase
+> t.dta"
+file C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Abiola Ehinfun_newdataset.d
+> ta saved
+
+. recode v013 (1/2=1 "15-24") (3/4=2 "25-34") (5/7=3 "35-49"), gen (age)
+(6311 differences between v013 and age)
+
+. tab age
+
+  RECODE of |
+  v013 (age |
+  in 5-year |
+    groups) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      15-24 |      1,782       26.55       26.55
+      25-34 |      3,156       47.01       73.56
+      35-49 |      1,775       26.44      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. numlabel, a
+
+. recode v137 (1/2=1 "One-Two") (3/4=2 "Three-Four") (5/max=3 "Five and above"), gen (number_of_under_5_children
+> )
+(4532 differences between v137 and number_of_under_5_children)
+
+. tab v137
+
+  number of |
+ children 5 |
+  and under |
+         in |
+  household |
+  (de jure) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |      2,181       32.49       32.49
+          2 |      2,516       37.48       69.97
+          3 |      1,124       16.74       86.71
+          4 |        501        7.46       94.18
+          5 |        259        3.86       98.03
+          6 |         94        1.40       99.43
+          7 |         27        0.40       99.84
+          8 |         10        0.15       99.99
+          9 |          1        0.01      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. tab number_of_under_5_children
+
+RECODE of v137 |
+    (number of |
+children 5 and |
+      under in |
+ household (de |
+        jure)) |      Freq.     Percent        Cum.
+---------------+-----------------------------------
+       One-Two |      4,697       69.97       69.97
+    Three-Four |      1,625       24.21       94.18
+Five and above |        391        5.82      100.00
+---------------+-----------------------------------
+         Total |      6,713      100.00
+
+. numlabel, a
+
+. tab number_of_under_5_children
+
+   RECODE of v137 |
+       (number of |
+   children 5 and |
+         under in |
+    household (de |
+           jure)) |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+       1. One-Two |      4,697       69.97       69.97
+    2. Three-Four |      1,625       24.21       94.18
+3. Five and above |        391        5.82      100.00
+------------------+-----------------------------------
+            Total |      6,713      100.00
+
+. tab v206
+
+   sons who |
+  have died |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      5,146       76.66       76.66
+          1 |      1,125       16.76       93.42
+          2 |        326        4.86       98.27
+          3 |         88        1.31       99.58
+          4 |         20        0.30       99.88
+          5 |          7        0.10       99.99
+          6 |          1        0.01      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. tab v207
+
+  daughters |
+   who have |
+       died |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      5,271       78.52       78.52
+          1 |      1,072       15.97       94.49
+          2 |        264        3.93       98.42
+          3 |         73        1.09       99.51
+          4 |         25        0.37       99.88
+          5 |          7        0.10       99.99
+          6 |          1        0.01      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. drop v206 v207
+
+. tab v131
+
+         ethnicity |      Freq.     Percent        Cum.
+-------------------+-----------------------------------
+           1. ekoi |         11        0.16        0.16
+         2. fulani |        883       13.15       13.32
+          3. hausa |      2,476       36.88       50.20
+         4. ibibio |         92        1.37       51.57
+          5. igala |         34        0.51       52.08
+           6. igbo |        644        9.59       61.67
+      7. ijaw/izon |         84        1.25       62.92
+8. kanuri/beriberi |        165        2.46       65.38
+            9. tiv |         92        1.37       66.75
+        10. yoruba |        333        4.96       71.71
+         96. other |      1,895       28.23       99.94
+    98. don't know |          4        0.06      100.00
+-------------------+-----------------------------------
+             Total |      6,713      100.00
+
+. recode v190 (1/2=1 "poor") (3=2 "middle") (4/5=3 "rich"), gen (wealth_index)
+(4743 differences between v190 and wealth_index)
+
+. recode v130 (1/2=1 "christian") (3=2 "islam")(4/max=3 "others"), gen (religion)
+(6281 differences between v130 and religion)
+
+. tab v106
+
+        highest |
+    educational |
+          level |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+0. no education |      3,535       52.66       52.66
+     1. primary |      1,067       15.89       68.55
+   2. secondary |      1,761       26.23       94.79
+      3. higher |        350        5.21      100.00
+----------------+-----------------------------------
+          Total |      6,713      100.00
+
+. save "C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Abiola Ehinfun_newdataset.dta", replace
+file C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Abiola Ehinfun_newdataset.dta saved
+
+. tab v701
+
+husband/partner |
+   's education |
+          level |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+0. no education |      2,707       40.32       40.32
+     1. primary |        937       13.96       54.28
+   2. secondary |      2,090       31.13       85.42
+      3. higher |        877       13.06       98.48
+  8. don't know |        102        1.52      100.00
+----------------+-----------------------------------
+          Total |      6,713      100.00
+
+. recode v701 (0=0 "no education") (1=1 "primary") (2=2 "secondary") (3=3 "higher") (8=0 "no education"), gen (p
+> artner_education)
+(102 differences between v701 and partner_education)
+
+. rename v501 marital_status
+
+. rename v106 maternal_education
+
+. rename v714 occupation_status
+
+. tab v714
+variable v714 not found
+r(111);
+
+. tab occupation_status
+
+ respondent |
+  currently |
+    working |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      2,173       32.37       32.37
+     1. yes |      4,540       67.63      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. rename v102 place_residence
+
+. tab v131
+
+         ethnicity |      Freq.     Percent        Cum.
+-------------------+-----------------------------------
+           1. ekoi |         11        0.16        0.16
+         2. fulani |        883       13.15       13.32
+          3. hausa |      2,476       36.88       50.20
+         4. ibibio |         92        1.37       51.57
+          5. igala |         34        0.51       52.08
+           6. igbo |        644        9.59       61.67
+      7. ijaw/izon |         84        1.25       62.92
+8. kanuri/beriberi |        165        2.46       65.38
+            9. tiv |         92        1.37       66.75
+        10. yoruba |        333        4.96       71.71
+         96. other |      1,895       28.23       99.94
+    98. don't know |          4        0.06      100.00
+-------------------+-----------------------------------
+             Total |      6,713      100.00
+
+. recode v131 (10=1 "yoruba") (6=2 "igbo") (2/3=3 "hausa/fulani") (1=4 "others") (4/5=4 "others") (7/9=4 "others
+> ") (96/max=4 "others"), gen (ethnicity)
+(4145 differences between v131 and ethnicity)
+
+. tab ethnicity
+
+   RECODE of |
+        v131 |
+ (ethnicity) |      Freq.     Percent        Cum.
+-------------+-----------------------------------
+      yoruba |        333        4.96        4.96
+        igbo |        644        9.59       14.55
+hausa/fulani |      3,359       50.04       64.59
+      others |      2,377       35.41      100.00
+-------------+-----------------------------------
+       Total |      6,713      100.00
+
+. tab v024
+
+          region |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+1. north central |        965       14.38       14.38
+   2. north east |      2,133       31.77       46.15
+   3. north west |      2,207       32.88       79.03
+   4. south east |        541        8.06       87.08
+  5. south south |        516        7.69       94.77
+   6. south west |        351        5.23      100.00
+-----------------+-----------------------------------
+           Total |      6,713      100.00
+
+. rename v024 region
+
+. tab v157
+
+    frequency of reading |
+   newspaper or magazine |      Freq.     Percent        Cum.
+-------------------------+-----------------------------------
+           0. not at all |      6,143       91.51       91.51
+1. less than once a week |        423        6.30       97.81
+ 2. at least once a week |        147        2.19      100.00
+-------------------------+-----------------------------------
+                   Total |      6,713      100.00
+
+. tab v158
+
+  frequency of listening |
+                to radio |      Freq.     Percent        Cum.
+-------------------------+-----------------------------------
+           0. not at all |      3,546       52.82       52.82
+1. less than once a week |      1,392       20.74       73.56
+ 2. at least once a week |      1,775       26.44      100.00
+-------------------------+-----------------------------------
+                   Total |      6,713      100.00
+
+. tab v159
+
+   frequency of watching |
+              television |      Freq.     Percent        Cum.
+-------------------------+-----------------------------------
+           0. not at all |      4,368       65.07       65.07
+1. less than once a week |        986       14.69       79.76
+ 2. at least once a week |      1,359       20.24      100.00
+-------------------------+-----------------------------------
+                   Total |      6,713      100.00
+
+. recode v157 (0=0 "no") (1/99=1 "yes"), gen (media_exp1)
+(147 differences between v157 and media_exp1)
+
+. browse
+
+. drop media_exp1
+
+. gen mediaexp1 = v157+v158+v159
+
+. tab mediaexp1
+
+  mediaexp1 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      3,022       45.02       45.02
+          1 |        851       12.68       57.69
+          2 |      1,326       19.75       77.45
+          3 |        579        8.63       86.07
+          4 |        661        9.85       95.92
+          5 |        165        2.46       98.38
+          6 |        109        1.62      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. recode mediaexp1 (0=0 "no exposure") (1/3=1 "poor exposure") (4/6=2 "good exposure"), gen (media_exposure)
+(2840 differences between mediaexp1 and media_exposure)
+
+. numlabel, a
+
+. tab 
+varlist required
+r(100);
+
+. tab media_exposure
+
+       RECODE of |
+       mediaexp1 |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+  0. no exposure |      3,022       45.02       45.02
+1. poor exposure |      2,756       41.05       86.07
+2. good exposure |        935       13.93      100.00
+-----------------+-----------------------------------
+           Total |      6,713      100.00
+
+. tab v850b
+
+ respondent can ask partner to |
+                  use a condom |      Freq.     Percent        Cum.
+-------------------------------+-----------------------------------
+                         0. no |      4,161       61.98       61.98
+                        1. yes |      2,346       34.95       96.93
+8. don't know/not sure/depends |        206        3.07      100.00
+-------------------------------+-----------------------------------
+                         Total |      6,713      100.00
+
+. tab v744d
+
+      beating |
+ justified if |
+ wife refuses |
+  to have sex |
+ with husband |      Freq.     Percent        Cum.
+--------------+-----------------------------------
+        0. no |      4,541       67.64       67.64
+       1. yes |      2,161       32.19       99.84
+8. don't know |         11        0.16      100.00
+--------------+-----------------------------------
+        Total |      6,713      100.00
+
+. v850a
+command v850a is unrecognized
+r(199);
+
+. tab v743f
+
+person who usually decides what to |
+       do with money husband earns |      Freq.     Percent        Cum.
+-----------------------------------+-----------------------------------
+               1. respondent alone |        412        6.14        6.14
+ 2. respondent and husband/partner |      1,189       17.71       23.85
+          4. husband/partner alone |      5,081       75.69       99.54
+                          6. other |         16        0.24       99.78
+7. husband/partner has no earnings |         15        0.22      100.00
+-----------------------------------+-----------------------------------
+                             Total |      6,713      100.00
+
+. tab v743c
+variable v743c not found
+r(111);
+
+. tab v743a
+
+    person who usually decides on |
+         respondent's health care |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+              1. respondent alone |        490        7.30        7.30
+2. respondent and husband/partner |      1,882       28.04       35.33
+         4. husband/partner alone |      4,322       64.38       99.72
+                  5. someone else |         17        0.25       99.97
+                         6. other |          2        0.03      100.00
+----------------------------------+-----------------------------------
+                            Total |      6,713      100.00
+
+. tab v743b
+
+    person who usually decides on |
+        large household purchases |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+              1. respondent alone |        253        3.77        3.77
+2. respondent and husband/partner |      1,961       29.21       32.98
+         4. husband/partner alone |      4,454       66.35       99.33
+                  5. someone else |         40        0.60       99.93
+                         6. other |          5        0.07      100.00
+----------------------------------+-----------------------------------
+                            Total |      6,713      100.00
+
+. tab v743d
+
+    person who usually decides on |
+    visits to family or relatives |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+              1. respondent alone |        780       11.62       11.62
+2. respondent and husband/partner |      2,854       42.51       54.13
+         4. husband/partner alone |      3,060       45.58       99.72
+                  5. someone else |         16        0.24       99.96
+                         6. other |          3        0.04      100.00
+----------------------------------+-----------------------------------
+                            Total |      6,713      100.00
+
+. tab v7632a
+variable v7632a not found
+r(111);
+
+. tab v632a
+variable v632a not found
+r(111);
+
+. tab v632
+variable v632 not found
+r(111);
+
+. tab v621
+
+  husband's desire for |
+              children |      Freq.     Percent        Cum.
+-----------------------+-----------------------------------
+     1. both want same |      2,227       33.17       33.17
+ 2. husband wants more |      3,466       51.63       84.81
+3. husband wants fewer |        300        4.47       89.27
+         8. don't know |        720       10.73      100.00
+-----------------------+-----------------------------------
+                 Total |      6,713      100.00
+
+. save "C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Abiola Ehinfun_newdataset.dta", replace
+file C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Abiola Ehinfun_newdataset.dta saved
+
+. clear
+
+. use "C:\Users\User PC\Desktop\NDHS Data\NGIR7AFL.DTA"
+
+. tab v501
+
+             current marital status |      Freq.     Percent        Cum.
+------------------------------------+-----------------------------------
+                     never in union |     10,669       25.51       25.51
+                            married |     27,841       66.57       92.08
+                living with partner |      1,047        2.50       94.59
+                            widowed |      1,117        2.67       97.26
+                           divorced |        543        1.30       98.56
+no longer living together/separated |        604        1.44      100.00
+------------------------------------+-----------------------------------
+                              Total |     41,821      100.00
+
+. drop if v501==0| v501==3 | v501==4 | v501==5
+(12,933 observations deleted)
+
+. tab v218
+
+  number of |
+     living |
+   children |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      2,234        7.73        7.73
+          1 |      4,219       14.60       22.34
+          2 |      4,808       16.64       38.98
+          3 |      4,521       15.65       54.63
+          4 |      4,177       14.46       69.09
+          5 |      3,373       11.68       80.77
+          6 |      2,415        8.36       89.13
+          7 |      1,532        5.30       94.43
+          8 |        893        3.09       97.52
+          9 |        419        1.45       98.97
+         10 |        198        0.69       99.66
+         11 |         59        0.20       99.86
+         12 |         36        0.12       99.99
+         13 |          2        0.01       99.99
+         14 |          1        0.00      100.00
+         15 |          1        0.00      100.00
+------------+-----------------------------------
+      Total |     28,888      100.00
+
+. tab v137
+
+  number of |
+ children 5 |
+  and under |
+         in |
+  household |
+  (de jure) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      6,546       22.66       22.66
+          1 |      8,673       30.02       52.68
+          2 |      7,945       27.50       80.19
+          3 |      3,420       11.84       92.02
+          4 |      1,336        4.62       96.65
+          5 |        605        2.09       98.74
+          6 |        238        0.82       99.57
+          7 |         91        0.32       99.88
+          8 |         25        0.09       99.97
+          9 |          9        0.03      100.00
+------------+-----------------------------------
+      Total |     28,888      100.00
+
+. drop if v137==0
+(6,546 observations deleted)
+
+. drop if v218==0
+(565 observations deleted)
+
+. tab h32z_1
+
+fever/cough |
+  : medical |
+  treatment |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      1,843       33.36       33.36
+        yes |      3,681       66.64      100.00
+------------+-----------------------------------
+      Total |      5,524      100.00
+
+. ta v501
+
+             current marital status |      Freq.     Percent        Cum.
+------------------------------------+-----------------------------------
+                            married |     21,061       96.71       96.71
+                living with partner |        716        3.29      100.00
+------------------------------------+-----------------------------------
+                              Total |     21,777      100.00
+
+. keep v013 v218 v190 v714 v130 v106 v501 v701 v102 v131 v206 v207 v024 v157 v158 v159 v743a v467b v743d v743b v
+> 850a h21_1 h32z_1 v202 v203 v204 v205 v621 v739 v743f v744d v850b v137 v632a v850a
+
+. gen no_treatment = 0 if h21_1 == 1 | h32z_1== 1
+(16,680 missing values generated)
+
+. replace no_treatmen = 1 if h21_1 == 0 | h32z_1 == 0
+(2,158 real changes made)
+
+. label define no_treatment 0 "no" 1 "yes"
+
+. label value no_treatment no_treatment
+
+. numlabel, a
+
+. tab no_treatment
+
+no_treatmen |
+          t |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      4,575       67.95       67.95
+     1. yes |      2,158       32.05      100.00
+------------+-----------------------------------
+      Total |      6,733      100.00
+
+. misstable summarize, all
+                                                               Obs<.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs>.     Obs<.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+          v013 |                        21,777  |      7          1           7
+          v024 |                        21,777  |      6          1           6
+          v102 |                        21,777  |      2          1           2
+          v106 |                        21,777  |      4          0           3
+          v130 |                        21,777  |      5          1          96
+          v131 |                        21,777  |     12          1          98
+          v137 |                        21,777  |      9          1           9
+          v157 |                        21,777  |      3          0           2
+          v158 |                        21,777  |      3          0           2
+          v159 |                        21,777  |      3          0           2
+          v190 |                        21,777  |      5          1           5
+          v202 |                        21,777  |     11          0          10
+          v203 |                        21,777  |      8          0           7
+          v204 |                        21,777  |      7          0           6
+          v205 |                        21,777  |      8          0           7
+          v206 |                        21,777  |      8          0           7
+          v207 |                        21,777  |      7          0           6
+          v218 |                        21,777  |     13          1          13
+         v467b |                        21,777  |      2          1           2
+         h21_1 |    18,871               2,906  |      2          0           1
+        h32z_1 |    16,253               5,524  |      2          0           1
+          v501 |                        21,777  |      2          1           2
+          v621 |        38              21,739  |      4          1           8
+         v632a |     6,669              15,108  |      4          1           6
+          v701 |                        21,777  |      5          0           8
+          v714 |                        21,777  |      2          0           1
+          v739 |     8,698              13,079  |      4          1           5
+         v743a |                        21,777  |      5          1           6
+         v743b |                        21,777  |      5          1           6
+         v743d |                        21,777  |      5          1           6
+         v743f |        48              21,729  |      5          1           7
+         v744d |                        21,777  |      3          0           8
+         v850a |                        21,777  |      3          0           8
+         v850b |                        21,777  |      3          0           8
+  no_treatment |    15,044               6,733  |      2          0           1
+  -----------------------------------------------------------------------------
+
+. drop if h21_1==. & h32z_1==.
+(15,044 observations deleted)
+
+. misstable summarize, all
+                                                               Obs<.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs>.     Obs<.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+          v013 |                         6,733  |      7          1           7
+          v024 |                         6,733  |      6          1           6
+          v102 |                         6,733  |      2          1           2
+          v106 |                         6,733  |      4          0           3
+          v130 |                         6,733  |      5          1          96
+          v131 |                         6,733  |     12          1          98
+          v137 |                         6,733  |      9          1           9
+          v157 |                         6,733  |      3          0           2
+          v158 |                         6,733  |      3          0           2
+          v159 |                         6,733  |      3          0           2
+          v190 |                         6,733  |      5          1           5
+          v202 |                         6,733  |     10          0           9
+          v203 |                         6,733  |      8          0           7
+          v204 |                         6,733  |      7          0           6
+          v205 |                         6,733  |      7          0           7
+          v206 |                         6,733  |      7          0           6
+          v207 |                         6,733  |      7          0           6
+          v218 |                         6,733  |     12          1          12
+         v467b |                         6,733  |      2          1           2
+         h21_1 |     3,827               2,906  |      2          0           1
+        h32z_1 |     1,209               5,524  |      2          0           1
+          v501 |                         6,733  |      2          1           2
+          v621 |         7               6,726  |      4          1           8
+         v632a |     2,124               4,609  |      4          1           6
+          v701 |                         6,733  |      5          0           8
+          v714 |                         6,733  |      2          0           1
+          v739 |     2,748               3,985  |      3          1           4
+         v743a |                         6,733  |      5          1           6
+         v743b |                         6,733  |      5          1           6
+         v743d |                         6,733  |      5          1           6
+         v743f |        13               6,720  |      5          1           7
+         v744d |                         6,733  |      3          0           8
+         v850a |                         6,733  |      3          0           8
+         v850b |                         6,733  |      3          0           8
+  no_treatment |                         6,733  |      2          0           1
+  -----------------------------------------------------------------------------
+
+. drop v739
+
+. misstable summarize, all
+                                                               Obs<.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs>.     Obs<.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+          v013 |                         6,733  |      7          1           7
+          v024 |                         6,733  |      6          1           6
+          v102 |                         6,733  |      2          1           2
+          v106 |                         6,733  |      4          0           3
+          v130 |                         6,733  |      5          1          96
+          v131 |                         6,733  |     12          1          98
+          v137 |                         6,733  |      9          1           9
+          v157 |                         6,733  |      3          0           2
+          v158 |                         6,733  |      3          0           2
+          v159 |                         6,733  |      3          0           2
+          v190 |                         6,733  |      5          1           5
+          v202 |                         6,733  |     10          0           9
+          v203 |                         6,733  |      8          0           7
+          v204 |                         6,733  |      7          0           6
+          v205 |                         6,733  |      7          0           7
+          v206 |                         6,733  |      7          0           6
+          v207 |                         6,733  |      7          0           6
+          v218 |                         6,733  |     12          1          12
+         v467b |                         6,733  |      2          1           2
+         h21_1 |     3,827               2,906  |      2          0           1
+        h32z_1 |     1,209               5,524  |      2          0           1
+          v501 |                         6,733  |      2          1           2
+          v621 |         7               6,726  |      4          1           8
+         v632a |     2,124               4,609  |      4          1           6
+          v701 |                         6,733  |      5          0           8
+          v714 |                         6,733  |      2          0           1
+         v743a |                         6,733  |      5          1           6
+         v743b |                         6,733  |      5          1           6
+         v743d |                         6,733  |      5          1           6
+         v743f |        13               6,720  |      5          1           7
+         v744d |                         6,733  |      3          0           8
+         v850a |                         6,733  |      3          0           8
+         v850b |                         6,733  |      3          0           8
+  no_treatment |                         6,733  |      2          0           1
+  -----------------------------------------------------------------------------
+
+. drop if v743f==.
+(13 observations deleted)
+
+. misstable summarize, all
+                                                               Obs<.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs>.     Obs<.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+          v013 |                         6,720  |      7          1           7
+          v024 |                         6,720  |      6          1           6
+          v102 |                         6,720  |      2          1           2
+          v106 |                         6,720  |      4          0           3
+          v130 |                         6,720  |      5          1          96
+          v131 |                         6,720  |     12          1          98
+          v137 |                         6,720  |      9          1           9
+          v157 |                         6,720  |      3          0           2
+          v158 |                         6,720  |      3          0           2
+          v159 |                         6,720  |      3          0           2
+          v190 |                         6,720  |      5          1           5
+          v202 |                         6,720  |     10          0           9
+          v203 |                         6,720  |      8          0           7
+          v204 |                         6,720  |      7          0           6
+          v205 |                         6,720  |      7          0           7
+          v206 |                         6,720  |      7          0           6
+          v207 |                         6,720  |      7          0           6
+          v218 |                         6,720  |     12          1          12
+         v467b |                         6,720  |      2          1           2
+         h21_1 |     3,820               2,900  |      2          0           1
+        h32z_1 |     1,207               5,513  |      2          0           1
+          v501 |                         6,720  |      2          1           2
+          v621 |         7               6,713  |      4          1           8
+         v632a |     2,118               4,602  |      4          1           6
+          v701 |                         6,720  |      5          0           8
+          v714 |                         6,720  |      2          0           1
+         v743a |                         6,720  |      5          1           6
+         v743b |                         6,720  |      5          1           6
+         v743d |                         6,720  |      5          1           6
+         v743f |                         6,720  |      5          1           7
+         v744d |                         6,720  |      3          0           8
+         v850a |                         6,720  |      3          0           8
+         v850b |                         6,720  |      3          0           8
+  no_treatment |                         6,720  |      2          0           1
+  -----------------------------------------------------------------------------
+
+. tab v621
+
+  husband's desire for |
+              children |      Freq.     Percent        Cum.
+-----------------------+-----------------------------------
+     1. both want same |      2,227       33.17       33.17
+ 2. husband wants more |      3,466       51.63       84.81
+3. husband wants fewer |        300        4.47       89.27
+         8. don't know |        720       10.73      100.00
+-----------------------+-----------------------------------
+                 Total |      6,713      100.00
+
+. drop if v621==.
+(7 observations deleted)
+
+. misstable summarize, all
+                                                               Obs<.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs>.     Obs<.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+          v013 |                         6,713  |      7          1           7
+          v024 |                         6,713  |      6          1           6
+          v102 |                         6,713  |      2          1           2
+          v106 |                         6,713  |      4          0           3
+          v130 |                         6,713  |      5          1          96
+          v131 |                         6,713  |     12          1          98
+          v137 |                         6,713  |      9          1           9
+          v157 |                         6,713  |      3          0           2
+          v158 |                         6,713  |      3          0           2
+          v159 |                         6,713  |      3          0           2
+          v190 |                         6,713  |      5          1           5
+          v202 |                         6,713  |     10          0           9
+          v203 |                         6,713  |      8          0           7
+          v204 |                         6,713  |      7          0           6
+          v205 |                         6,713  |      7          0           7
+          v206 |                         6,713  |      7          0           6
+          v207 |                         6,713  |      7          0           6
+          v218 |                         6,713  |     12          1          12
+         v467b |                         6,713  |      2          1           2
+         h21_1 |     3,815               2,898  |      2          0           1
+        h32z_1 |     1,206               5,507  |      2          0           1
+          v501 |                         6,713  |      2          1           2
+          v621 |                         6,713  |      4          1           8
+         v632a |     2,111               4,602  |      4          1           6
+          v701 |                         6,713  |      5          0           8
+          v714 |                         6,713  |      2          0           1
+         v743a |                         6,713  |      5          1           6
+         v743b |                         6,713  |      5          1           6
+         v743d |                         6,713  |      5          1           6
+         v743f |                         6,713  |      5          1           7
+         v744d |                         6,713  |      3          0           8
+         v850a |                         6,713  |      3          0           8
+         v850b |                         6,713  |      3          0           8
+  no_treatment |                         6,713  |      2          0           1
+  -----------------------------------------------------------------------------
+
+. save "C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Abiola Ehinfun_newdataset_05-03-2024.dta"
+file C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Abiola Ehinfun_newdataset_05-03-2024.dta saved
+
+. recode v013 (1/2=1 "15-24") (3/4=2 "25-34") (5/7=3 "35-49"), gen (age)
+(6311 differences between v013 and age)
+
+. tab age
+
+  RECODE of |
+  v013 (age |
+  in 5-year |
+    groups) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      15-24 |      1,782       26.55       26.55
+      25-34 |      3,156       47.01       73.56
+      35-49 |      1,775       26.44      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. numlabel, a
+
+. recode v137 (1/2=1 "One-Two") (3/4=2 "Three-Four") (5/max=3 "Five and above"), gen (number_of_under_5_children
+> )
+(4532 differences between v137 and number_of_under_5_children)
+
+. tab v137
+
+  number of |
+ children 5 |
+  and under |
+         in |
+  household |
+  (de jure) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |      2,181       32.49       32.49
+          2 |      2,516       37.48       69.97
+          3 |      1,124       16.74       86.71
+          4 |        501        7.46       94.18
+          5 |        259        3.86       98.03
+          6 |         94        1.40       99.43
+          7 |         27        0.40       99.84
+          8 |         10        0.15       99.99
+          9 |          1        0.01      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. tab number_of_under_5_children
+
+RECODE of v137 |
+    (number of |
+children 5 and |
+      under in |
+ household (de |
+        jure)) |      Freq.     Percent        Cum.
+---------------+-----------------------------------
+       One-Two |      4,697       69.97       69.97
+    Three-Four |      1,625       24.21       94.18
+Five and above |        391        5.82      100.00
+---------------+-----------------------------------
+         Total |      6,713      100.00
+
+. numlabel, a
+
+. tab number_of_under_5_children
+
+   RECODE of v137 |
+       (number of |
+   children 5 and |
+         under in |
+    household (de |
+           jure)) |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+       1. One-Two |      4,697       69.97       69.97
+    2. Three-Four |      1,625       24.21       94.18
+3. Five and above |        391        5.82      100.00
+------------------+-----------------------------------
+            Total |      6,713      100.00
+
+. tab v206
+
+   sons who |
+  have died |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      5,146       76.66       76.66
+          1 |      1,125       16.76       93.42
+          2 |        326        4.86       98.27
+          3 |         88        1.31       99.58
+          4 |         20        0.30       99.88
+          5 |          7        0.10       99.99
+          6 |          1        0.01      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. tab v207
+
+  daughters |
+   who have |
+       died |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      5,271       78.52       78.52
+          1 |      1,072       15.97       94.49
+          2 |        264        3.93       98.42
+          3 |         73        1.09       99.51
+          4 |         25        0.37       99.88
+          5 |          7        0.10       99.99
+          6 |          1        0.01      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. drop v206 v207
+
+. tab v131
+
+         ethnicity |      Freq.     Percent        Cum.
+-------------------+-----------------------------------
+           1. ekoi |         11        0.16        0.16
+         2. fulani |        883       13.15       13.32
+          3. hausa |      2,476       36.88       50.20
+         4. ibibio |         92        1.37       51.57
+          5. igala |         34        0.51       52.08
+           6. igbo |        644        9.59       61.67
+      7. ijaw/izon |         84        1.25       62.92
+8. kanuri/beriberi |        165        2.46       65.38
+            9. tiv |         92        1.37       66.75
+        10. yoruba |        333        4.96       71.71
+         96. other |      1,895       28.23       99.94
+    98. don't know |          4        0.06      100.00
+-------------------+-----------------------------------
+             Total |      6,713      100.00
+
+. recode v190 (1/2=1 "poor") (3=2 "middle") (4/5=3 "rich"), gen (wealth_index)
+(4743 differences between v190 and wealth_index)
+
+. recode v130 (1/2=1 "christian") (3=2 "islam")(4/max=3 "others"), gen (religion)
+(6281 differences between v130 and religion)
+
+. tab v106
+
+        highest |
+    educational |
+          level |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+0. no education |      3,535       52.66       52.66
+     1. primary |      1,067       15.89       68.55
+   2. secondary |      1,761       26.23       94.79
+      3. higher |        350        5.21      100.00
+----------------+-----------------------------------
+          Total |      6,713      100.00
+
+. tab v701
+
+husband/partner |
+   's education |
+          level |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+0. no education |      2,707       40.32       40.32
+     1. primary |        937       13.96       54.28
+   2. secondary |      2,090       31.13       85.42
+      3. higher |        877       13.06       98.48
+  8. don't know |        102        1.52      100.00
+----------------+-----------------------------------
+          Total |      6,713      100.00
+
+. recode v701 (0=0 "no education") (1=1 "primary") (2=2 "secondary") (3=3 "higher") (8=0 "no education"), gen (p
+> artner_education)
+(102 differences between v701 and partner_education)
+
+. rename v501 marital_status
+
+. rename v106 maternal_education
+
+. rename v714 occupation_status
+
+. tab occupation_status
+
+ respondent |
+  currently |
+    working |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      2,173       32.37       32.37
+     1. yes |      4,540       67.63      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. rename v102 place_residence
+
+. tab v131
+
+         ethnicity |      Freq.     Percent        Cum.
+-------------------+-----------------------------------
+           1. ekoi |         11        0.16        0.16
+         2. fulani |        883       13.15       13.32
+          3. hausa |      2,476       36.88       50.20
+         4. ibibio |         92        1.37       51.57
+          5. igala |         34        0.51       52.08
+           6. igbo |        644        9.59       61.67
+      7. ijaw/izon |         84        1.25       62.92
+8. kanuri/beriberi |        165        2.46       65.38
+            9. tiv |         92        1.37       66.75
+        10. yoruba |        333        4.96       71.71
+         96. other |      1,895       28.23       99.94
+    98. don't know |          4        0.06      100.00
+-------------------+-----------------------------------
+             Total |      6,713      100.00
+
+. recode v131 (10=1 "yoruba") (6=2 "igbo") (2/3=3 "hausa/fulani") (1=4 "others") (4/5=4 "others") (7/9=4 "others
+> ") (96/max=4 "others"), gen (ethnicity)
+(4145 differences between v131 and ethnicity)
+
+. tab ethnicity
+
+   RECODE of |
+        v131 |
+ (ethnicity) |      Freq.     Percent        Cum.
+-------------+-----------------------------------
+      yoruba |        333        4.96        4.96
+        igbo |        644        9.59       14.55
+hausa/fulani |      3,359       50.04       64.59
+      others |      2,377       35.41      100.00
+-------------+-----------------------------------
+       Total |      6,713      100.00
+
+. tab v024
+
+          region |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+1. north central |        965       14.38       14.38
+   2. north east |      2,133       31.77       46.15
+   3. north west |      2,207       32.88       79.03
+   4. south east |        541        8.06       87.08
+  5. south south |        516        7.69       94.77
+   6. south west |        351        5.23      100.00
+-----------------+-----------------------------------
+           Total |      6,713      100.00
+
+. rename v024 region
+
+. tab v157
+
+    frequency of reading |
+   newspaper or magazine |      Freq.     Percent        Cum.
+-------------------------+-----------------------------------
+           0. not at all |      6,143       91.51       91.51
+1. less than once a week |        423        6.30       97.81
+ 2. at least once a week |        147        2.19      100.00
+-------------------------+-----------------------------------
+                   Total |      6,713      100.00
+
+. tab v158
+
+  frequency of listening |
+                to radio |      Freq.     Percent        Cum.
+-------------------------+-----------------------------------
+           0. not at all |      3,546       52.82       52.82
+1. less than once a week |      1,392       20.74       73.56
+ 2. at least once a week |      1,775       26.44      100.00
+-------------------------+-----------------------------------
+                   Total |      6,713      100.00
+
+. tab v159
+
+   frequency of watching |
+              television |      Freq.     Percent        Cum.
+-------------------------+-----------------------------------
+           0. not at all |      4,368       65.07       65.07
+1. less than once a week |        986       14.69       79.76
+ 2. at least once a week |      1,359       20.24      100.00
+-------------------------+-----------------------------------
+                   Total |      6,713      100.00
+
+. recode v157 (0=0 "no") (1/99=1 "yes"), gen (media_exp1)
+(147 differences between v157 and media_exp1)
+
+. browse
+
+. drop media_exp1
+
+. gen mediaexp1 = v157+v158+v159
+
+. tab mediaexp1
+
+  mediaexp1 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      3,022       45.02       45.02
+          1 |        851       12.68       57.69
+          2 |      1,326       19.75       77.45
+          3 |        579        8.63       86.07
+          4 |        661        9.85       95.92
+          5 |        165        2.46       98.38
+          6 |        109        1.62      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. recode mediaexp1 (0=0 "no exposure") (1/3=1 "poor exposure") (4/6=2 "good exposure"), gen (media_exposure)
+(2840 differences between mediaexp1 and media_exposure)
+
+. numlabel, a
+
+. tab media_exposure
+
+       RECODE of |
+       mediaexp1 |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+  0. no exposure |      3,022       45.02       45.02
+1. poor exposure |      2,756       41.05       86.07
+2. good exposure |        935       13.93      100.00
+-----------------+-----------------------------------
+           Total |      6,713      100.00
+
+. tab v850b
+
+ respondent can ask partner to |
+                  use a condom |      Freq.     Percent        Cum.
+-------------------------------+-----------------------------------
+                         0. no |      4,161       61.98       61.98
+                        1. yes |      2,346       34.95       96.93
+8. don't know/not sure/depends |        206        3.07      100.00
+-------------------------------+-----------------------------------
+                         Total |      6,713      100.00
+
+. tab v744d
+
+      beating |
+ justified if |
+ wife refuses |
+  to have sex |
+ with husband |      Freq.     Percent        Cum.
+--------------+-----------------------------------
+        0. no |      4,541       67.64       67.64
+       1. yes |      2,161       32.19       99.84
+8. don't know |         11        0.16      100.00
+--------------+-----------------------------------
+        Total |      6,713      100.00
+
+. tab v743f
+
+person who usually decides what to |
+       do with money husband earns |      Freq.     Percent        Cum.
+-----------------------------------+-----------------------------------
+               1. respondent alone |        412        6.14        6.14
+ 2. respondent and husband/partner |      1,189       17.71       23.85
+          4. husband/partner alone |      5,081       75.69       99.54
+                          6. other |         16        0.24       99.78
+7. husband/partner has no earnings |         15        0.22      100.00
+-----------------------------------+-----------------------------------
+                             Total |      6,713      100.00
+
+. tab v743a
+
+    person who usually decides on |
+         respondent's health care |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+              1. respondent alone |        490        7.30        7.30
+2. respondent and husband/partner |      1,882       28.04       35.33
+         4. husband/partner alone |      4,322       64.38       99.72
+                  5. someone else |         17        0.25       99.97
+                         6. other |          2        0.03      100.00
+----------------------------------+-----------------------------------
+                            Total |      6,713      100.00
+
+. tab v743b
+
+    person who usually decides on |
+        large household purchases |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+              1. respondent alone |        253        3.77        3.77
+2. respondent and husband/partner |      1,961       29.21       32.98
+         4. husband/partner alone |      4,454       66.35       99.33
+                  5. someone else |         40        0.60       99.93
+                         6. other |          5        0.07      100.00
+----------------------------------+-----------------------------------
+                            Total |      6,713      100.00
+
+. tab v743d
+
+    person who usually decides on |
+    visits to family or relatives |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+              1. respondent alone |        780       11.62       11.62
+2. respondent and husband/partner |      2,854       42.51       54.13
+         4. husband/partner alone |      3,060       45.58       99.72
+                  5. someone else |         16        0.24       99.96
+                         6. other |          3        0.04      100.00
+----------------------------------+-----------------------------------
+                            Total |      6,713      100.00
+
+. tab v632a
+
+    decision maker for not |
+       using contraception |      Freq.     Percent        Cum.
+---------------------------+-----------------------------------
+      1. mainly respondent |      1,834       39.85       39.85
+2. mainly husband, partner |        989       21.49       61.34
+         3. joint decision |      1,732       37.64       98.98
+                  6. other |         47        1.02      100.00
+---------------------------+-----------------------------------
+                     Total |      4,602      100.00
+
+. tab v850a
+
+     respondent can refuse sex |      Freq.     Percent        Cum.
+-------------------------------+-----------------------------------
+                         0. no |      3,226       48.06       48.06
+                        1. yes |      3,365       50.13       98.18
+8. don't know/not sure/depends |        122        1.82      100.00
+-------------------------------+-----------------------------------
+                         Total |      6,713      100.00
+
+. misstable summarize, all
+                                                               Obs<.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs>.     Obs<.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+          v013 |                         6,713  |      7          1           7
+        region |                         6,713  |      6          1           6
+  place_resi~e |                         6,713  |      2          1           2
+  maternal_e~n |                         6,713  |      4          0           3
+          v130 |                         6,713  |      5          1          96
+          v131 |                         6,713  |     12          1          98
+          v137 |                         6,713  |      9          1           9
+          v157 |                         6,713  |      3          0           2
+          v158 |                         6,713  |      3          0           2
+          v159 |                         6,713  |      3          0           2
+          v190 |                         6,713  |      5          1           5
+          v202 |                         6,713  |     10          0           9
+          v203 |                         6,713  |      8          0           7
+          v204 |                         6,713  |      7          0           6
+          v205 |                         6,713  |      7          0           7
+          v218 |                         6,713  |     12          1          12
+         v467b |                         6,713  |      2          1           2
+         h21_1 |     3,815               2,898  |      2          0           1
+        h32z_1 |     1,206               5,507  |      2          0           1
+  marital_st~s |                         6,713  |      2          1           2
+          v621 |                         6,713  |      4          1           8
+         v632a |     2,111               4,602  |      4          1           6
+          v701 |                         6,713  |      5          0           8
+  occupation~s |                         6,713  |      2          0           1
+         v743a |                         6,713  |      5          1           6
+         v743b |                         6,713  |      5          1           6
+         v743d |                         6,713  |      5          1           6
+         v743f |                         6,713  |      5          1           7
+         v744d |                         6,713  |      3          0           8
+         v850a |                         6,713  |      3          0           8
+         v850b |                         6,713  |      3          0           8
+  no_treatment |                         6,713  |      2          0           1
+           age |                         6,713  |      3          1           3
+  number_of_~n |                         6,713  |      3          1           3
+  wealth_index |                         6,713  |      3          1           3
+      religion |                         6,713  |      3          1           3
+  partner_ed~n |                         6,713  |      4          0           3
+     ethnicity |                         6,713  |      4          1           4
+     mediaexp1 |                         6,713  |      7          0           6
+  media_expo~e |                         6,713  |      3          0           2
+  -----------------------------------------------------------------------------
+
+. drop v632a
+
+. save "C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Abiola Ehinfun_newdataset_05-03-2024.dta", repl
+> ace
+file C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Abiola Ehinfun_newdataset_05-03-2024.dta saved
+
+. misstable summarize, all
+                                                               Obs<.
+                                                +------------------------------
+               |                                | Unique
+      Variable |     Obs=.     Obs>.     Obs<.  | values        Min         Max
+  -------------+--------------------------------+------------------------------
+          v013 |                         6,713  |      7          1           7
+        region |                         6,713  |      6          1           6
+  place_resi~e |                         6,713  |      2          1           2
+  maternal_e~n |                         6,713  |      4          0           3
+          v130 |                         6,713  |      5          1          96
+          v131 |                         6,713  |     12          1          98
+          v137 |                         6,713  |      9          1           9
+          v157 |                         6,713  |      3          0           2
+          v158 |                         6,713  |      3          0           2
+          v159 |                         6,713  |      3          0           2
+          v190 |                         6,713  |      5          1           5
+          v202 |                         6,713  |     10          0           9
+          v203 |                         6,713  |      8          0           7
+          v204 |                         6,713  |      7          0           6
+          v205 |                         6,713  |      7          0           7
+          v218 |                         6,713  |     12          1          12
+         v467b |                         6,713  |      2          1           2
+         h21_1 |     3,815               2,898  |      2          0           1
+        h32z_1 |     1,206               5,507  |      2          0           1
+  marital_st~s |                         6,713  |      2          1           2
+          v621 |                         6,713  |      4          1           8
+          v701 |                         6,713  |      5          0           8
+  occupation~s |                         6,713  |      2          0           1
+         v743a |                         6,713  |      5          1           6
+         v743b |                         6,713  |      5          1           6
+         v743d |                         6,713  |      5          1           6
+         v743f |                         6,713  |      5          1           7
+         v744d |                         6,713  |      3          0           8
+         v850a |                         6,713  |      3          0           8
+         v850b |                         6,713  |      3          0           8
+  no_treatment |                         6,713  |      2          0           1
+           age |                         6,713  |      3          1           3
+  number_of_~n |                         6,713  |      3          1           3
+  wealth_index |                         6,713  |      3          1           3
+      religion |                         6,713  |      3          1           3
+  partner_ed~n |                         6,713  |      4          0           3
+     ethnicity |                         6,713  |      4          1           4
+     mediaexp1 |                         6,713  |      7          0           6
+  media_expo~e |                         6,713  |      3          0           2
+  -----------------------------------------------------------------------------
+
+. tab maternal_education
+
+        highest |
+    educational |
+          level |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+0. no education |      3,535       52.66       52.66
+     1. primary |      1,067       15.89       68.55
+   2. secondary |      1,761       26.23       94.79
+      3. higher |        350        5.21      100.00
+----------------+-----------------------------------
+          Total |      6,713      100.00
+
+. recode maternal_education (0=1 "yes") (1/3=1 "no"), gen (no_empowerment1)
+(5646 differences between maternal_education and no_empowerment1)
+
+. tab no_empowerment1
+
+  RECODE of |
+maternal_ed |
+    ucation |
+   (highest |
+educational |
+     level) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      6,713      100.00      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. drop no_empowerment1
+
+. recode maternal_education (0=1 "yes") (1/3=0 "no"), gen (no_empowerment1)
+(6713 differences between maternal_education and no_empowerment1)
+
+. recode maternal_education (0=1 "yes") (1/3=0 "no"), gen (no_empowerment1)
+variable no_empowerment1 already defined
+r(110);
+
+. drop no_empowerment1
+
+. recode maternal_education (1/3=0 "no") (0=1 "yes"), gen (no_empowerment1)
+(6713 differences between maternal_education and no_empowerment1)
+
+. tab no_empowerment1
+
+  RECODE of |
+maternal_ed |
+    ucation |
+   (highest |
+educational |
+     level) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      3,178       47.34       47.34
+        yes |      3,535       52.66      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. tab occupation_status
+
+ respondent |
+  currently |
+    working |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      2,173       32.37       32.37
+     1. yes |      4,540       67.63      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. recode occupation_status (0=1 "yes") (1=0 "no"), gen (no_empowerment2)
+(6713 differences between occupation_status and no_empowerment2)
+
+. tab no_empowerment2
+
+  RECODE of |
+occupation_ |
+     status |
+(respondent |
+  currently |
+   working) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      4,540       67.63       67.63
+        yes |      2,173       32.37      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. tab v621
+
+  husband's desire for |
+              children |      Freq.     Percent        Cum.
+-----------------------+-----------------------------------
+     1. both want same |      2,227       33.17       33.17
+ 2. husband wants more |      3,466       51.63       84.81
+3. husband wants fewer |        300        4.47       89.27
+         8. don't know |        720       10.73      100.00
+-----------------------+-----------------------------------
+                 Total |      6,713      100.00
+
+. recode v621 (1=0 "no") (2/max=1 "yes"), gen (no_empowerment3)
+(6713 differences between v621 and no_empowerment3)
+
+. tab no_empowerment3
+
+  RECODE of |
+       v621 |
+ (husband's |
+ desire for |
+  children) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      2,227       33.17       33.17
+        yes |      4,486       66.83      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. tab v743a
+
+    person who usually decides on |
+         respondent's health care |      Freq.     Percent        Cum.
+----------------------------------+-----------------------------------
+              1. respondent alone |        490        7.30        7.30
+2. respondent and husband/partner |      1,882       28.04       35.33
+         4. husband/partner alone |      4,322       64.38       99.72
+                  5. someone else |         17        0.25       99.97
+                         6. other |          2        0.03      100.00
+----------------------------------+-----------------------------------
+                            Total |      6,713      100.00
+
+. recode v743a (1/2=0 "no") (4/max=1 "yes"), gen (no_empowerment4)
+(6713 differences between v743a and no_empowerment4)
+
+. recode v743b (1/2=0 "no") (4/max=1 "yes"), gen (no_empowerment5)
+(6713 differences between v743b and no_empowerment5)
+
+. recode v743d (1/2=0 "no") (4/max=1 "yes"), gen (no_empowerment6)
+(6713 differences between v743d and no_empowerment6)
+
+. tab v743f
+
+person who usually decides what to |
+       do with money husband earns |      Freq.     Percent        Cum.
+-----------------------------------+-----------------------------------
+               1. respondent alone |        412        6.14        6.14
+ 2. respondent and husband/partner |      1,189       17.71       23.85
+          4. husband/partner alone |      5,081       75.69       99.54
+                          6. other |         16        0.24       99.78
+7. husband/partner has no earnings |         15        0.22      100.00
+-----------------------------------+-----------------------------------
+                             Total |      6,713      100.00
+
+. recode v743f (1/2=0 "no") (4/max=1 "yes"), gen (no_empowerment7)
+(6713 differences between v743f and no_empowerment7)
+
+. tab v850a
+
+     respondent can refuse sex |      Freq.     Percent        Cum.
+-------------------------------+-----------------------------------
+                         0. no |      3,226       48.06       48.06
+                        1. yes |      3,365       50.13       98.18
+8. don't know/not sure/depends |        122        1.82      100.00
+-------------------------------+-----------------------------------
+                         Total |      6,713      100.00
+
+. recode v850a (1=0 "no") (0=1 "yes") (8=1 "yes"), gen (no_empowerment8)
+(6713 differences between v850a and no_empowerment8)
+
+. tab v850b
+
+ respondent can ask partner to |
+                  use a condom |      Freq.     Percent        Cum.
+-------------------------------+-----------------------------------
+                         0. no |      4,161       61.98       61.98
+                        1. yes |      2,346       34.95       96.93
+8. don't know/not sure/depends |        206        3.07      100.00
+-------------------------------+-----------------------------------
+                         Total |      6,713      100.00
+
+. recode v850b (1=0 "no") (0=1 "yes") (8=1 "yes"), gen (no_empowerment9)
+(6713 differences between v850b and no_empowerment9)
+
+. tab1 no_empowerment1 no_empowerment2 no_empowerment3 no_empowerment4 no_empowerment5 no_empowerment6 no_empowe
+> rment7 no_empowerment8 no_empowerment9
+
+-> tabulation of no_empowerment1  
+
+  RECODE of |
+maternal_ed |
+    ucation |
+   (highest |
+educational |
+     level) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      3,178       47.34       47.34
+        yes |      3,535       52.66      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+-> tabulation of no_empowerment2  
+
+  RECODE of |
+occupation_ |
+     status |
+(respondent |
+  currently |
+   working) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      4,540       67.63       67.63
+        yes |      2,173       32.37      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+-> tabulation of no_empowerment3  
+
+  RECODE of |
+       v621 |
+ (husband's |
+ desire for |
+  children) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      2,227       33.17       33.17
+        yes |      4,486       66.83      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+-> tabulation of no_empowerment4  
+
+  RECODE of |
+      v743a |
+(person who |
+    usually |
+ decides on |
+respondent' |
+   s health |
+      care) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      2,372       35.33       35.33
+        yes |      4,341       64.67      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+-> tabulation of no_empowerment5  
+
+  RECODE of |
+      v743b |
+(person who |
+    usually |
+ decides on |
+      large |
+  household |
+ purchases) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      2,214       32.98       32.98
+        yes |      4,499       67.02      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+-> tabulation of no_empowerment6  
+
+  RECODE of |
+      v743d |
+(person who |
+    usually |
+ decides on |
+  visits to |
+  family or |
+ relatives) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      3,634       54.13       54.13
+        yes |      3,079       45.87      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+-> tabulation of no_empowerment7  
+
+  RECODE of |
+      v743f |
+(person who |
+    usually |
+    decides |
+ what to do |
+ with money |
+    husband |
+     earns) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      1,601       23.85       23.85
+        yes |      5,112       76.15      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+-> tabulation of no_empowerment8  
+
+  RECODE of |
+      v850a |
+(respondent |
+ can refuse |
+       sex) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      3,365       50.13       50.13
+        yes |      3,348       49.87      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+-> tabulation of no_empowerment9  
+
+  RECODE of |
+      v850b |
+(respondent |
+    can ask |
+ partner to |
+      use a |
+    condom) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         no |      2,346       34.95       34.95
+        yes |      4,367       65.05      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. numlabel, a
+
+. gen no_empowerment = no_empowerment1+ no_empowerment2+ no_empowerment3+ no_empowerment4+ no_empowerment5+ no_e
+> mpowerment6+ no_empowerment7+ no_empowerment8+ no_empowerment9
+
+. sum no_empowerment, d
+
+                       no_empowerment
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            1              0
+10%            1              0       Obs               6,713
+25%            3              0       Sum of Wgt.       6,713
+
+50%            6                      Mean           5.204826
+                        Largest       Std. Dev.       2.54686
+75%            7              9
+90%            8              9       Variance       6.486496
+95%            9              9       Skewness      -.3286529
+99%            9              9       Kurtosis       2.013802
+
+. tab no_empowerment
+
+no_empowerm |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        207        3.08        3.08
+          1 |        507        7.55       10.64
+          2 |        588        8.76       19.40
+          3 |        557        8.30       27.69
+          4 |        684       10.19       37.88
+          5 |        742       11.05       48.93
+          6 |        919       13.69       62.62
+          7 |        975       14.52       77.15
+          8 |      1,005       14.97       92.12
+          9 |        529        7.88      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. tab media_exposure
+
+       RECODE of |
+       mediaexp1 |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+  0. no exposure |      3,022       45.02       45.02
+1. poor exposure |      2,756       41.05       86.07
+2. good exposure |        935       13.93      100.00
+-----------------+-----------------------------------
+           Total |      6,713      100.00
+
+. recode no_empowerment (0/3=2 "full") (4/6=1 "partial") (7/9=0 )
+Rules defining value labels not allowed when overwriting a variable
+r(198);
+
+. recode no_empowerment (0/3=2 "full") (4/6=1 "partial") (7/9=0 "none"), gen (women_autonomy_empowerment)
+(6125 differences between no_empowerment and women_autonomy_empowerment)
+
+. numlabel, a
+
+. tab women_autonomy_empowerment
+
+  RECODE of |
+no_empowerm |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+    0. none |      2,509       37.38       37.38
+ 1. partial |      2,345       34.93       72.31
+    2. full |      1,859       27.69      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. recode no_empowerment (0/3=2 "no") (4/max=1 "yes"), gen (no_autonomy_empowerment)
+(6125 differences between no_empowerment and no_autonomy_empowerment)
+
+. numlabel, a
+
+. tab no_autonomy_empowerment
+
+  RECODE of |
+no_empowerm |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+     1. yes |      4,854       72.31       72.31
+      2. no |      1,859       27.69      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. **order age maternal_education partner_education marital_status occupation_status religion wealth_index ethnic
+> ity number_of_under_5_children**
+
+. ta v218
+
+  number of |
+     living |
+   children |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |      1,172       17.46       17.46
+          2 |      1,264       18.83       36.29
+          3 |      1,119       16.67       52.96
+          4 |        970       14.45       67.41
+          5 |        760       11.32       78.73
+          6 |        588        8.76       87.49
+          7 |        392        5.84       93.33
+          8 |        245        3.65       96.98
+          9 |        121        1.80       98.78
+         10 |         55        0.82       99.60
+         11 |         15        0.22       99.82
+         12 |         12        0.18      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+. recode v218 (1/2=1 "One-Two") (3/4=2 "Three-Four") (5/max=3 "Five and above"), gen (number_of_living_children)
+(5541 differences between v218 and number_of_living_children)
+
+. numlabel, a
+
+. tab number_of_living_children
+
+   RECODE of v218 |
+(number of living |
+        children) |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+       1. One-Two |      2,436       36.29       36.29
+    2. Three-Four |      2,089       31.12       67.41
+3. Five and above |      2,188       32.59      100.00
+------------------+-----------------------------------
+            Total |      6,713      100.00
+
+. order age maternal_education partner_education marital_status occupation_status religion wealth_index ethnicit
+> y number_of_under_5_children number_of_living_children media_exposure women_autonomy_empowerment place_residen
+> ce region
+
+. asdoc tab1 age maternal_education partner_education marital_status occupation_status religion wealth_index eth
+> nicity number_of_under_5_children number_of_living_children media_exposure women_autonomy_empowerment place_re
+> sidence region
+
+  RECODE of |
+  v013 (age |
+  in 5-year |
+    groups) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+   1. 15-24 |      1,782       26.55       26.55
+   2. 25-34 |      3,156       47.01       73.56
+   3. 35-49 |      1,775       26.44      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+        highest |
+    educational |
+          level |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+0. no education |      3,535       52.66       52.66
+     1. primary |      1,067       15.89       68.55
+   2. secondary |      1,761       26.23       94.79
+      3. higher |        350        5.21      100.00
+----------------+-----------------------------------
+          Total |      6,713      100.00
+
+ RECODE of v701 |
+(husband/partne |
+  r's education |
+         level) |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+0. no education |      2,809       41.84       41.84
+     1. primary |        937       13.96       55.80
+   2. secondary |      2,090       31.13       86.94
+      3. higher |        877       13.06      100.00
+----------------+-----------------------------------
+          Total |      6,713      100.00
+
+                current marital status |      Freq.     Percent        Cum.
+---------------------------------------+-----------------------------------
+                            1. married |      6,529       97.26       97.26
+                2. living with partner |        184        2.74      100.00
+---------------------------------------+-----------------------------------
+                                 Total |      6,713      100.00
+
+ respondent |
+  currently |
+    working |      Freq.     Percent        Cum.
+------------+-----------------------------------
+      0. no |      2,173       32.37       32.37
+     1. yes |      4,540       67.63      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+   RECODE of |
+        v130 |
+  (religion) |      Freq.     Percent        Cum.
+-------------+-----------------------------------
+1. christian |      2,027       30.20       30.20
+    2. islam |      4,660       69.42       99.61
+   3. others |         26        0.39      100.00
+-------------+-----------------------------------
+       Total |      6,713      100.00
+
+  RECODE of |
+       v190 |
+    (wealth |
+      index |
+  combined) |      Freq.     Percent        Cum.
+------------+-----------------------------------
+    1. poor |      3,651       54.39       54.39
+  2. middle |      1,371       20.42       74.81
+    3. rich |      1,691       25.19      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+ RECODE of v131 |
+    (ethnicity) |      Freq.     Percent        Cum.
+----------------+-----------------------------------
+      1. yoruba |        333        4.96        4.96
+        2. igbo |        644        9.59       14.55
+3. hausa/fulani |      3,359       50.04       64.59
+      4. others |      2,377       35.41      100.00
+----------------+-----------------------------------
+          Total |      6,713      100.00
+
+   RECODE of v137 |
+       (number of |
+   children 5 and |
+         under in |
+    household (de |
+           jure)) |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+       1. One-Two |      4,697       69.97       69.97
+    2. Three-Four |      1,625       24.21       94.18
+3. Five and above |        391        5.82      100.00
+------------------+-----------------------------------
+            Total |      6,713      100.00
+
+   RECODE of v218 |
+(number of living |
+        children) |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+       1. One-Two |      2,436       36.29       36.29
+    2. Three-Four |      2,089       31.12       67.41
+3. Five and above |      2,188       32.59      100.00
+------------------+-----------------------------------
+            Total |      6,713      100.00
+
+       RECODE of |
+       mediaexp1 |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+  0. no exposure |      3,022       45.02       45.02
+1. poor exposure |      2,756       41.05       86.07
+2. good exposure |        935       13.93      100.00
+-----------------+-----------------------------------
+           Total |      6,713      100.00
+
+  RECODE of |
+no_empowerm |
+        ent |      Freq.     Percent        Cum.
+------------+-----------------------------------
+    0. none |      2,509       37.38       37.38
+ 1. partial |      2,345       34.93       72.31
+    2. full |      1,859       27.69      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+    type of |
+   place of |
+  residence |      Freq.     Percent        Cum.
+------------+-----------------------------------
+   1. urban |      1,930       28.75       28.75
+   2. rural |      4,783       71.25      100.00
+------------+-----------------------------------
+      Total |      6,713      100.00
+
+          region |      Freq.     Percent        Cum.
+-----------------+-----------------------------------
+1. north central |        965       14.38       14.38
+   2. north east |      2,133       31.77       46.15
+   3. north west |      2,207       32.88       79.03
+   4. south east |        541        8.06       87.08
+  5. south south |        516        7.69       94.77
+   6. south west |        351        5.23      100.00
+-----------------+-----------------------------------
+           Total |      6,713      100.00
+Click to Open File:  Myfile.doc
+
+. save "C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Abiola Ehinfun_newdataset_05-03-2024.dta", repl
+> ace
+file C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\Abiola Ehinfun_newdataset_05-03-2024.dta saved
+
+. log off
+      name:  <unnamed>
+       log:  C:\Users\User PC\Desktop\Contract Project\ABIOLA EHINFUN\abiola5.log
+  log type:  text
+ paused on:   8 Mar 2024, 10:04:37
+----------------------------------------------------------------------------------------------------------------
